@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   valide_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 13:55:18 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 22:51:26 by lsabik           ###   ########.fr       */
+/*   Created: 2023/05/19 22:37:31 by lsabik            #+#    #+#             */
+/*   Updated: 2023/05/19 22:52:44 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include"../includes/cub3d.h"
 
-int	ft_error(char *s)
+int	cub_file(char *s)
 {
-	ft_putstr("\033[1;31mError!!\n");
-	ft_putstr(s);
-	ft_putstr("\n");
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	str = ".cub";
+	while (s && s[i])
+	{
+		if (s && s[i] == str[0] && ft_strcmp(s + i, str) == 0)
+			return (EXIT_SUCCESS);
+		i++;
+	}
 	return (FAILURE);
 }

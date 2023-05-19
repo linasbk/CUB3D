@@ -6,11 +6,31 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:36:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 21:36:38 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/19 22:49:00 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (0);
+	while (i < len)
+	{
+		*(str + i) = *(s + i + start);
+		i++;
+	}
+	*(str + i) = '\0';
+	return (str);
+}
 
 int	get_num_word(char *s, char sep)
 {

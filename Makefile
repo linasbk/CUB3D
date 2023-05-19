@@ -1,7 +1,7 @@
 CC := cc
 NAME := cub3d
-SRC_NAME =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c  \
-			parsing/parsing.c parsing/errors.c parsing/valide_color.c \
+SRC_NAME =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c utilis/ft_atoi.c \
+			parsing/parsing.c parsing/errors.c parsing/valide_color.c parsing/valide_file.c \
 			init/init.c \
 
 OBJ = $(SRC_NAME:.c=.o)

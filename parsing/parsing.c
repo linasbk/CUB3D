@@ -6,40 +6,11 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 21:48:28 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/19 22:55:18 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../includes/cub3d.h"
-#include"../includes/macros.h"
-int	cub_file(char *s)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	str = ".cub";
-	
-	while (s && s[i])
-	{
-		if (s && s[i] == str[0] && ft_strcmp(s + i, str) == 0)
-			return (EXIT_SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
-
-t_map_color	*valide_color(t_cub3d_data *cub, char *str)
-{
-	t_map_color	*color;
-
-	if (check_comma(cub, str) == FAILURE)
-		exit(EXIT_FAILURE);
-	color = check_range(cub, str);
-	return (color);
-}
 
 int	check_texture(t_cub3d_data *cub, char *line, int key)
 {
@@ -73,7 +44,7 @@ int	check_texture(t_cub3d_data *cub, char *line, int key)
 			return (EXIT_SUCCESS);
 		}
 	}
-	return (FAILURE);
+	return (ft_error(TEXTURE_ERROR));
 }
 
 int	get_key(char *line)
@@ -141,10 +112,10 @@ int	map_parsing(t_cub3d_data *cub, int ac, char **av)
 	int	fd;
 
 	if (ac != 2 || (cub_file(av[1]) == -1))
-		return(ft_error(INVALIDE_ARGS));
+		return (ft_error(INVALIDE_ARGS));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		return(ft_error(NON_EXIT_FILE));
+		return (ft_error(NON_EXIT_FILE));
 	init_data(cub);
 	if (read_map(cub, av[1], fd) == -1)
 		return (FAILURE);

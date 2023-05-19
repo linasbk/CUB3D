@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:25:38 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 21:50:08 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/19 22:53:24 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_comma(t_cub3d_data *cube, char *line)
 {
-	int comma;
-	int i;
+	int	comma;
+	int	i;
 
 	i = 0;
 	comma = 0;
@@ -26,25 +26,43 @@ int	check_comma(t_cub3d_data *cube, char *line)
 		i++;
 	}
 	if (comma != 2)
-		return(ft_error("Invalid color"));
-	else if (comma == 2 &&line[i - 2] == ',')
-		return(ft_error("Invalid color"));
+		return (ft_error("Invalid color"));
+	else if (comma == 2 && line[i - 2] == ',')
+		return (ft_error("Invalid color"));
 	return (SUCCESS);
 }
 
-int	check_range(t_cub3d_data *cube, char *line)
+t_map_color	*check_range(t_cub3d_data *cube, char *line)
 {
 	t_map_color	*color;
 	char		**str;
 	int			i;
 
 	i = 0;
+	color = malloc(sizeof(t_map_color));
+	color->r = 0;
+	color->g = 0;
+	color->b = 0;
+	str = NULL;
 	str = ft_split(line, ',');
-	color->r = ft_atoi(str[0]);
+	color->b = ft_atoi(str[0]);
 	color->g = ft_atoi(str[1]);
-	color->b = ft_atoi(str[2]);
-	if (color->r < 0 || color->r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return(ft_error("Invalid color"));
-	return (SUCCESS);
+	color->r = ft_atoi(str[2]);
+	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
+		|| color->b < 0 || color->b > 255)
+	{
+		ft_error("Invalid coloor");
+		exit(EXIT_FAILURE);
+	}
+	return (color);
 }
 
+t_map_color	*valide_color(t_cub3d_data *cub, char *str)
+{
+	t_map_color	*color;
+
+	if (check_comma(cub, str) == FAILURE)
+		exit(EXIT_FAILURE);
+	color = check_range(cub, str);
+	return (color);
+}

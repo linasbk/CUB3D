@@ -6,32 +6,11 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 13:23:10 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/19 22:49:45 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-size_t	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	ft_putstr(char *s)
-{
-	if (!s)
-		return ;
-	while (*s)
-	{
-		write(1, &(*s), 1);
-		s++;
-	}
-}
 
 int	ft_strchr(char *s, char c)
 {
@@ -88,45 +67,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		res[len++] = s2[i++];
 	return (res[len] = '\0', free (s1), res);
-}
-
-char	*ft_strdup(char *s1)
-{
-	char	*str;
-	char	*res;
-
-	str = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!(str))
-		return (0);
-	res = str;
-	while (*s1)
-	{
-		*str = *s1;
-		s1++;
-		str++;
-	}
-	*str = '\0';
-	return (res);
-}
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	char	*str;
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (0);
-	while (i < len)
-	{
-		*(str + i) = *(s + i + start);
-		i++;
-	}
-	*(str + i) = '\0';
-	return (str);
 }
 
 static int	check_set(char s1, char *set)
