@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:58:45 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 22:52:26 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/21 15:13:01 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-static int	ft_isspace(char str)
+int	ft_isspace(char str)
 {
 	if (str == '\t' || str == '\f' || str == '\v'
 		|| str == '\n' || str == '\r' || str == ' ')

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 22:55:18 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/22 20:32:00 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,22 @@ int	check_lines(t_cub3d_data *cub, char *line)
 {
 	int	key;
 
-	while (line[0] == ' ' || line[0] == '\t')
-		line++;
-	key = get_key(ft_strtrim(line, " "));
+	key = get_key(ft_strtrim(ft_strtrim(line, " "), "\t"));
 	if (key >= T_NO && key <= C_C)
-		return (check_texture(cub, ft_strtrim(line, " "), key));
-	else if (key == RET_LINE)
+		return (check_texture(cub, ft_strtrim(ft_strtrim(line, " "), "\t"), key));
+	else if (key == RET_LINE && cub->m_index != 0)
+	{
+		cub->line = ft_strjoin(cub->line, line);
+		return (SUCCESS);
+	}
+	else if (key == RET_LINE && cub->m_index == 0)
 		return (SUCCESS);
 	else if (key == M_W && cub->t_index == 6)
+	{
+		cub->m_index++;
+		cub->line = ft_strjoin(cub->line, line);
 		return (SUCCESS);
-		// return (check_map(cub));
+	}
 	return (ft_error(CONFIG_ERROR));
 }
 
@@ -95,7 +101,7 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 
 	i = 0;
 	line = get_next_line(fd);
-	while (line > 0)
+	while (line)
 	{
 		if (check_lines(cub, line) == -1)
 			return (FAILURE);
@@ -104,6 +110,7 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 	}
 	free(line);
 	close(fd);
+	check_map(cub);
 	return (EXIT_SUCCESS);
 }
 

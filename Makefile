@@ -1,7 +1,8 @@
 CC := cc
 NAME := cub3d
+FLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address
 SRC_NAME =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c utilis/ft_atoi.c \
-			parsing/parsing.c parsing/errors.c parsing/valide_color.c parsing/valide_file.c \
+			parsing/parsing.c parsing/errors.c parsing/valide_color.c parsing/valide_file.c parsing/valide_map.c \
 			init/init.c \
 
 OBJ = $(SRC_NAME:.c=.o)
@@ -21,7 +22,7 @@ $(NAME): $(OBJ)
 	@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 %.o: %.c fdf.h
-	$(CC) -fno-signed-zeros -mtune=intel -Ofast -march=native -fno-trapping-math -Wall -Wextra -Werror  -Imlx -c $< -o $@
+	$(CC) -fno-signed-zeros -mtune=intel -Ofast -march=native -fno-trapping-math $(FLAGS)  -Imlx -c $< -o $@
 
 
 clean:
