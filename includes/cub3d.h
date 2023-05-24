@@ -6,26 +6,26 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/22 13:57:59 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/24 21:55:23 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include<unistd.h>
-# include<stdio.h>
-# include<stdlib.h>
-# include<fcntl.h>
-# include<limits.h>
-# include"macros.h"
+# include "macros.h"
+# include <fcntl.h>
+# include <limits.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_map_color
 {
-	int	r;
-	int	g;
-	int	b;
-}	t_map_color;
+	int			r;
+	int			g;
+	int			b;
+}				t_map_color;
 
 typedef struct cub3d_data
 {
@@ -40,7 +40,7 @@ typedef struct cub3d_data
 	char		*line;
 	t_map_color	*c_f;
 	t_map_color	*c_c;
-}	t_cub3d_data;
+}				t_cub3d_data;
 
 // UTILS
 int				ft_strcmp(char *s1, char *s2);
@@ -67,4 +67,5 @@ int				init_data(t_cub3d_data *cub);
 t_map_color		*valide_color(t_cub3d_data *cub, char *str);
 //VALID_MAP
 int				check_map(t_cub3d_data *cub);
+int				valid_char(char c);
 #endif

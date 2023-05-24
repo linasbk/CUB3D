@@ -6,11 +6,11 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/22 20:32:00 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/24 21:50:17 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 int	check_texture(t_cub3d_data *cub, char *line, int key)
 {
@@ -48,7 +48,7 @@ int	check_texture(t_cub3d_data *cub, char *line, int key)
 }
 
 int	get_key(char *line)
-{	
+{
 	if (!line || !line[0])
 		return (-1);
 	if (line[0] == 'N' && line[1] == 'O')
@@ -77,7 +77,8 @@ int	check_lines(t_cub3d_data *cub, char *line)
 
 	key = get_key(ft_strtrim(ft_strtrim(line, " "), "\t"));
 	if (key >= T_NO && key <= C_C)
-		return (check_texture(cub, ft_strtrim(ft_strtrim(line, " "), "\t"), key));
+		return (check_texture(cub, ft_strtrim(ft_strtrim(line, " "), "\t"),
+				key));
 	else if (key == RET_LINE && cub->m_index != 0)
 	{
 		cub->line = ft_strjoin(cub->line, line);

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/22 13:58:05 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/24 21:50:08 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	init_data(t_cub3d_data *cub)
 {
-	
 	cub->t_no = NULL;
 	cub->t_so = NULL;
 	cub->t_we = NULL;

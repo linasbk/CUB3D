@@ -6,15 +6,15 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/24 21:39:07 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/24 21:54:52 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
-int	parseTopBottom_line(t_cub3d_data *cub)
+int	parsetopbottom_line(t_cub3d_data *cub)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cub->matrice[0][i])
@@ -28,7 +28,7 @@ int	parseTopBottom_line(t_cub3d_data *cub)
 	while (cub->matrice[cub->m_index - 1][i])
 	{
 		if (cub->matrice[cub->m_index - 1][i] == '1'
-			 || ft_isspace(cub->matrice[cub->m_index - 1][i]))
+			|| ft_isspace(cub->matrice[cub->m_index - 1][i]))
 			i++;
 		else
 			return (ft_error("MAP ERROR"));
@@ -36,38 +36,27 @@ int	parseTopBottom_line(t_cub3d_data *cub)
 	return (SUCCESS);
 }
 
-int	valid_char(char c)
-{
-	if (c == '1' || c == '0' || c == ' ' || c == 'N' || c == 'S' || c == 'E'
-		|| c == 'W')
-		return (SUCCESS);
-	else
-		return (FAILURE);
-}
-
 int	check_sides(t_cub3d_data *cub, int i, int j)
 {
-	if ((cub->matrice[i - 1][j] == ' ' || cub->matrice[i - 1][j] == '1') && (cub->matrice[i + 1][j] == ' ' || cub->matrice[i + 1][j] == '1')
-		&& (cub->matrice[i][j - 1] == ' ' || cub->matrice[i][j - 1] == '1') && (cub->matrice[i][j + 1] == ' ' || cub->matrice[i][j + 1] == '1'))
+	if ((cub->matrice[i - 1][j] == ' ' || cub->matrice[i - 1][j] == '1')
+		&& (cub->matrice[i + 1][j] == ' ' || cub->matrice[i + 1][j] == '1')
+		&& (cub->matrice[i][j - 1] == ' ' || cub->matrice[i][j - 1] == '1')
+		&& (cub->matrice[i][j + 1] == ' ' || cub->matrice[i][j + 1] == '1'))
 		return (SUCCESS);
 	return (ft_error("MAP ERROR"));
 }
 
-int	parse_mid(t_cub3d_data *cub, int i)
+int	parse_mid(t_cub3d_data *cub, int i, int ret, int j)
 {
-	int j;
-	int ret;
-	int len;
+	int	len;
 
-	j = 1;
-	ret = 1;
 	len = ft_strlen(cub->matrice[i]);
 	while (cub->matrice[i][j] == ' ')
 		j++;
 	while (len > 0)
 	{
 		if (!(cub->matrice[i][len - 1] == ' '))
-			break;
+			break ;
 		len--;
 	}
 	if (cub->matrice[i][len - 1] != '1')
@@ -85,18 +74,17 @@ int	parse_mid(t_cub3d_data *cub, int i)
 	return (ret);
 }
 
-int	check_retLine(t_cub3d_data *cub)
+int	check_retline(t_cub3d_data *cub)
 {
-	int i;
-	int j;
-	char *line;
+	int		i;
+	int		j;
+	char	*line;
 
 	i = 0;
 	j = 0;
 	line = ft_strtrim(cub->line, "\n");
 	while (line[i])
 	{
-		
 		if (line[i] == '\n' && line[i + 1] == '\n')
 			return (FAILURE);
 		else
@@ -106,21 +94,21 @@ int	check_retLine(t_cub3d_data *cub)
 	return (SUCCESS);
 }
 
-int check_map(t_cub3d_data *cub)
+int	check_map(t_cub3d_data *cub)
 {
-	int i;
-	int ret;
+	int	i;
+	int	ret;
 
 	i = 1;
 	ret = 1;
-	if (check_retLine(cub) == FAILURE)
+	if (check_retline(cub) == FAILURE)
 		return (ft_error("MAP ERROR"));
 	while (i < cub->m_index - 1)
 	{
 		if (i == 0 || i == cub->m_index)
-			ret = parseTopBottom_line(cub);
+			ret = parsetopbottom_line(cub);
 		else
-			ret = parse_mid(cub, i);
+			ret = parse_mid(cub, i, 1, 1);
 		if (ret == FAILURE)
 			return (FAILURE);
 		i++;
