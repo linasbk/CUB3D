@@ -6,13 +6,13 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:36:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 22:49:00 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/30 16:04:14 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, int len)
 {
 	char	*str;
 	size_t	i;

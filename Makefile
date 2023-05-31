@@ -1,35 +1,29 @@
 CC := cc
-NAME := cub3d
-FLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address
-SRC_NAME =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c utilis/ft_atoi.c \
+NAME := cub3D
+FLAGS := -Wall -Wextra -Werror -fsanitize=address
+SRCS =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c utilis/ft_atoi.c \
 			parsing/parsing.c parsing/errors.c parsing/valide_color.c parsing/valide_file.c parsing/valide_map.c \
 			init/init.c \
 
-OBJ = $(SRC_NAME:.c=.o)
+OBJ = $(SRCS:.c=.o)
+MLX        := libs/libmlx.a
+LIBS    := -lglfw -L/Users/lsabik/.brew/opt/glfw/lib 
 
-CLR_RMV		:= \033[0m
-RED		    := \033[1;31m
-GREEN		:= \033[1;32m
-YELLOW		:= \033[1;33m
-BLUE		:= \033[1;34m
-CYAN 		:= \033[1;36m
-RM		    := rm -f
 
-all: ${NAME}
-$(NAME): $(OBJ)
-	@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-	$(CC) $(OBJ) -lmlx -framework OpenGL -ofast -framework AppKit -o $(NAME)
-	@echo "$(GREEN)$(NAME) created[0m ✔️"
+OBJS := $(SRCS:.c=.o)
 
-%.o: %.c fdf.h
-	$(CC) -fno-signed-zeros -mtune=intel -Ofast -march=native -fno-trapping-math $(FLAGS)  -Imlx -c $< -o $@
+%.o: %.c include/cub3d.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX) ${LIBFT} -o $(NAME) $(LIBS)
 
 clean:
-	@ ${RM} *.o */*.o */*/*.o
-	@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
+	rm -f $(OBJS)
 
 fclean: clean
-	@ ${RM} ${NAME}
-	@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
+	rm -f $(NAME)
+
 re: fclean all

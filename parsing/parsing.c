@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/24 21:50:17 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/05/25 14:11:47 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	get_key(char *line)
 	else if (line[0] == '\n')
 		return (RET_LINE);
 	else
-		return (ft_error(CONFIG_ERROR));
+		return (FAILURE);
 }
 
 int	check_lines(t_cub3d_data *cub, char *line)
