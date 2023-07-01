@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/25 14:11:47 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/06/29 19:40:57 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 	}
 	free(line);
 	close(fd);
-	check_map(cub);
+	if (check_map(cub) == FAILURE)
+		return (FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -125,7 +126,7 @@ int	map_parsing(t_cub3d_data *cub, int ac, char **av)
 	if (fd == -1)
 		return (ft_error(NON_EXIT_FILE));
 	init_data(cub);
-	if (read_map(cub, av[1], fd) == -1)
+	if (read_map(cub, av[1], fd) == FAILURE)
 		return (FAILURE);
 	return (EXIT_SUCCESS);
 }

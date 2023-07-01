@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/31 21:08:03 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/06/30 17:45:59 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 # include "MLX42/MLX42.h"
 # include <fcntl.h>
 # include <limits.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# define WIDTH 820
-# define HEIGHT 600
+# define WIDTH 2080
+# define HEIGHT 1500
 typedef struct s_map_color
 {
 	int			r;
@@ -29,27 +30,52 @@ typedef struct s_map_color
 	int			b;
 }				t_map_color;
 
+typedef struct player_movement
+{
+	char	position_1;
+	float		x;
+	float		y;
+	int		i;
+	int		j;
+	float	radius;
+	float	turn_direction;
+	float	walk_direction;
+	float	side_direction;
+	double	rotation_angle;
+	double	move_speed;
+	double	move_step;
+	double	rotation_speed;
+}				t_data_player;
+
 typedef struct cub3d_data
 {
-	mlx_t		*mlx;
-	char		**map;
-	char		*t_no;
-	char		*t_so;
-	char		*t_we;
-	char		*t_ea;
-	char		**matrice;
-	int			t_index;
-	int			m_index;
-	char		*line;
-	int			player_x;
-	int			player_y;
-	int			player_dir;
-	t_map_color	*c_f;
-	t_map_color	*c_c;
-	mlx_image_t	*player;
-	mlx_image_t	*minimap;
+	mlx_t			*mlx;
+	char			**map;
+	char			*t_no;
+	char			*t_so;
+	char			*t_we;
+	char			*t_ea;
+	char			**matrice;
+	int				t_index;
+	int				m_index;
+	char			*line;
+	int				player_x;
+	int				new_x;
+	int				player_y;
+	int				new_y;
+	float			angleIncrement;
+	int				player_dir;
+	int				len_i;
+	int				len_j;
+	t_map_color		*c_f;
+	t_map_color		*c_c;
+	mlx_image_t		*player;
+	mlx_image_t		*point;
+	mlx_image_t		*minimap;
+	mlx_image_t 	*map_img;
+	t_data_player	*player_data;
 
-}				t_cub3d_data;
+}					t_cub3d_data;
 
 // UTILS
 int				ft_strcmp(char *s1, char *s2);
@@ -78,4 +104,8 @@ t_map_color		*valide_color(t_cub3d_data *cub, char *str);
 //VALID_MAP
 int				check_map(t_cub3d_data *cub);
 int				valid_char(t_cub3d_data *cub, char c);
+void			put_player(mlx_image_t *img, float x, float y, t_cub3d_data *cub);
+void			ft_update(t_cub3d_data *cub);
+void			put_map(t_cub3d_data *cub);
+void			init_data_player(t_cub3d_data *cub);
 #endif

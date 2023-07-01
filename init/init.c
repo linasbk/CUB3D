@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/31 21:09:46 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/06/24 18:27:58 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,51 @@ void	ft_mlx_init(t_cub3d_data *cub)
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
-	cub->player = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	if (!cub->player)
+	init_data_player(cub);
+}
+
+void	init_data_player(t_cub3d_data *cub)
+{
+	int x = 0;
+	int y = 0;
+
+	cub->player_data = malloc(sizeof(t_data_player));
+	cub->player_data->radius = 5.0;
+	cub->player_data->move_speed = 2.0;
+	cub->player_data->rotation_speed = 3.0 * (M_PI / 180);
+	cub->player_data->turn_direction = 0;
+	cub->player_data->walk_direction = 0;
+	cub->player_data->side_direction = 0;
+	cub->len_i = 0;
+	while (cub->matrice[y])
 	{
-		mlx_close_window(cub->mlx);
-		puts(mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
+		x = 0;
+		while (cub->matrice[y][x])
+		{
+			if (cub->matrice[y][x] == 'N' || cub->matrice[y][x] == 'S' ||
+			cub->matrice[y][x] == 'E' || cub->matrice[y][x] == 'W')
+			{
+				cub->player_data->x = x * 20 + 10;
+				cub->player_data->y = y * 20 + 10;
+				cub->player_data->i = x;
+				cub->player_data->j = y;
+				cub->player_data->position_1 = cub->matrice[y][x];
+				if (cub->player_data->position_1 == 'E')
+					cub->player_data->rotation_angle = M_PI;
+				if (cub->player_data->position_1 == 'N')
+					cub->player_data->rotation_angle = M_PI / 2;
+				if (cub->player_data->position_1 == 'S')
+				cub->player_data->rotation_angle =  -M_PI / 2;
+				if (cub->player_data->position_1 == 'W')
+				cub->player_data->rotation_angle =  M_PI * 2;
+			}
+			x++;
+		}
+		if (cub->len_i < x)
+			cub->len_i = x;
+		y++;
 	}
-		// draw_circle(image->img, 100, 100, 50, 0xFFFFFFFF);
+	cub->len_j = y;
 }
 
 int	init_data(t_cub3d_data *cub)
