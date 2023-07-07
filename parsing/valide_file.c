@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:37:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/26 17:29:14 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:26:42 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	cub_file(char *s)
 	while (s && s[i])
 	{
 		if (s && s[i] == str[0] && ft_strcmp(s + i, str) == 0)
-			return (EXIT_SUCCESS);
+			return (SUCCESS);
 		i++;
 	}
 	return (FAILURE);

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/25 14:11:47 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:40:10 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_texture(t_cub3d_data *cub, char *line, int key)
 			else
 				return (ft_error(TEXTURE_ERROR));
 			cub->t_index++;
-			return (EXIT_SUCCESS);
+			return (SUCCESS);
 		}
 	}
 	return (ft_error(TEXTURE_ERROR));
@@ -111,8 +111,9 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 	}
 	free(line);
 	close(fd);
-	check_map(cub);
-	return (EXIT_SUCCESS);
+	if (check_map(cub) == FAILURE)
+		return (ft_error("MAP ERROR"));
+	return (SUCCESS);
 }
 
 int	map_parsing(t_cub3d_data *cub, int ac, char **av)
@@ -127,5 +128,5 @@ int	map_parsing(t_cub3d_data *cub, int ac, char **av)
 	init_data(cub);
 	if (read_map(cub, av[1], fd) == -1)
 		return (FAILURE);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }

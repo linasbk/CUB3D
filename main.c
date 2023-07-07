@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/31 21:47:40 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:43:27 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,31 +81,30 @@ int main(int ac, char **av)
 	cub->minimap = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	int x = 0;
 	int y = 0;
-	draw_player(cub->player, 0, 0, 4, 0xFF0000FF);
-	while (cub->matrice[y])
-	{
-		x = 0;
-		while (cub->matrice[y][x])
-		{
-			if (cub->matrice[y][x] == '1')
-			{
-				// printf("x = %d, y = %d\n", x, y); 
-				draw_square(cub->minimap, x * 10, y * 10, 10, 0xFFFFFFFF);
+	// draw_player(cub->player, 0, 0, 4, 0xFF0000FF);
+	// while (cub->matrice[y])
+	// {
+	// 	x = 0;
+	// 	while (cub->matrice[y][x])
+	// 	{
+	// 		if (cub->matrice[y][x] == '1')
+	// 		{
+	// 			draw_square(cub->minimap, x * 10, y * 10, 10, 0xFFFFFFFF);
 				
-			}
-			if (cub->matrice[y][x] == 'N')
-			{
-				cub->player_x = x;
-				cub->player_y = y;
-				mlx_image_to_window(cub->mlx, cub->player, x * 10, y * 10);
-			}
-			x++;
-		}
-		y++;
-	}
+	// 		}
+	// 		if (cub->matrice[y][x] == 'N')
+	// 		{
+	// 			cub->player_x = x;
+	// 			cub->player_y = y;
+	// 			mlx_image_to_window(cub->mlx, cub->player, x * 10, y * 10);
+	// 		}
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
 	mlx_image_to_window(cub->mlx, cub->minimap,0,0);
-	mlx_loop_hook(cub->mlx, ft_hook, cub);
+	// mlx_loop_hook(cub->mlx, ft_hook, cub);
 	mlx_loop(cub->mlx);
 	mlx_terminate(cub->mlx);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }

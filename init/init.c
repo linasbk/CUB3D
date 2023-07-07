@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/31 21:09:46 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:26:59 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	if (!cub->mlx)
 	{
 		puts(mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
+		exit(FAILURE);
 	}
 	cub->player = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->player)
 	{
 		mlx_close_window(cub->mlx);
 		puts(mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
+		exit(FAILURE);
 	}
 		// draw_circle(image->img, 100, 100, 50, 0xFFFFFFFF);
 }

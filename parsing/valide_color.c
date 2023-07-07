@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:25:38 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 22:53:24 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:26:59 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_map_color	*check_range(t_cub3d_data *cube, char *line)
 		|| color->b < 0 || color->b > 255)
 	{
 		ft_error("Invalid coloor");
-		exit(EXIT_FAILURE);
+		exit(FAILURE);
 	}
 	return (color);
 }
@@ -62,7 +62,7 @@ t_map_color	*valide_color(t_cub3d_data *cub, char *str)
 	t_map_color	*color;
 
 	if (check_comma(cub, str) == FAILURE)
-		exit(EXIT_FAILURE);
+		exit(FAILURE);
 	color = check_range(cub, str);
 	return (color);
 }
