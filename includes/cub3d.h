@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/06/30 17:45:59 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/07 20:07:27 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@
 # include <unistd.h>
 # define WIDTH 2080
 # define HEIGHT 1500
+# define WALL_DIMENSION 20
+typedef struct data_rays
+{
+	double	ray_angle;
+	double	wallhitX;
+	double	wallhitY;
+	double	distance;
+	double	is_rayfacingdown;
+	double	is_rayfacingup;
+	double	is_rayfacingright;
+	double	is_rayfacingileft;
+}				t_ray_data;
 typedef struct s_map_color
 {
 	int			r;
@@ -45,6 +57,8 @@ typedef struct player_movement
 	double	move_speed;
 	double	move_step;
 	double	rotation_speed;
+	double	fov_angle;
+	double	num_rays;
 }				t_data_player;
 
 typedef struct cub3d_data
@@ -64,9 +78,10 @@ typedef struct cub3d_data
 	int				player_y;
 	int				new_y;
 	float			angleIncrement;
-	int				player_dir;
+	char			player_dir;
 	int				len_i;
 	int				len_j;
+	t_ray_data		*data_rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
 	mlx_image_t		*player;
@@ -97,14 +112,16 @@ int				cub_file(char *s);
 //ERROR
 int				ft_error(char *s);
 //INIT
+double			normalizeamgle(t_cub3d_data *cub);
 int				init_data(t_cub3d_data *cub);
+void			init_ray_data(t_cub3d_data *cub);
 void			ft_mlx_init(t_cub3d_data *cub);
 //VALID_COLOR
 t_map_color		*valide_color(t_cub3d_data *cub, char *str);
 //VALID_MAP
 int				check_map(t_cub3d_data *cub);
-int				valid_char(t_cub3d_data *cub, char c);
-void			put_player(mlx_image_t *img, float x, float y, t_cub3d_data *cub);
+int				valid_char(t_cub3d_data *cub, char c, int i, int j);
+void			put_player(t_cub3d_data *cub);
 void			ft_update(t_cub3d_data *cub);
 void			put_map(t_cub3d_data *cub);
 void			init_data_player(t_cub3d_data *cub);

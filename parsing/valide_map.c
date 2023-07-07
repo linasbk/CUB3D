@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/06/29 19:40:04 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/07 20:27:26 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parsetopbottom_line(t_cub3d_data *cub)
 		if (cub->matrice[0][i] == '1' || ft_isspace(cub->matrice[0][i]))
 			i++;
 		else
-			return (ft_error("MAP ERROR"));
+			return (FAILURE);
 	}
 	i = 0;
 	while (cub->matrice[cub->m_index - 1][i])
@@ -31,7 +31,7 @@ int	parsetopbottom_line(t_cub3d_data *cub)
 			|| ft_isspace(cub->matrice[cub->m_index - 1][i]))
 			i++;
 		else
-			return (ft_error("MAP ERROR"));
+			return (FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -46,7 +46,7 @@ int	check_sides(t_cub3d_data *cub, int i, int j)
 		&& (ft_isspace(cub->matrice[i][j + 1]) || cub->matrice[i][j + 1] == '1'
 			|| cub->matrice[i][j + 1] == '\0'))
 		return (SUCCESS);
-	return (ft_error("MAP ERROR"));
+	return (FAILURE);
 }
 
 int	parse_mid(t_cub3d_data *cub, int i, int ret, int j)
@@ -61,17 +61,19 @@ int	parse_mid(t_cub3d_data *cub, int i, int ret, int j)
 		len--;
 	}
 	if (cub->matrice[i][len - 1] != '1')
-		ret = ft_error("MAP ERROR");
+		return (FAILURE);
 	while (j < len - 1)
 	{
-		if (valid_char(cub, cub->matrice[i][j]) == FAILURE)
-			ret = ft_error("MAP ERROR");
+		if (valid_char(cub, cub->matrice[i][j], i, j) == FAILURE)
+			return (FAILURE);
 		else if (cub->matrice[i][j] == ' ')
 			ret = check_sides(cub, i, j);
 		if (ret == FAILURE)
 			return (FAILURE);
 		j++;
 	}
+	if (j == len - 1 && cub->player_dir == '\0')
+		return (FAILURE);
 	return (ret);
 }
 
@@ -105,7 +107,7 @@ int	check_map(t_cub3d_data *cub)
 	i = 0;
 	ret = 1;
 	if (check_retline(cub) == FAILURE)
-		return (ft_error("MAP ERROR"));
+		return (FAILURE);
 	while (i < cub->m_index - 1)
 	{
 		if (i == 0 || i == cub->m_index)
@@ -116,5 +118,6 @@ int	check_map(t_cub3d_data *cub)
 			return (FAILURE);
 		i++;
 	}
+	cub->len_j = cub->m_index - 1;
 	return (ret);
 }

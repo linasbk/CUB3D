@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/06/29 19:40:57 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/07 20:41:03 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_texture(t_cub3d_data *cub, char *line, int key)
 			else
 				return (ft_error(TEXTURE_ERROR));
 			cub->t_index++;
-			return (EXIT_SUCCESS);
+			return (SUCCESS);
 		}
 	}
 	return (ft_error(TEXTURE_ERROR));
@@ -102,18 +102,21 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 
 	i = 0;
 	line = get_next_line(fd);
+	cub->len_i = ft_strlen(line);
 	while (line)
 	{
 		if (check_lines(cub, line) == -1)
 			return (FAILURE);
 		free(line);
 		line = get_next_line(fd);
+		if (line && ft_strlen(line) > cub->len_i)
+			cub->len_i = ft_strlen(line);
 	}
 	free(line);
 	close(fd);
 	if (check_map(cub) == FAILURE)
-		return (FAILURE);
-	return (EXIT_SUCCESS);
+		return (ft_error("MAP ERROR"));
+	return (SUCCESS);
 }
 
 int	map_parsing(t_cub3d_data *cub, int ac, char **av)
@@ -126,7 +129,7 @@ int	map_parsing(t_cub3d_data *cub, int ac, char **av)
 	if (fd == -1)
 		return (ft_error(NON_EXIT_FILE));
 	init_data(cub);
-	if (read_map(cub, av[1], fd) == FAILURE)
+	if (read_map(cub, av[1], fd) == -1)
 		return (FAILURE);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
