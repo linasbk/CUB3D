@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 20:27:26 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:21:55 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ int	check_map(t_cub3d_data *cub)
 			return (FAILURE);
 		i++;
 	}
-	cub->len_j = cub->m_index - 1;
+	cub->len_j = cub->m_index;
 	return (ret);
 }

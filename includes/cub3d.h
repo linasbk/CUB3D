@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 20:07:27 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:39:41 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ typedef struct s_map_color
 	int			g;
 	int			b;
 }				t_map_color;
+
+typedef struct point {
+	float	x;
+	float	y;
+	float	z;
+	double	delta_x;
+	double	delta_y;
+}				t_point;
 
 typedef struct player_movement
 {
