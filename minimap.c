@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/08 21:12:48 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/08 21:38:56 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ int distance_between_points(float x1, float y1, float x2, float y2)
 
 void	ray_cast(t_cub3d_data *cub, double colmnID)
 {
-
 	    //  this.rayAngle = normalizeAngle(rayAngle);
         // this.wallHitX = 0;
         // this.wallHitY = 0;
@@ -193,7 +192,6 @@ void	ray_cast(t_cub3d_data *cub, double colmnID)
 			foundhorzwallhit = 1;
 			hor_wallhitX = nextHorztouchX;
 			hor_wallhitY = nextHorztouchY;
-			drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(hor_wallhitX, hor_wallhitY), ORANGE);
 			break ;
 		}
 		else
