@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 22:17:29 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:15:41 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-double	normalizeamgle(t_cub3d_data *cub)
+double	normalizeamgle(double ray_angle)
 {
-	cub->data_rays->ray_angle = fmod(cub->data_rays->ray_angle, 2 * M_PI);
-	if (cub->data_rays->ray_angle < 0)
-		cub->data_rays->ray_angle = (2 * M_PI) + cub->data_rays->ray_angle;
-	return (cub->data_rays->ray_angle);
+	ray_angle = fmod(ray_angle, 2 * M_PI);
+	if (ray_angle < 0)
+		ray_angle = (2 * M_PI) + ray_angle;
+	return (ray_angle);
 }
 
 void	init_ray_data(t_cub3d_data *cub)
 {
 	cub->data_rays = malloc(sizeof(t_ray_data));
-	cub->data_rays->ray_angle = normalizeamgle(cub);
+	cub->data_rays->ray_angle = normalizeamgle(cub->data_rays->ray_angle);
 	cub->data_rays->wallhitX = 0;
 	cub->data_rays->wallhitY = 0;
 	cub->data_rays->distance = 0;
@@ -73,9 +73,12 @@ void	ft_player_dir(t_cub3d_data	*cub)
 		if (cub->player_dir == 'E')
 			cub->player_data->rotation_angle = M_PI;
 		if (cub->player_dir == 'N')
-			cub->player_data->rotation_angle = M_PI / 2;
+			// cub->player_data->rotation_angle = M_PI / 2;
+			cub->player_data->rotation_angle = 3 * M_PI / 2 ;
 		if (cub->player_dir == 'S')
-		cub->player_data->rotation_angle = 3 * M_PI / 2 ;
+		// cub->player_data->rotation_angle = 3 * M_PI / 2 ;
+			cub->player_data->rotation_angle = M_PI / 2;
+		
 		if (cub->player_dir == 'W')
 		cub->player_data->rotation_angle = M_PI * 2;
 	}

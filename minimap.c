@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/08 15:30:26 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/08 21:12:48 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,41 +33,11 @@ void	draw_square(mlx_image_t *img, int x, int y, int size, int color)
 	}
 }
 
-// void	draw_line(void *mlx_ptr, float x, float y, int color, t_cub3d_data *cub)
-// {
-// 	int	i;
-// 	float x2;
-// 	float y2;
-//     float dx;
-//     float dy;
-//     float steps;
-//     float xIncrement;
-//     float yIncrement;
-
-// 	i = -1;
-// 	x2 = x + cos(cub->player_data->rotation_angle) * 20;
-// 	y2 = y + sin(cub->player_data->rotation_angle) * 20;
-// 	dx = x - x2;
-// 	dy = y - y2;
-// 	steps = fabs(dy);
-// 	if (fabs(dx) > fabs(dy))
-// 		steps = fabs(dx);
-// 	xIncrement = (float)(dx / steps);
-// 	yIncrement = (float)(dy / steps);
-//    	while (++i <= steps)
-//     {
-// 		if (x >= 0 &&  y1 >= 0)
-//      		mlx_put_pixel(mlx_ptr, x, y, color);
-//         x += xIncrement;
-//         y += yIncrement;
-//     }
-// }
-
 void	cast_allrays(int color, t_cub3d_data *cub)
 {
 	double	colmnID = 0;
 	int		i = 0;
-
+	
 	cub->data_rays->ray_angle  = cub->player_data->rotation_angle - (cub->player_data->fov_angle / 2);
 	while (i < cub->player_data->num_rays)
 	{
@@ -104,7 +74,6 @@ void	put_player(t_cub3d_data *cub)
 		}
 		y2++;
 	}
-	// draw_line(cub->map_img, cub->player_data->x, cub->player_data->y, ORANGE, cub);
 	cast_allrays(0xFF0000FF, cub);
 }
 
@@ -162,25 +131,49 @@ int	protect_matrice(float nextHorztouchX, float nextHorztouchY, t_cub3d_data *cu
 	return(cub->matrice[y][x] == '1');
 }
 
+int distance_between_points(float x1, float y1, float x2, float y2)
+{
+	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
+}
+
 void	ray_cast(t_cub3d_data *cub, double colmnID)
 {
-	double	yintercept;
-	double	xintercept;
-	double	ystep;
-	double	xstep;
-	double	nextHorztouchX; 
-	double	nextHorztouchY;
-	double	foundhorzwallhit;
-	double	wallhitX;
-	double	wallhitY;
 
+	    //  this.rayAngle = normalizeAngle(rayAngle);
+        // this.wallHitX = 0;
+        // this.wallHitY = 0;
+        // this.distance = 0;
+        // this.wasHitVertical = false;
+
+        // this.isRayFacingDown = this.rayAngle > 0 && this.rayAngle < Math.PI;
+        // this.isRayFacingUp = !this.isRayFacingDown;
+
+        // this.isRayFacingRight = this.rayAngle < 0.5 * Math.PI || this.rayAngle > 1.5 * Math.PI;
+        // this.isRayFacingLeft = !this.isRayFacingRight;
+	
+	float	wallhitX = 0;
+	float	wallhitY = 0;
+	float	distance = 0;
+	float	wasHitVertical = 0;
+	float	yintercept;
+	float	xintercept;
+	float	ystep;
+	float	xstep;
+	float	nextHorztouchX; 
+	float	nextHorztouchY;
+	int		foundhorzwallhit;
+	float	hor_wallhitX = 0;
+	float	hor_wallhitY = 0;
+	cub->data_rays->ray_angle = normalizeamgle(cub->data_rays->ray_angle);
+	// drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(cub->player_data->x + cos(cub->player_data->rotation_angle) * 20, cub->player_data->y + sin(cub->player_data->rotation_angle) * 20), ORANGE);
+	  //////////////////////////////////////////
+	 // HORIZONTAL RAY-GRID INTERSECTION CODE//
+	//////////////////////////////////////////
 	foundhorzwallhit = 0;
 	yintercept = floor(cub->player_data->y / 20) * 20;
 	if (cub->data_rays->is_rayfacingdown)
 		yintercept += 20;
 	xintercept = cub->player_data->x + (yintercept - cub->player_data->y) / tan(cub->data_rays->ray_angle);
-	// printf("%f\n", tan(cub->data_rays->ray_angle));
-	// yintercept += floor(cub->player_data->x / 20) * 20;
 	ystep = 20;
 	if (cub->data_rays->is_rayfacingup)
 		ystep *= -1;
@@ -195,23 +188,84 @@ void	ray_cast(t_cub3d_data *cub, double colmnID)
 		nextHorztouchY--;
 	while (nextHorztouchX >= 0 && nextHorztouchX <= 20 * cub->len_i && nextHorztouchY >= 0 && nextHorztouchY <= 20 * cub->len_j)
 	{
-		// printf("%d - %d\n", (int)nextHorztouchX / 20,(int)nextHorztouchY / 20);
 		if (protect_matrice(nextHorztouchX, nextHorztouchY, cub))
 		{
-			puts("hey");
-
 			foundhorzwallhit = 1;
-			wallhitX = nextHorztouchX;
-			wallhitY = nextHorztouchY;
-			drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(wallhitX, wallhitY), ORANGE);
-			// ft_line(x, y, wallhitX, wallhitY, );
+			hor_wallhitX = nextHorztouchX;
+			hor_wallhitY = nextHorztouchY;
+			drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(hor_wallhitX, hor_wallhitY), ORANGE);
 			break ;
 		}
 		else
 		{
 			nextHorztouchX += xstep;
-			nextHorztouchX += ystep;
+			nextHorztouchY += ystep;
 		}
 	}
-	// drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(wallhitX, wallhitY), ORANGE);
+	  //////////////////////////////////////////
+	 //  VERTICAL RAY-GRID INTERSECTION CODE //
+	//////////////////////////////////////////
+	int		foundverzwallhit = 0;
+	float	vert_wallhitX = 0;
+	float	vert_wallhitY = 0;
+	float	nextvert_touchX;
+	float	nextvert_touchY;
+
+	xintercept = floor(cub->player_data->x / 20) * 20;
+	if (cub->data_rays->is_rayfacingright)
+		xintercept += 20;
+	yintercept = cub->player_data->y + (xintercept - cub->player_data->x) * tan(cub->data_rays->ray_angle);
+	xstep = 20;
+	if (cub->data_rays->is_rayfacingileft)
+		xstep *= -1;
+	ystep = 20 * tan(cub->data_rays->ray_angle);
+	if (cub->data_rays->is_rayfacingup && ystep > 0)
+		ystep *= -1;
+	if (cub->data_rays->is_rayfacingdown && ystep < 0)
+		ystep *= -1;
+	nextvert_touchX = xintercept;
+	nextvert_touchY = yintercept;
+	if (cub->data_rays->is_rayfacingileft)
+		nextvert_touchX--;
+	while (nextvert_touchX >= 0 && nextvert_touchX <= 20 * cub->len_i && nextvert_touchY >= 0 && nextvert_touchY <= 20 * cub->len_j)
+	{
+		if (protect_matrice(nextvert_touchX, nextvert_touchY, cub))
+		{
+			foundverzwallhit = 1;
+			vert_wallhitX = nextvert_touchX;
+			vert_wallhitY = nextvert_touchY;
+			break ;
+		}
+		else
+		{
+			nextvert_touchX += xstep;
+			nextvert_touchY += ystep;
+		}
+	}
+	//calculate hor and ver distance and choose the smallest one
+	int horzhitdistance = INT_MAX;
+	
+	if (foundhorzwallhit)
+		horzhitdistance = distance_between_points(cub->player_data->x, cub->player_data->y, hor_wallhitX, hor_wallhitY);
+	int vertzhitdistance = INT_MAX;
+	if (foundverzwallhit)
+		vertzhitdistance = distance_between_points(cub->player_data->x, cub->player_data->y, vert_wallhitX, vert_wallhitY);
+	if (vertzhitdistance > horzhitdistance)
+		wallhitX = hor_wallhitX;
+	else
+		wallhitX = vert_wallhitX;
+	if (vertzhitdistance > horzhitdistance)
+		wallhitY = hor_wallhitY;
+	else
+		wallhitY = vert_wallhitY;
+	if (vertzhitdistance > horzhitdistance)
+		distance = horzhitdistance;
+	else
+		distance = vertzhitdistance;
+	if (vertzhitdistance < horzhitdistance)
+		wasHitVertical = 1;
+	else
+		wasHitVertical = 0;
+
+	drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(wallhitX, wallhitY), ORANGE);
 }

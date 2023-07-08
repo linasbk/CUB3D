@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   keyhook.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/08 10:13:29 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:30:08 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	ft_hook(void *param)
 		mlx_close_window(cub->mlx);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT) || mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
 	{
-		cub->player_data->turn_direction = 1.0;
+		cub->player_data->turn_direction = -1.0;
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
-			cub->player_data->turn_direction = -1.0;
+			cub->player_data->turn_direction = 1.0;
 		cub->player_data->rotation_angle += (cub->player_data->turn_direction * cub->player_data->rotation_speed);
 		cub->player_data->turn_direction = 0;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) || mlx_is_key_down(cub->mlx, MLX_KEY_W))
 	{
-		cub->player_data->walk_direction = 1.0;
+		cub->player_data->walk_direction = -1.0;
 		if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-			cub->player_data->walk_direction = -1.0;
+			cub->player_data->walk_direction = 1.0;
 		x1 = cub->player_data->x;
 		y1 = cub->player_data->y;
 		cub->player_data->move_step = cub->player_data->walk_direction * cub->player_data->move_speed;

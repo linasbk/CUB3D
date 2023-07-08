@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/08 12:06:31 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/08 20:28:54 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int				cub_file(char *s);
 //ERROR
 int				ft_error(char *s);
 //INIT
-double			normalizeamgle(t_cub3d_data *cub);
+double			normalizeamgle(double angle);
 int				init_data(t_cub3d_data *cub);
 void			init_ray_data(t_cub3d_data *cub);
 void			ft_mlx_init(t_cub3d_data *cub);
