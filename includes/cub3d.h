@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 22:39:41 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/08 12:06:31 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct player_movement
 typedef struct cub3d_data
 {
 	mlx_t			*mlx;
+	float			angleIncrement;
 	char			**map;
 	char			*t_no;
 	char			*t_so;
@@ -85,7 +86,6 @@ typedef struct cub3d_data
 	int				new_x;
 	int				player_y;
 	int				new_y;
-	float			angleIncrement;
 	char			player_dir;
 	int				len_i;
 	int				len_j;
@@ -95,7 +95,7 @@ typedef struct cub3d_data
 	mlx_image_t		*player;
 	mlx_image_t		*point;
 	mlx_image_t		*minimap;
-	mlx_image_t 	*map_img;
+	mlx_image_t		*map_img;
 	t_data_player	*player_data;
 
 }					t_cub3d_data;
@@ -133,4 +133,14 @@ void			put_player(t_cub3d_data *cub);
 void			ft_update(t_cub3d_data *cub);
 void			put_map(t_cub3d_data *cub);
 void			init_data_player(t_cub3d_data *cub);
+void			ft_hook(void	*param);
+void			cast_allrays(int color, t_cub3d_data *cub);
+void	ray_cast(t_cub3d_data *cub, double colmnID);
+//DRAW_LINE
+void			draw_square(mlx_image_t *img, int x, int y, int size, int color);
+// void			draw_line(void *mlx_ptr, float x, float y, int color, t_cub3d_data *cub, double ray_angle);
+void			drawline(t_cub3d_data *cub, t_point *a, t_point *b, int color);
+t_point			*get_points(int x, int y);
+//HOOK
+void	ft_hook(void *param);
 #endif

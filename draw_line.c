@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:31:03 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/07 22:43:30 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/08 12:07:44 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void	ft_convert(t_point *a, t_point *b)
 	}
 }
 
-void	drawline(t_cub3d_data *cub, t_point *a, t_point *b)
+void	drawline(t_cub3d_data *cub, t_point *a, t_point *b, int color)
 {
 	int	p;
-	int	color;
 
 	ft_convert(a, b);
-	color = cub->color;
 	a->delta_x = b->x - a->x;
 	a->delta_y = b->y - a->y;
 	p = sqrt((a->delta_x * a->delta_x) + (a->delta_y * a->delta_y));
@@ -46,8 +44,7 @@ void	drawline(t_cub3d_data *cub, t_point *a, t_point *b)
 	{
 		if ((a->x > 0 && a->x < WIDTH) && (a->y > 0
 				&& a->y < HEIGHT))
-            // mlx_put_pixel(image, x, y, color);
-			my_mlx_pixel_put(cub, a->x, a->y, color);
+			mlx_put_pixel(cub->map_img, a->x, a->y, color);
 			a->x += a->delta_x;
 			a->y += a->delta_y;
 			--p;
