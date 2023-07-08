@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/08 12:27:53 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/08 13:33:14 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,35 @@ void	draw_square(mlx_image_t *img, int x, int y, int size, int color)
 	}
 }
 
-void	draw_line(void *mlx_ptr, float x, float y, int color, t_cub3d_data *cub, double ray_angle)
-{
-	int	i;
-	float x2;
-	float y2;
-	float x1;
-	float y1;
-	float dx;
-	float dy;
-	float steps;
-	float xIncrement;
-	float yIncrement;
+// void	draw_line(void *mlx_ptr, float x, float y, int color, t_cub3d_data *cub)
+// {
+// 	int	i;
+// 	float x2;
+// 	float y2;
+//     float dx;
+//     float dy;
+//     float steps;
+//     float xIncrement;
+//     float yIncrement;
 
-	i = -1;
-	x1 = x;
-	y1 = y;
-	x2 = x + cos(ray_angle) * 30;
-	y2 = y + sin(ray_angle) * 30;
-	dx = x - x2;
-	dy = y - y2;
-	steps = fabs(dy);
-	if (fabs(dx) > fabs(dy))
-		steps = fabs(dx);
-	xIncrement = (float)(dx / steps);
-	yIncrement = (float)(dy / steps);
-   	while (++i <= steps)
-	{
-		if (x >= 0 &&  y1 >= 0)
-	 		mlx_put_pixel(mlx_ptr, x1, y1, color);
-		x1 += xIncrement;
-		y1 += yIncrement;
-	}
-}
+// 	i = -1;
+// 	x2 = x + cos(cub->player_data->rotation_angle) * 20;
+// 	y2 = y + sin(cub->player_data->rotation_angle) * 20;
+// 	dx = x - x2;
+// 	dy = y - y2;
+// 	steps = fabs(dy);
+// 	if (fabs(dx) > fabs(dy))
+// 		steps = fabs(dx);
+// 	xIncrement = (float)(dx / steps);
+// 	yIncrement = (float)(dy / steps);
+//    	while (++i <= steps)
+//     {
+// 		if (x >= 0 &&  y1 >= 0)
+//      		mlx_put_pixel(mlx_ptr, x, y, color);
+//         x += xIncrement;
+//         y += yIncrement;
+//     }
+// }
 
 void	cast_allrays(int color, t_cub3d_data *cub)
 {
@@ -76,8 +72,8 @@ void	cast_allrays(int color, t_cub3d_data *cub)
 	while (i < cub->player_data->num_rays)
 	{
 		ray_cast(cub, colmnID);
-		// drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(x, y + 1));
-		draw_line(cub->map_img, cub->player_data->x, cub->player_data->y, color, cub, cub->data_rays->ray_angle);
+		// drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(cub->player_data->x + cos(cub->player_data->rotation_angle) * 20, cub->player_data->y + sin(cub->player_data->rotation_angle) * 20), ORANGE);
+		// draw_line(cub->map_img, cub->player_data->x, cub->player_data->y, color, cub);
 		// cub->data_rays->ray_angle += cub->player_data->fov_angle / cub->player_data->num_rays;
 		i++;
 		colmnID++;
@@ -108,7 +104,7 @@ void	put_player(t_cub3d_data *cub)
 		}
 		y2++;
 	}
-	// ray_cast();
+	// draw_line(cub->map_img, cub->player_data->x, cub->player_data->y, ORANGE, cub);
 	cast_allrays(0xFF0000FF, cub);
 }
 
@@ -131,28 +127,6 @@ void	mini_map_framing(t_cub3d_data *cub)
 	while (j < cub->len_j * 20)
 		mlx_put_pixel(cub->map_img, cub->len_i * 20 - 1, j++, 0xFF0000FF);
 }
-
-// void	ft_puts(t_cub3d_data *cub, int i, int j, int ind)
-// {
-// 	int	i1;
-// 	int j1;
-
-// 	i1 = i;
-// 	j1 = j;
-// 	while (j1 < j + 19)
-// 	{
-// 		i1 = i;
-// 		while (i1 < i + 19)
-// 		{
-// 			if (ind)
-// 				mlx_put_pixel(cub->map_img, i1, j1, 0xFFFFFFFF);
-// 			else
-// 				mlx_put_pixel(cub->map_img, i1, j1, 0xFF000000);
-// 			i1++;
-// 		}
-// 		j1++;
-// 	}
-// }
 
 void	put_map(t_cub3d_data *cub)
 {
@@ -213,6 +187,7 @@ void	ray_cast(t_cub3d_data *cub, double colmnID)
 			foundhorzwallhit = 1;
 			wallhitX = nextHorztouchX;
 			wallhitY = nextHorztouchY;
+			drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(wallhitX, wallhitY), ORANGE);
 			// ft_line(x, y, wallhitX, wallhitY, );
 			break ;
 		}
