@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/08 13:33:14 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/08 15:30:26 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,18 @@ void	put_map(t_cub3d_data *cub)
 	mini_map_framing(cub);
 }
 
+int	protect_matrice(float nextHorztouchX, float nextHorztouchY, t_cub3d_data *cub)
+{
+	int	x;
+	int	y;
+
+	x = floor(nextHorztouchX / 20);
+	y = floor(nextHorztouchY / 20);
+	if (x < 0 || x >= cub->len_i - 1 || y < 0 || y >= cub->len_j - 1)
+		return (1);
+	return(cub->matrice[y][x] == '1');
+}
+
 void	ray_cast(t_cub3d_data *cub, double colmnID)
 {
 	double	yintercept;
@@ -166,8 +178,9 @@ void	ray_cast(t_cub3d_data *cub, double colmnID)
 	yintercept = floor(cub->player_data->y / 20) * 20;
 	if (cub->data_rays->is_rayfacingdown)
 		yintercept += 20;
-	xintercept = cub->player_data->x * (yintercept - cub->player_data->y) / tan(cub->data_rays->ray_angle); 
-	yintercept += floor(cub->player_data->x / 20) * 20;
+	xintercept = cub->player_data->x + (yintercept - cub->player_data->y) / tan(cub->data_rays->ray_angle);
+	// printf("%f\n", tan(cub->data_rays->ray_angle));
+	// yintercept += floor(cub->player_data->x / 20) * 20;
 	ystep = 20;
 	if (cub->data_rays->is_rayfacingup)
 		ystep *= -1;
@@ -182,8 +195,11 @@ void	ray_cast(t_cub3d_data *cub, double colmnID)
 		nextHorztouchY--;
 	while (nextHorztouchX >= 0 && nextHorztouchX <= 20 * cub->len_i && nextHorztouchY >= 0 && nextHorztouchY <= 20 * cub->len_j)
 	{
-		if (cub->matrice[(int)(nextHorztouchX / 20)][(int)(nextHorztouchY / 20)] == '1')
+		// printf("%d - %d\n", (int)nextHorztouchX / 20,(int)nextHorztouchY / 20);
+		if (protect_matrice(nextHorztouchX, nextHorztouchY, cub))
 		{
+			puts("hey");
+
 			foundhorzwallhit = 1;
 			wallhitX = nextHorztouchX;
 			wallhitY = nextHorztouchY;
