@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/09 16:34:18 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 18:57:07 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,10 @@ float	normalizeamgle(float ray_angle)
 void	init_ray_data(t_cub3d_data *cub)
 {
 	cub->data_rays = ft_calloc(1, sizeof(t_ray_data));
-	// cub->data_rays->ray_angle = normalizeamgle(cub->data_rays->ray_angle);
-	// if (cub->data_rays->ray_angle > 0 && cub->data_rays->ray_angle < M_PI)
-	// 	cub->data_rays->is_rayfacingdown = 1;
-	// else
-	// {
-	// 	cub->data_rays->is_rayfacingdown = 0;
-	// 	cub->data_rays->is_rayfacingup = 1;
-	// }
-	// if (cub->data_rays->ray_angle < 0.5 * M_PI \
-	// 	|| cub->data_rays->ray_angle > 1.5 * M_PI)
-	// 	cub->data_rays->is_rayfacingright = 1;
-	// else
-	// {
-	// 	cub->data_rays->is_rayfacingright = 0;
-	// 	cub->data_rays->is_rayfacingileft = 1;
-	// }
+	cub->data_rays->is_rayfacingdown = 0;
+	cub->data_rays->is_rayfacingright = 0;
+	cub->data_rays->is_rayfacingup = 0;
+	cub->data_rays->is_rayfacingleft = 0;
 }
 
 void	ft_mlx_init(t_cub3d_data *cub)
@@ -51,12 +39,6 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	}
 	init_data_player(cub);
 	init_ray_data(cub);
-	// cub->map_img = mlx_new_image(cub->mlx, cub->len_i * 20, cub->len_j * 20);
-	// if (!cub->map_img)
-	// {
-	// 	puts(mlx_strerror(mlx_errno));
-	// 	exit(EXIT_FAILURE);
-	// }
 }
 
 void	ft_player_dir(t_cub3d_data	*cub)
@@ -66,13 +48,13 @@ void	ft_player_dir(t_cub3d_data	*cub)
 		cub->player_data->x = cub->player_x * 20 + 10;
 		cub->player_data->y = cub->player_y * 20 + 10;
 		if (cub->player_dir == 'E')
-			cub->player_data->rotation_angle = 2 * M_PI;
-		if (cub->player_dir == 'N')
-			cub->player_data->rotation_angle = (3 * M_PI) / 2;
-		if (cub->player_dir == 'S')
-			cub->player_data->rotation_angle = M_PI / 2;
-		if (cub->player_dir == 'W')
 			cub->player_data->rotation_angle = M_PI;
+		if (cub->player_dir == 'N')
+			cub->player_data->rotation_angle = M_PI / 2;
+		if (cub->player_dir == 'S')
+			cub->player_data->rotation_angle = (3 * M_PI) / 2;
+		if (cub->player_dir == 'W')
+			cub->player_data->rotation_angle = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/09 16:16:04 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 18:56:27 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef struct data_rays
 {
 	float	ray_angle;
 	float	is_rayfacingdown;
+	float	is_rayfacingup;
 	float	is_rayfacingright;
+	float	is_rayfacingleft;
 }				t_ray_data;
 typedef struct s_map_color
 {
