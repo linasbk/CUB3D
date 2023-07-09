@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/08 21:38:56 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 16:21:41 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ void	draw_square(mlx_image_t *img, int x, int y, int size, int color)
 
 void	cast_allrays(int color, t_cub3d_data *cub)
 {
-	double	colmnID = 0;
+	float	colmnID = 0;
 	int		i = 0;
 	
-	cub->data_rays->ray_angle  = cub->player_data->rotation_angle - (cub->player_data->fov_angle / 2);
+	cub->data_rays->ray_angle  = cub->player_data->rotation_angle;
 	while (i < cub->player_data->num_rays)
 	{
+		cub->data_rays->ray_angle = normalizeamgle(cub->data_rays->ray_angle);
 		ray_cast(cub, colmnID);
 		// drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(cub->player_data->x + cos(cub->player_data->rotation_angle) * 20, cub->player_data->y + sin(cub->player_data->rotation_angle) * 20), ORANGE);
 		// draw_line(cub->map_img, cub->player_data->x, cub->player_data->y, color, cub);
@@ -136,20 +137,13 @@ int distance_between_points(float x1, float y1, float x2, float y2)
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
-void	ray_cast(t_cub3d_data *cub, double colmnID)
-{
-	    //  this.rayAngle = normalizeAngle(rayAngle);
-        // this.wallHitX = 0;
-        // this.wallHitY = 0;
-        // this.distance = 0;
-        // this.wasHitVertical = false;
-
-        // this.isRayFacingDown = this.rayAngle > 0 && this.rayAngle < Math.PI;
-        // this.isRayFacingUp = !this.isRayFacingDown;
-
-        // this.isRayFacingRight = this.rayAngle < 0.5 * Math.PI || this.rayAngle > 1.5 * Math.PI;
-        // this.isRayFacingLeft = !this.isRayFacingRight;
+// void	raycast_init(t_cub3d_data *cub, float colmnID)
+// {
 	
+// }
+
+void	ray_cast(t_cub3d_data *cub, float colmnID)
+{	
 	float	wallhitX = 0;
 	float	wallhitY = 0;
 	float	distance = 0;
@@ -163,28 +157,39 @@ void	ray_cast(t_cub3d_data *cub, double colmnID)
 	int		foundhorzwallhit;
 	float	hor_wallhitX = 0;
 	float	hor_wallhitY = 0;
-	cub->data_rays->ray_angle = normalizeamgle(cub->data_rays->ray_angle);
+	// raycast_init(cub, colmnID);
+	if (cub->data_rays->ray_angle > 0 && cub->data_rays->ray_angle < M_PI)
+		cub->data_rays->is_rayfacingdown = 1;
+	else
+		cub->data_rays->is_rayfacingdown = 0;
+	if (cub->data_rays->ray_angle < M_PI / 2 \
+		|| cub->data_rays->ray_angle > (3 * M_PI) / 2)
+		cub->data_rays->is_rayfacingright = 1;
+	else
+		cub->data_rays->is_rayfacingright = 0;
+	// cub->data_rays->ray_angle  = cub->player_data->rotation_angle - (cub->player_data->fov_angle / 2);
 	// drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(cub->player_data->x + cos(cub->player_data->rotation_angle) * 20, cub->player_data->y + sin(cub->player_data->rotation_angle) * 20), ORANGE);
 	  //////////////////////////////////////////
 	 // HORIZONTAL RAY-GRID INTERSECTION CODE//
 	//////////////////////////////////////////
-	foundhorzwallhit = 0;
+	 
 	yintercept = floor(cub->player_data->y / 20) * 20;
 	if (cub->data_rays->is_rayfacingdown)
 		yintercept += 20;
 	xintercept = cub->player_data->x + (yintercept - cub->player_data->y) / tan(cub->data_rays->ray_angle);
 	ystep = 20;
-	if (cub->data_rays->is_rayfacingup)
-		ystep *= -1;
 	xstep = 20 / tan(cub->data_rays->ray_angle);
-	if (cub->data_rays->is_rayfacingileft && xstep > 0)
+	if (!cub->data_rays->is_rayfacingdown)
+		ystep *= -1;
+	if (!cub->data_rays->is_rayfacingright && xstep > 0)
 		xstep *= -1;
 	if (cub->data_rays->is_rayfacingright && xstep < 0)
 		xstep *= -1;
 	nextHorztouchX = xintercept;
 	nextHorztouchY = yintercept;
-	if (cub->data_rays->is_rayfacingup)
+	if (!cub->data_rays->is_rayfacingdown)
 		nextHorztouchY--;
+	// drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(cub->player_data->x + cos(cub->player_data->rotation_angle) * 20, cub->player_data->y + sin(cub->player_data->rotation_angle) * 20), ORANGE);
 	while (nextHorztouchX >= 0 && nextHorztouchX <= 20 * cub->len_i && nextHorztouchY >= 0 && nextHorztouchY <= 20 * cub->len_j)
 	{
 		if (protect_matrice(nextHorztouchX, nextHorztouchY, cub))
@@ -214,16 +219,16 @@ void	ray_cast(t_cub3d_data *cub, double colmnID)
 		xintercept += 20;
 	yintercept = cub->player_data->y + (xintercept - cub->player_data->x) * tan(cub->data_rays->ray_angle);
 	xstep = 20;
-	if (cub->data_rays->is_rayfacingileft)
+	if (!cub->data_rays->is_rayfacingright)
 		xstep *= -1;
 	ystep = 20 * tan(cub->data_rays->ray_angle);
-	if (cub->data_rays->is_rayfacingup && ystep > 0)
+	if (!cub->data_rays->is_rayfacingdown && ystep > 0)
 		ystep *= -1;
 	if (cub->data_rays->is_rayfacingdown && ystep < 0)
 		ystep *= -1;
 	nextvert_touchX = xintercept;
 	nextvert_touchY = yintercept;
-	if (cub->data_rays->is_rayfacingileft)
+	if (!cub->data_rays->is_rayfacingright)
 		nextvert_touchX--;
 	while (nextvert_touchX >= 0 && nextvert_touchX <= 20 * cub->len_i && nextvert_touchY >= 0 && nextvert_touchY <= 20 * cub->len_j)
 	{

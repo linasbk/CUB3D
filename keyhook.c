@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/08 21:30:08 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 14:12:32 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void	ft_hook(void *param)
 		cub->player_data->side_direction = 0;
 	}
 	put_map(cub);
+	printf("cub->data_rays->ray_angle = %f\n", cub->data_rays->ray_angle);
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
-
 }

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:36:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/30 16:04:14 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 14:09:38 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_substr(char *s, unsigned int start, int len)
 	i = 0;
 	if (!s)
 		return (0);
-	str = malloc(sizeof(char) * (len + 1));
+	str = ft_calloc(1, sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
 	while (i < len)
@@ -92,7 +92,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	full_len = get_num_word((char *)s, c);
-	str = malloc(sizeof(char *) * (full_len + 1));
+	str = ft_calloc(1, sizeof(char *) * (full_len + 1));
 	if (!str)
 		return (NULL);
 	while (i < full_len)

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:31:03 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/08 13:33:53 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 14:09:08 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_point	*get_points(int x, int y)
 {
 	t_point		*lines;
 
-	lines = malloc(sizeof(t_point));
+	lines = ft_calloc(1, sizeof(t_point));
 	if (!lines)
 		return (0);
 	lines->x = x;

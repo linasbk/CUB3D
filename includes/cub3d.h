@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/08 20:28:54 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 16:16:04 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,12 @@
 # define WIDTH 2080
 # define HEIGHT 1500
 # define WALL_DIMENSION 20
+// # define FOV_ANGLE 60 * (M_PI / 180)
 typedef struct data_rays
 {
-	double	ray_angle;
-	double	wallhitX;
-	double	wallhitY;
-	double	distance;
-	double	is_rayfacingdown;
-	double	is_rayfacingup;
-	double	is_rayfacingright;
-	double	is_rayfacingileft;
+	float	ray_angle;
+	float	is_rayfacingdown;
+	float	is_rayfacingright;
 }				t_ray_data;
 typedef struct s_map_color
 {
@@ -46,8 +42,8 @@ typedef struct point {
 	float	x;
 	float	y;
 	float	z;
-	double	delta_x;
-	double	delta_y;
+	float	delta_x;
+	float	delta_y;
 }				t_point;
 
 typedef struct player_movement
@@ -61,12 +57,12 @@ typedef struct player_movement
 	float	turn_direction;
 	float	walk_direction;
 	float	side_direction;
-	double	rotation_angle;
-	double	move_speed;
-	double	move_step;
-	double	rotation_speed;
-	double	fov_angle;
-	double	num_rays;
+	float	rotation_angle;
+	float	move_speed;
+	float	move_step;
+	float	rotation_speed;
+	float	fov_angle;
+	float	num_rays;
 }				t_data_player;
 
 typedef struct cub3d_data
@@ -110,6 +106,7 @@ char			*ft_strjoin(char *s1, char *s2);
 char			*ft_substr(char *s, unsigned int start, int len);
 char			*ft_strtrim(char *s1, char *set);
 int				ft_isspace(char str);
+void			*ft_calloc(size_t count, size_t size);
 //GET_NEXT_LINE && SPLIT && ATOI
 char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);
@@ -120,7 +117,7 @@ int				cub_file(char *s);
 //ERROR
 int				ft_error(char *s);
 //INIT
-double			normalizeamgle(double angle);
+float			normalizeamgle(float angle);
 int				init_data(t_cub3d_data *cub);
 void			init_ray_data(t_cub3d_data *cub);
 void			ft_mlx_init(t_cub3d_data *cub);
@@ -135,10 +132,10 @@ void			put_map(t_cub3d_data *cub);
 void			init_data_player(t_cub3d_data *cub);
 void			ft_hook(void	*param);
 void			cast_allrays(int color, t_cub3d_data *cub);
-void	ray_cast(t_cub3d_data *cub, double colmnID);
+void	ray_cast(t_cub3d_data *cub, float colmnID);
 //DRAW_LINE
 void			draw_square(mlx_image_t *img, int x, int y, int size, int color);
-// void			draw_line(void *mlx_ptr, float x, float y, int color, t_cub3d_data *cub, double ray_angle);
+// void			draw_line(void *mlx_ptr, float x, float y, int color, t_cub3d_data *cub, float ray_angle);
 void			drawline(t_cub3d_data *cub, t_point *a, t_point *b, int color);
 t_point			*get_points(int x, int y);
 //HOOK

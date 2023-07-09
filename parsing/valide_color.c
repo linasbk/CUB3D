@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:25:38 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 15:26:59 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 14:09:38 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_map_color	*check_range(t_cub3d_data *cube, char *line)
 	int			i;
 
 	i = 0;
-	color = malloc(sizeof(t_map_color));
+	color = ft_calloc(1, sizeof(t_map_color));
 	color->r = 0;
 	color->g = 0;
 	color->b = 0;
