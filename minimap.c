@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/09 18:59:06 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 20:44:50 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,15 +147,28 @@ void	raycast_init(t_cub3d_data *cub, float colmnID)
 	// if (cub->data_rays->ray_angle < M_PI / 2 \
 	// 	|| cub->data_rays->ray_angle > (3 * M_PI) / 2)
 	// 	cub->data_rays->is_rayfacingright = 1;
+	
 	if (cub->data_rays->ray_angle > M_PI)
+	{
+		cub->data_rays->is_rayfacingup = 0;
 		cub->data_rays->is_rayfacingdown = 1;
+	}
 	else
+	{
+		cub->data_rays->is_rayfacingdown = 0;
 		cub->data_rays->is_rayfacingup = 1;
+	}
 	if (cub->data_rays->ray_angle > M_PI / 2 \
 		&& cub->data_rays->ray_angle < (3 * M_PI) / 2)
+	{
+		cub->data_rays->is_rayfacingleft = 0;
 		cub->data_rays->is_rayfacingright = 1;
+	}
 	else
+	{
+		cub->data_rays->is_rayfacingright = 0;
 		cub->data_rays->is_rayfacingleft = 1;
+	}
 }
 
 void	 ray_cast(t_cub3d_data *cub, float colmnID)
@@ -190,17 +203,13 @@ void	 ray_cast(t_cub3d_data *cub, float colmnID)
 	xstep = 20 / tan(cub->data_rays->ray_angle);
 	if (cub->data_rays->is_rayfacingup)
 		ystep *= -1;
-	// if (!cub->data_rays->is_rayfacingdown)
-	// 	ystep *= -1;
 	if (cub->data_rays->is_rayfacingleft && xstep > 0)
 		xstep *= -1;
-	// if (!cub->data_rays->is_rayfacingright && xstep > 0)
-	// 	xstep *= -1;
 	if (cub->data_rays->is_rayfacingright && xstep < 0)
 		xstep *= -1;
 	nextHorztouchX = xintercept;
 	nextHorztouchY = yintercept;
-	if (!cub->data_rays->is_rayfacingdown)
+	if (cub->data_rays->is_rayfacingup)
 		nextHorztouchY--;
 	// drawline(cub, get_points(cub->player_data->x, cub->player_data->y), get_points(cub->player_data->x + cos(cub->player_data->rotation_angle) * 20, cub->player_data->y + sin(cub->player_data->rotation_angle) * 20), ORANGE);
 	while (nextHorztouchX >= 0 && nextHorztouchX <= 20 * cub->len_i && nextHorztouchY >= 0 && nextHorztouchY <= 20 * cub->len_j)
@@ -233,16 +242,16 @@ void	 ray_cast(t_cub3d_data *cub, float colmnID)
 		xintercept += 20;
 	yintercept = cub->player_data->y + (xintercept - cub->player_data->x) * tan(cub->data_rays->ray_angle);
 	xstep = 20;
-	if (!cub->data_rays->is_rayfacingright)
+	if (cub->data_rays->is_rayfacingleft)
 		xstep *= -1;
 	ystep = 20 * tan(cub->data_rays->ray_angle);
-	if (!cub->data_rays->is_rayfacingdown && ystep > 0)
+	if (cub->data_rays->is_rayfacingup && ystep > 0)
 		ystep *= -1;
 	if (cub->data_rays->is_rayfacingdown && ystep < 0)
 		ystep *= -1;
 	nextvert_touchX = xintercept;
 	nextvert_touchY = yintercept;
-	if (!cub->data_rays->is_rayfacingright)
+	if (cub->data_rays->is_rayfacingleft)
 		nextvert_touchX--;
 	while (nextvert_touchX >= 0 && nextvert_touchX <= 20 * cub->len_i && nextvert_touchY >= 0 && nextvert_touchY <= 20 * cub->len_j)
 	{
