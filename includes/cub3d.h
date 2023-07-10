@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/09 18:56:27 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/10 19:11:55 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# define WIDTH 2080
-# define HEIGHT 1500
-# define WALL_DIMENSION 20
-// # define FOV_ANGLE 60 * (M_PI / 180)
+
 typedef struct data_rays
 {
 	float	ray_angle;
@@ -32,7 +29,18 @@ typedef struct data_rays
 	float	is_rayfacingup;
 	float	is_rayfacingright;
 	float	is_rayfacingleft;
+	float	yintercept;
+	float	xintercept;
+	float	ystep;
+	float	xstep;
+	int		foundhorzwallhit;
+	float	hor_wallhitX;
+	float	hor_wallhitY;
+	int		foundverzwallhit;
+	float	vert_wallhitX;
+	float	vert_wallhitY;
 }				t_ray_data;
+
 typedef struct s_map_color
 {
 	int			r;
@@ -40,37 +48,18 @@ typedef struct s_map_color
 	int			b;
 }				t_map_color;
 
-typedef struct point {
-	float	x;
-	float	y;
-	float	z;
-	float	delta_x;
-	float	delta_y;
-}				t_point;
-
 typedef struct player_movement
 {
-	char	position_1;
-	float		x;
-	float		y;
+	float	x;
+	float	y;
 	int		i;
 	int		j;
-	float	radius;
-	float	turn_direction;
-	float	walk_direction;
-	float	side_direction;
-	float	rotation_angle;
-	float	move_speed;
-	float	move_step;
-	float	rotation_speed;
-	float	fov_angle;
-	float	num_rays;
+	float	rot_angle;
 }				t_data_player;
 
 typedef struct cub3d_data
 {
 	mlx_t			*mlx;
-	float			angleIncrement;
 	char			**map;
 	char			*t_no;
 	char			*t_so;
@@ -81,21 +70,16 @@ typedef struct cub3d_data
 	int				m_index;
 	char			*line;
 	int				player_x;
-	int				new_x;
 	int				player_y;
-	int				new_y;
 	char			player_dir;
 	int				len_i;
 	int				len_j;
 	t_ray_data		*data_rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
-	mlx_image_t		*player;
-	mlx_image_t		*point;
-	mlx_image_t		*minimap;
+	mlx_image_t		*sky_floor;
 	mlx_image_t		*map_img;
 	t_data_player	*player_data;
-
 }					t_cub3d_data;
 
 // UTILS
@@ -134,12 +118,11 @@ void			put_map(t_cub3d_data *cub);
 void			init_data_player(t_cub3d_data *cub);
 void			ft_hook(void	*param);
 void			cast_allrays(int color, t_cub3d_data *cub);
-void	ray_cast(t_cub3d_data *cub, float colmnID);
+void			ray_cast(t_cub3d_data *cub, float colmnID);
 //DRAW_LINE
 void			draw_square(mlx_image_t *img, int x, int y, int size, int color);
-// void			draw_line(void *mlx_ptr, float x, float y, int color, t_cub3d_data *cub, float ray_angle);
-void			drawline(t_cub3d_data *cub, t_point *a, t_point *b, int color);
-t_point			*get_points(int x, int y);
+void	 		ray_cast(t_cub3d_data *cub, float colmnID);
+void			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
 //HOOK
-void	ft_hook(void *param);
+void			ft_hook(void *param);
 #endif

@@ -6,64 +6,33 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:31:03 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/09 14:09:08 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/10 18:52:00 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-void	ft_convert(t_point *a, t_point *b)
+void drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color)
 {
-	int	swap;
+    int dx = abs(x2 - x1);
+    int dy = abs(y2 - y1);
+    int sx = x1 < x2 ? 1 : -1;
+    int sy = y1 < y2 ? 1 : -1;
+    int err = dx - dy;
 
-	if (a->x > b->x)
-	{
-			swap = a->x;
-			a->x = b->x;
-			b->x = swap;
-	}
-	if (a->y > b->y)
-	{
-			swap = a->y;
-			a->y = b->y;
-			b->y = swap;
-	}
-}
+    while (x1 != x2 || y1 != y2) {
+        mlx_put_pixel(mlx_ptr, x1, y1, color);
 
-void	drawline(t_cub3d_data *cub, t_point *a, t_point *b, int color)
-{
-	int	i;
-    float steps;
-    float xIncrement;
-    float yIncrement;
+        int err2 = 2 * err;
 
-	i = -1;
-	a->delta_x = a->x - b->x;
-	a->delta_y = a->y - b->y;
-	steps = fabs(a->delta_y);
-	if (fabs(a->delta_x) > fabs(a->delta_y))
-		steps = fabs(a->delta_x);
-	xIncrement = (float)(a->delta_x / steps);
-	yIncrement = (float)(a->delta_y / steps);
-   	while (++i <= steps)
-    {
-		if (a->x >= 0 &&  a->y >= 0)
-     		mlx_put_pixel(cub->map_img, a->x, a->y, color);
-        a->x += xIncrement;
-        a->y += yIncrement;
+        if (err2 > -dy) {
+            err -= dy;
+            x1 += sx;
+        }
+
+        if (err2 < dx) {
+            err += dx;
+            y1 += sy;
+        }
     }
-	free(a);
-	free(b);
-}
-
-t_point	*get_points(int x, int y)
-{
-	t_point		*lines;
-
-	lines = ft_calloc(1, sizeof(t_point));
-	if (!lines)
-		return (0);
-	lines->x = x;
-	lines->y = y;
-	return (lines);
 }

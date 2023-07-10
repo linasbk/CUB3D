@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/08 11:58:21 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:00:59 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,29 @@
 # define BLUE "\033[1;34m"
 # define CYAN "\033[1;36m"
 
-# define ORANGE 0xFF7000FF
+# define WIDTH 2080
+# define HEIGHT 1500
+# define WALL_DIMENSION 20
+# define FOV_ANGLE 60 * (M_PI / 180)
+# define P_RADIUS  5.0
+# define MV_SPEED 3.0
+# define ROT_SPEED 5.0 * (M_PI / 180)
+
+# define ORANGE_MP 0xFF7000FF
+# define BLACK_MP 0x000000FF
+# define WHITE_MP 0xFFFFFFFF
+# define RED_MP 0xFF0000FF
+# define GREEN_MP 0x00FF00FF
+# define BLUE_MP 0x0000FFFF
+# define YELLOW_MP 0xFFFF00FF
+# define CYAN_MP 0x00FFFFFF
+# define PURPLE_MP 0x800080FF
 
 # define FAILURE -1
 # define SUCCESS 1
+
+# define VERTICAL 0
+# define HORIZONTAL 1
 
 # define T_NO 1
 # define T_SO 2
