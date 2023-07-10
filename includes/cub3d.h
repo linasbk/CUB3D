@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/10 19:11:55 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:24:58 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct data_rays
 	int		foundverzwallhit;
 	float	vert_wallhitX;
 	float	vert_wallhitY;
+	float	x_to_check;
+	float	y_to_check;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -103,7 +105,7 @@ int				cub_file(char *s);
 //ERROR
 int				ft_error(char *s);
 //INIT
-float			normalizeamgle(float angle);
+float			normalizeangle(float angle);
 int				init_data(t_cub3d_data *cub);
 void			init_ray_data(t_cub3d_data *cub);
 void			ft_mlx_init(t_cub3d_data *cub);

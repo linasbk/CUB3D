@@ -6,13 +6,13 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/10 19:10:59 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:24:58 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-float	normalizeamgle(float ray_angle)
+float	normalizeangle(float ray_angle)
 {
 	ray_angle = fmod(ray_angle, (2 * M_PI));
 	if (ray_angle < 0)
@@ -56,7 +56,7 @@ void	init_data_player(t_cub3d_data *cub)
 		if (cub->player_dir == 'S')
 			cub->player_data->rot_angle = (3 * M_PI) / 2;
 		if (cub->player_dir == 'W')
-			cub->player_data->rot_angle = 2 * M_PI;
+			cub->player_data->rot_angle = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/10 18:59:35 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:24:58 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,31 @@ int distance_between_points(float x1, float y1, float x2, float y2)
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
-void    wall_intersecloop(t_cub3d_data *cub, float nextvert_touchX, float nextvert_touchY, int type)
+void    wall_intersecloop(t_cub3d_data *cub, float x, float y, int type)
 {
-	while (nextvert_touchX >= 0 && nextvert_touchX <= WALL_DIMENSION * cub->len_i && nextvert_touchY \
-			>= 0 && nextvert_touchY <= WALL_DIMENSION * cub->len_j)
+	while (x >= 0 && x <= WALL_DIMENSION * cub->len_i && y \
+			>= 0 && y <= WALL_DIMENSION * cub->len_j)
 	{
-		if (protect_matrice(nextvert_touchX, nextvert_touchY, cub))
+		if (protect_matrice(x - cub->data_rays->x_to_check, y - cub->data_rays->y_to_check, cub))
 		{
 			if (type == VERTICAL)
 			{
 				cub->data_rays->foundverzwallhit = 1;
-				cub->data_rays->vert_wallhitX = nextvert_touchX;
-				cub->data_rays->vert_wallhitY = nextvert_touchY;
+				cub->data_rays->vert_wallhitX = x;
+				cub->data_rays->vert_wallhitY = y;
 			}
 			else
 			{
 				cub->data_rays->foundhorzwallhit = 1;
-				cub->data_rays->hor_wallhitX = nextvert_touchX;
-				cub->data_rays->hor_wallhitY = nextvert_touchY;
+				cub->data_rays->hor_wallhitX = x;
+				cub->data_rays->hor_wallhitY = y;
 			}
 			break ;
 		}
 		else
 		{
-			nextvert_touchX += cub->data_rays->xstep;
-			nextvert_touchY += cub->data_rays->ystep;
+			x += cub->data_rays->xstep;
+			y += cub->data_rays->ystep;
 		}
 	}
 }
@@ -88,6 +88,7 @@ void    hor_intersec(t_cub3d_data *cub)
 	float	nextHorztouchX; 
 	float	nextHorztouchY;
 
+	cub->data_rays->y_to_check = 0;
 	cub->data_rays->hor_wallhitX = 0;
 	cub->data_rays->hor_wallhitY = 0;
 	cub->data_rays->foundverzwallhit = 0;
@@ -107,7 +108,7 @@ void    hor_intersec(t_cub3d_data *cub)
 	nextHorztouchX = cub->data_rays->xintercept;
 	nextHorztouchY = cub->data_rays->yintercept ;
 	if (cub->data_rays->is_rayfacingup)
-		nextHorztouchY--;
+		cub->data_rays->y_to_check = 1;
 	wall_intersecloop(cub, nextHorztouchX, nextHorztouchY, HORIZONTAL);
 }
 
@@ -116,6 +117,7 @@ void    vert_intersec(t_cub3d_data *cub)
 	float	nextvert_touchX;
 	float	nextvert_touchY;
 
+	cub->data_rays->x_to_check = 0;
 	cub->data_rays->vert_wallhitX = 0;
 	cub->data_rays->vert_wallhitY = 0;
 	cub->data_rays->foundverzwallhit = 0;
@@ -134,7 +136,7 @@ void    vert_intersec(t_cub3d_data *cub)
 	nextvert_touchX = cub->data_rays->xintercept;
 	nextvert_touchY = cub->data_rays->yintercept ;
 	if (cub->data_rays->is_rayfacingleft)
-		nextvert_touchX--;
+		cub->data_rays->x_to_check = 1;
 	wall_intersecloop(cub, nextvert_touchX, nextvert_touchY, VERTICAL);
 }
 
@@ -147,6 +149,7 @@ void	 ray_cast(t_cub3d_data *cub, float colmnID)
 	float	distance = 0;
 	float	wasHitVertical = 0;
 
+	cub->data_rays->ray_angle = normalizeangle(cub->data_rays->ray_angle);
 	rayfacing_init(cub, colmnID);
 	hor_intersec(cub);
 	vert_intersec(cub);

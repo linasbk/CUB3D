@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/10 19:10:59 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:25:29 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	cast_allrays(int color, t_cub3d_data *cub)
 	float	num_rays;
 
 	num_rays = cub->len_i * WALL_DIMENSION;
-	cub->data_rays->ray_angle = normalizeamgle(cub->player_data->rot_angle - (FOV_ANGLE/ 2));
+	cub->data_rays->ray_angle = cub->player_data->rot_angle - (FOV_ANGLE/ 2);
 	while (i < num_rays)
 	{
 		ray_cast(cub, colmnID);
-		cub->data_rays->ray_angle += FOV_ANGLE/ num_rays;
+		cub->data_rays->ray_angle += FOV_ANGLE / num_rays;
 		i++;
 		colmnID++;
 	}
