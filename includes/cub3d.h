@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/10 22:24:58 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/11 20:49:58 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct data_rays
 	float	vert_wallhitY;
 	float	x_to_check;
 	float	y_to_check;
+	float	wasHitVertical;
+	float	distance;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -127,4 +129,6 @@ void	 		ray_cast(t_cub3d_data *cub, float colmnID);
 void			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
 //HOOK
 void			ft_hook(void *param);
+//render
+void			renderwallproject(t_cub3d_data *cub, int i);
 #endif

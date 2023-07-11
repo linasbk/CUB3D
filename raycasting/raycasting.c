@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/10 22:24:58 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/11 21:39:35 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,9 @@ void	 ray_cast(t_cub3d_data *cub, float colmnID)
 {	
 	float	wallhitX = 0;
 	float	wallhitY = 0;
-	float	distance = 0;
-	float	wasHitVertical = 0;
-
+	// float	distance = 0;
+	cub->data_rays->wasHitVertical = 0;
+	cub->data_rays->distance = 0;
 	cub->data_rays->ray_angle = normalizeangle(cub->data_rays->ray_angle);
 	rayfacing_init(cub, colmnID);
 	hor_intersec(cub);
@@ -170,13 +170,62 @@ void	 ray_cast(t_cub3d_data *cub, float colmnID)
 	else
 		wallhitY = cub->data_rays->vert_wallhitY;
 	if (vertzhitdistance > horzhitdistance)
-		distance = horzhitdistance;
+		cub->data_rays->distance = horzhitdistance;
 	else
-		distance = vertzhitdistance;
+		cub->data_rays->distance = vertzhitdistance;
 	if (vertzhitdistance < horzhitdistance)
-		wasHitVertical = 1;
+		cub->data_rays->wasHitVertical = 1;
 	else
-		wasHitVertical = 0;
+		cub->data_rays->wasHitVertical = 0;
 	
-	drawline(cub->map_img, cub->player_data->x, cub->player_data->y, wallhitX, wallhitY, ORANGE_MP);
+	drawline(cub->map_img, cub->player_data->x * MINIMAP_SCALE_FACTOR, cub->player_data->y* MINIMAP_SCALE_FACTOR, wallhitX* MINIMAP_SCALE_FACTOR, wallhitY* MINIMAP_SCALE_FACTOR, ORANGE_MP);
+}
+
+void	draw_rec(mlx_image_t *img, int x, int y, int width, int height)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < width)
+	{
+		j = 0;
+		while (j < height)
+		{
+			if ((x + i < WIDTH && x + i > 0)  && (y + j < HEIGHT && y + j > 0))
+				mlx_put_pixel(img, x + i, y + j, 0xCCCCCCFF);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	renderwallproject(t_cub3d_data *cub, int i)
+{
+	float corr_dis = cub->data_rays->distance * cos(cub->data_rays->ray_angle - cub->player_data->rot_angle);
+	float d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
+	float pr_wallheight = (WALL_DIMENSION / corr_dis) * d_pr_plane;
+	int wallstripheight =(int) pr_wallheight;
+    // render the wall from wallTopPixel to wallBottomPixel
+	int wallTopPixel = (HEIGHT / 2) - (wallstripheight / 2);
+	if (wallTopPixel < 0)
+		wallTopPixel = 0;
+	else
+		wallTopPixel = wallTopPixel;
+	int wallBottomPixel = (HEIGHT / 2) + (wallstripheight / 2);
+	if (wallBottomPixel > HEIGHT)
+		wallBottomPixel = HEIGHT;
+	else
+		wallBottomPixel = wallBottomPixel;
+	int y = wallTopPixel;
+	while (y < wallBottomPixel)
+	{
+		if (cub->data_rays->wasHitVertical)
+			mlx_put_pixel(cub->map_img, i * WALL_STRIP_WIDTH, y, 0xFFFFFFFF);
+		else
+			mlx_put_pixel(cub->map_img, i * WALL_STRIP_WIDTH, y, 0xCCCCCCFF);
+		y++;
+	}
+	// draw_rec(cub->map_img, i * WALL_STRIP_WIDTH, (HEIGHT / 2) - (wallstripheight / 2) \
+	// 	, WALL_STRIP_WIDTH, wallstripheight);
 }

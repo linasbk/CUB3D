@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/10 22:07:42 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/11 19:38:54 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 # define BLUE "\033[1;34m"
 # define CYAN "\033[1;36m"
 
-# define WIDTH 2080
+# define WIDTH 1580
 # define HEIGHT 1500
-# define WALL_DIMENSION 20
+# define WALL_DIMENSION 32
+# define NUM_RAYS WIDTH
 # define FOV_ANGLE 60 * (M_PI / 180)
 # define P_RADIUS  5.0
-# define MV_SPEED 3.0
-# define ROT_SPEED 1.0 * (M_PI / 180)
+# define MV_SPEED 5.0
+# define ROT_SPEED 3.0 * (M_PI / 180)
+# define MINIMAP_SCALE_FACTOR 0.3
+# define WALL_STRIP_WIDTH 1
 
 # define ORANGE_MP 0xFF7000FF
 # define BLACK_MP 0x000000FF
