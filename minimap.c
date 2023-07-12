@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/11 21:42:40 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 13:23:06 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	draw_square(mlx_image_t *img, int x, int y, int size, int color)
 	int j;
 
 	i = 0;
-	while (i < size + 1)
+	while (i <= size)
 	{
 		j = 0;
-		while (j < size + 1)
+		while (j <= size)
 		{
 			if (j == size || i == size || j == 0 || i == 0)
 				mlx_put_pixel(img, x + i, y + j, BLACK_MP);

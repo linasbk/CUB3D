@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/11 21:39:35 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 13:49:35 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,14 @@ int	protect_matrice(float nextHorztouchX, float nextHorztouchY, t_cub3d_data *cu
 	return(cub->matrice[y][x] == '1');
 }
 
-int distance_between_points(float x1, float y1, float x2, float y2)
+float distance_between_points(float x1, float y1, float x2, float y2)
 {
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
 void    wall_intersecloop(t_cub3d_data *cub, float x, float y, int type)
 {
-	while (x >= 0 && x <= WALL_DIMENSION * cub->len_i && y \
-			>= 0 && y <= WALL_DIMENSION * cub->len_j)
+	while (x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
 	{
 		if (protect_matrice(x - cub->data_rays->x_to_check, y - cub->data_rays->y_to_check, cub))
 		{
@@ -95,7 +94,6 @@ void    hor_intersec(t_cub3d_data *cub)
 	cub->data_rays->yintercept  = floor(cub->player_data->y / WALL_DIMENSION) * WALL_DIMENSION;
 	if (cub->data_rays->is_rayfacingdown)
 		cub->data_rays->yintercept  += WALL_DIMENSION;
-	
 	cub->data_rays->xintercept = cub->player_data->x + (cub->data_rays->yintercept  - cub->player_data->y) / tan(cub->data_rays->ray_angle);
 	cub->data_rays->ystep = WALL_DIMENSION;
 	cub->data_rays->xstep = WALL_DIMENSION / tan(cub->data_rays->ray_angle);
@@ -108,7 +106,7 @@ void    hor_intersec(t_cub3d_data *cub)
 	nextHorztouchX = cub->data_rays->xintercept;
 	nextHorztouchY = cub->data_rays->yintercept ;
 	if (cub->data_rays->is_rayfacingup)
-		cub->data_rays->y_to_check = 1;
+		cub->data_rays->y_to_check = 0.01;
 	wall_intersecloop(cub, nextHorztouchX, nextHorztouchY, HORIZONTAL);
 }
 
@@ -136,7 +134,7 @@ void    vert_intersec(t_cub3d_data *cub)
 	nextvert_touchX = cub->data_rays->xintercept;
 	nextvert_touchY = cub->data_rays->yintercept ;
 	if (cub->data_rays->is_rayfacingleft)
-		cub->data_rays->x_to_check = 1;
+		cub->data_rays->x_to_check = 0.01;
 	wall_intersecloop(cub, nextvert_touchX, nextvert_touchY, VERTICAL);
 }
 
@@ -146,7 +144,7 @@ void	 ray_cast(t_cub3d_data *cub, float colmnID)
 {	
 	float	wallhitX = 0;
 	float	wallhitY = 0;
-	// float	distance = 0;
+
 	cub->data_rays->wasHitVertical = 0;
 	cub->data_rays->distance = 0;
 	cub->data_rays->ray_angle = normalizeangle(cub->data_rays->ray_angle);
@@ -154,34 +152,31 @@ void	 ray_cast(t_cub3d_data *cub, float colmnID)
 	hor_intersec(cub);
 	vert_intersec(cub);
 	//calculate hor and ver distance and choose the smallest one
-	int horzhitdistance = INT_MAX;
-	
+	float horzhitdistance = INT_MAX;
+	float vertzhitdistance = INT_MAX;
 	if (cub->data_rays->foundhorzwallhit)
 		horzhitdistance = distance_between_points(cub->player_data->x, cub->player_data->y, cub->data_rays->hor_wallhitX, cub->data_rays->hor_wallhitY);
-	int vertzhitdistance = INT_MAX;
 	if (cub->data_rays->foundverzwallhit)
 		vertzhitdistance = distance_between_points(cub->player_data->x, cub->player_data->y, cub->data_rays->vert_wallhitX, cub->data_rays->vert_wallhitY);
-	if (vertzhitdistance > horzhitdistance)
-		wallhitX = cub->data_rays->hor_wallhitX;
-	else
-		wallhitX = cub->data_rays->vert_wallhitX;
-	if (vertzhitdistance > horzhitdistance)
-		wallhitY = cub->data_rays->hor_wallhitY;
-	else
-		wallhitY = cub->data_rays->vert_wallhitY;
-	if (vertzhitdistance > horzhitdistance)
-		cub->data_rays->distance = horzhitdistance;
-	else
-		cub->data_rays->distance = vertzhitdistance;
 	if (vertzhitdistance < horzhitdistance)
+	{
+		wallhitX = cub->data_rays->vert_wallhitX;
+		wallhitY = cub->data_rays->vert_wallhitY;
+		cub->data_rays->distance = vertzhitdistance;
 		cub->data_rays->wasHitVertical = 1;
+
+	}
 	else
+	{
+		wallhitX = cub->data_rays->hor_wallhitX;
+		wallhitY = cub->data_rays->hor_wallhitY;
+		cub->data_rays->distance = horzhitdistance;
 		cub->data_rays->wasHitVertical = 0;
-	
+	}
 	drawline(cub->map_img, cub->player_data->x * MINIMAP_SCALE_FACTOR, cub->player_data->y* MINIMAP_SCALE_FACTOR, wallhitX* MINIMAP_SCALE_FACTOR, wallhitY* MINIMAP_SCALE_FACTOR, ORANGE_MP);
 }
 
-void	draw_rec(mlx_image_t *img, int x, int y, int width, int height)
+void	draw_rec(t_cub3d_data *cub, int x, int y, int width, int height)
 {
 	int i;
 	int j;
@@ -192,8 +187,10 @@ void	draw_rec(mlx_image_t *img, int x, int y, int width, int height)
 		j = 0;
 		while (j < height)
 		{
-			if ((x + i < WIDTH && x + i > 0)  && (y + j < HEIGHT && y + j > 0))
-				mlx_put_pixel(img, x + i, y + j, 0xCCCCCCFF);
+			if ((x + i < WIDTH && x + i > 0)  && (y + j < HEIGHT && y + j > 0) && cub->data_rays->wasHitVertical)
+				mlx_put_pixel(cub->map_img, x + i, y + j, 0xCCCCCCFF);
+			else
+				mlx_put_pixel(cub->map_img, x + i, y + j, 0xFFFFFFFF);
 			j++;
 		}
 		i++;
@@ -220,12 +217,13 @@ void	renderwallproject(t_cub3d_data *cub, int i)
 	int y = wallTopPixel;
 	while (y < wallBottomPixel)
 	{
+		// printf("y = %d, %d\n", y / WALL_DIMENSION, i / WALL_DIMENSION);
 		if (cub->data_rays->wasHitVertical)
-			mlx_put_pixel(cub->map_img, i * WALL_STRIP_WIDTH, y, 0xFFFFFFFF);
+			mlx_put_pixel(cub->map_img, i, y, 0xFFFFFFFF);
 		else
-			mlx_put_pixel(cub->map_img, i * WALL_STRIP_WIDTH, y, 0xCCCCCCFF);
+			mlx_put_pixel(cub->map_img, i, y, 0xCCCCCCFF);
 		y++;
 	}
-	// draw_rec(cub->map_img, i * WALL_STRIP_WIDTH, (HEIGHT / 2) - (wallstripheight / 2) \
+	// draw_rec(cub, i * WALL_STRIP_WIDTH, (HEIGHT / 2) - (wallstripheight / 2) \
 	// 	, WALL_STRIP_WIDTH, wallstripheight);
 }

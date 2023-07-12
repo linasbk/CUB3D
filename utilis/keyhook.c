@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/10 19:14:31 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 13:43:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,30 @@ void	ft_hook(void *param)
 		mv_step = walk_dir * MV_SPEED;
 		cub->player_data->x += cos(cub->player_data->rot_angle) * mv_step;
 		cub->player_data->y += sin(cub->player_data->rot_angle) * mv_step;
-		if (cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] == '1')
-		{
-			cub->player_data->x = x1;
-			cub->player_data->y = y1;
-		}
-	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) || mlx_is_key_down(cub->mlx, MLX_KEY_A))
-	{
-		x1 = cub->player_data->x;
-		y1 = cub->player_data->y;
-		side_dir = -1;
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-			side_dir = 1;
-		mv_step = side_dir * MV_SPEED;
-		cub->player_data->x += cos(cub->player_data->rot_angle + (M_PI / 2)) * mv_step;
-		cub->player_data->y += sin(cub->player_data->rot_angle + (M_PI / 2)) * mv_step;
-		if (cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] == '1')
-		{
-			cub->player_data->x = x1;
-			cub->player_data->y = y1;
-		}
-	}
-	put_map(cub);
-	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
+        if (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == '1' 
+        || (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(x1 / WALL_DIMENSION)] == '1' && cub->matrice[(int)(y1 / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == '1'))
+        {
+            cub->player_data->x = x1;
+            cub->player_data->y = y1;
+        }
+    }
+    if (mlx_is_key_down(cub->mlx, MLX_KEY_D) || mlx_is_key_down(cub->mlx, MLX_KEY_A))
+    {
+        x1 = cub->player_data->x;
+        y1 = cub->player_data->y;
+        side_dir = -1;
+        if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+            side_dir = 1;
+        mv_step = side_dir * MV_SPEED;
+        cub->player_data->x += cos(cub->player_data->rot_angle + (M_PI / 2)) * mv_step;
+        cub->player_data->y += sin(cub->player_data->rot_angle + (M_PI / 2)) * mv_step;
+        if (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == '1'
+        || (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(x1 / WALL_DIMENSION)] == '1' && cub->matrice[(int)(y1 / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == '1'))
+        {
+            cub->player_data->x = x1;
+            cub->player_data->y = y1;
+        }
+    }
+    put_map(cub);
+    mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 }
