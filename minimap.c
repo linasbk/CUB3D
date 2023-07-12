@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 13:23:06 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 21:20:01 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,18 @@ void	draw_square(mlx_image_t *img, int x, int y, int size, int color)
 	}
 }
 
-void	cast_allrays(int color, t_cub3d_data *cub)
+void	cast_allrays(t_cub3d_data *cub)
 {
-	float	colmnID = 0;
-	int		i = 0;
+	int		i;
 
-	cub->data_rays->ray_angle = cub->player_data->rot_angle - (FOV_ANGLE/ 2);
+	i = 0;
+	cub->data_rays->ray_angle = cub->player_data->rot_angle - (FOV_ANGLE / 2);
 	while (i < NUM_RAYS)
 	{
-		ray_cast(cub, colmnID);
+		ray_cast(cub);
 		renderwallproject(cub, i);
 		cub->data_rays->ray_angle += FOV_ANGLE / NUM_RAYS;
 		i++;
-		colmnID++;
 	}
 }
 
@@ -107,7 +106,7 @@ void	put_map(t_cub3d_data *cub)
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
-	cast_allrays(RED_MP, cub);
+	cast_allrays(cub);
 	while (cub->matrice[j])
 	{
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:36:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/09 14:09:38 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 17:59:13 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_substr(char *s, unsigned int start, int len)
 {
 	char	*str;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	if (!s)

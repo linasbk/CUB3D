@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 10:48:49 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 18:41:26 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	check_retline(t_cub3d_data *cub)
 	char	*line;
 
 	i = 0;
-	j = 0;
+	j = ft_strlen(cub->line);
 	if (!cub->line)
 		return (FAILURE);
 	line = ft_strtrim(cub->line, "\n");
@@ -92,6 +92,12 @@ int	check_retline(t_cub3d_data *cub)
 			return (FAILURE);
 		else
 			i++;
+	}
+	while (j < cub->m_index)
+	{
+		if (cub->matrice[j][0] == '\0')
+			return (FAILURE);
+		j++;
 	}
 	cub->matrice = ft_split(line, '\n');
 	return (SUCCESS);
@@ -119,5 +125,6 @@ int	check_map(t_cub3d_data *cub)
 	if (i == cub->m_index - 1 && cub->player_dir == '\0')
 		return (FAILURE);
 	cub->len_j = cub->m_index;
+	// while (cub)
 	return (ret);
 }

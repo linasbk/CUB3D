@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:58:45 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/09 14:10:15 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 18:01:12 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_putstr(char *s)
 	}
 }
 
-size_t	ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 

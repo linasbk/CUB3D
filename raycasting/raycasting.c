@@ -6,14 +6,18 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 13:49:35 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 21:36:05 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	rayfacing_init(t_cub3d_data *cub, float colmnID)
+void	rayfacing_init(t_cub3d_data *cub)
 {
+	cub->data_rays->hor_wallhitX = WIDTH *20;
+	cub->data_rays->hor_wallhitY = HEIGHT *20;
+	cub->data_rays->vert_wallhitX = WIDTH *20;
+	cub->data_rays->vert_wallhitY = HEIGHT *20;
 	if (cub->data_rays->ray_angle > 0 && cub->data_rays->ray_angle < M_PI)
 	{
 		cub->data_rays->is_rayfacingup = 1;
@@ -37,37 +41,42 @@ void	rayfacing_init(t_cub3d_data *cub, float colmnID)
 	}
 }
 
-int	protect_matrice(float nextHorztouchX, float nextHorztouchY, t_cub3d_data *cub)
+int	protect_matrice(double nextHorztouchX, double nextHorztouchY, t_cub3d_data *cub)
 {
 	int	x;
 	int	y;
 
 	x = floor(nextHorztouchX / WALL_DIMENSION);
 	y = floor(nextHorztouchY / WALL_DIMENSION);
-	if (x < 0 || x >= cub->len_i - 1 || y < 0 || y >= cub->len_j - 1)
+	if (x < 0 || x > cub->len_i || y < 0 || y > cub->len_j - 1)
 		return (1);
 	return(cub->matrice[y][x] == '1');
 }
 
-float distance_between_points(float x1, float y1, float x2, float y2)
+double distance_between_points(double x1, double y1, double x2, double y2)
 {
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
-void    wall_intersecloop(t_cub3d_data *cub, float x, float y, int type)
+void    wall_intersecloop(t_cub3d_data *cub, double x, double y, int type)
 {
 	while (x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
 	{
-		if (protect_matrice(x - cub->data_rays->x_to_check, y - cub->data_rays->y_to_check, cub))
+		if (protect_matrice(x, y, cub))
 		{
 			if (type == VERTICAL)
 			{
+				
+				if (cub->data_rays->is_rayfacingleft)
+					x += 0.01;
 				cub->data_rays->foundverzwallhit = 1;
 				cub->data_rays->vert_wallhitX = x;
 				cub->data_rays->vert_wallhitY = y;
 			}
 			else
 			{
+				if (cub->data_rays->is_rayfacingup)
+					y += 0.01;
 				cub->data_rays->foundhorzwallhit = 1;
 				cub->data_rays->hor_wallhitX = x;
 				cub->data_rays->hor_wallhitY = y;
@@ -84,12 +93,9 @@ void    wall_intersecloop(t_cub3d_data *cub, float x, float y, int type)
 
 void    hor_intersec(t_cub3d_data *cub)
 {
-	float	nextHorztouchX; 
-	float	nextHorztouchY;
+	double	nextHorztouchX; 
+	double	nextHorztouchY;
 
-	cub->data_rays->y_to_check = 0;
-	cub->data_rays->hor_wallhitX = 0;
-	cub->data_rays->hor_wallhitY = 0;
 	cub->data_rays->foundverzwallhit = 0;
 	cub->data_rays->yintercept  = floor(cub->player_data->y / WALL_DIMENSION) * WALL_DIMENSION;
 	if (cub->data_rays->is_rayfacingdown)
@@ -106,18 +112,15 @@ void    hor_intersec(t_cub3d_data *cub)
 	nextHorztouchX = cub->data_rays->xintercept;
 	nextHorztouchY = cub->data_rays->yintercept ;
 	if (cub->data_rays->is_rayfacingup)
-		cub->data_rays->y_to_check = 0.01;
+		nextHorztouchY -= 0.01;
 	wall_intersecloop(cub, nextHorztouchX, nextHorztouchY, HORIZONTAL);
 }
 
 void    vert_intersec(t_cub3d_data *cub)
 {
-	float	nextvert_touchX;
-	float	nextvert_touchY;
+	double	nextvert_touchX;
+	double	nextvert_touchY;
 
-	cub->data_rays->x_to_check = 0;
-	cub->data_rays->vert_wallhitX = 0;
-	cub->data_rays->vert_wallhitY = 0;
 	cub->data_rays->foundverzwallhit = 0;
 	cub->data_rays->xintercept = floor(cub->player_data->x / WALL_DIMENSION) * WALL_DIMENSION;
 	if (cub->data_rays->is_rayfacingright)
@@ -134,26 +137,25 @@ void    vert_intersec(t_cub3d_data *cub)
 	nextvert_touchX = cub->data_rays->xintercept;
 	nextvert_touchY = cub->data_rays->yintercept ;
 	if (cub->data_rays->is_rayfacingleft)
-		cub->data_rays->x_to_check = 0.01;
+		nextvert_touchX -= 0.01;
 	wall_intersecloop(cub, nextvert_touchX, nextvert_touchY, VERTICAL);
 }
 
 
 
-void	 ray_cast(t_cub3d_data *cub, float colmnID)
+void	 ray_cast(t_cub3d_data *cub)
 {	
-	float	wallhitX = 0;
-	float	wallhitY = 0;
+	double	wallhitX = 0;
+	double	wallhitY = 0;
 
-	cub->data_rays->wasHitVertical = 0;
 	cub->data_rays->distance = 0;
 	cub->data_rays->ray_angle = normalizeangle(cub->data_rays->ray_angle);
-	rayfacing_init(cub, colmnID);
+	rayfacing_init(cub);
 	hor_intersec(cub);
 	vert_intersec(cub);
 	//calculate hor and ver distance and choose the smallest one
-	float horzhitdistance = INT_MAX;
-	float vertzhitdistance = INT_MAX;
+	double horzhitdistance = INT_MAX;
+	double vertzhitdistance = INT_MAX;
 	if (cub->data_rays->foundhorzwallhit)
 		horzhitdistance = distance_between_points(cub->player_data->x, cub->player_data->y, cub->data_rays->hor_wallhitX, cub->data_rays->hor_wallhitY);
 	if (cub->data_rays->foundverzwallhit)
@@ -164,7 +166,6 @@ void	 ray_cast(t_cub3d_data *cub, float colmnID)
 		wallhitY = cub->data_rays->vert_wallhitY;
 		cub->data_rays->distance = vertzhitdistance;
 		cub->data_rays->wasHitVertical = 1;
-
 	}
 	else
 	{
@@ -199,25 +200,22 @@ void	draw_rec(t_cub3d_data *cub, int x, int y, int width, int height)
 
 void	renderwallproject(t_cub3d_data *cub, int i)
 {
-	float corr_dis = cub->data_rays->distance * cos(cub->data_rays->ray_angle - cub->player_data->rot_angle);
-	float d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
-	float pr_wallheight = (WALL_DIMENSION / corr_dis) * d_pr_plane;
+	if (cub->data_rays->distance == 0)
+		cub->data_rays->distance = 0.1;
+	double corr_dis = cub->data_rays->distance * cos(cub->data_rays->ray_angle - cub->player_data->rot_angle);
+	double d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
+	double pr_wallheight = (WALL_DIMENSION / corr_dis) * d_pr_plane;
 	int wallstripheight =(int) pr_wallheight;
     // render the wall from wallTopPixel to wallBottomPixel
 	int wallTopPixel = (HEIGHT / 2) - (wallstripheight / 2);
 	if (wallTopPixel < 0)
 		wallTopPixel = 0;
-	else
-		wallTopPixel = wallTopPixel;
 	int wallBottomPixel = (HEIGHT / 2) + (wallstripheight / 2);
 	if (wallBottomPixel > HEIGHT)
 		wallBottomPixel = HEIGHT;
-	else
-		wallBottomPixel = wallBottomPixel;
 	int y = wallTopPixel;
 	while (y < wallBottomPixel)
 	{
-		// printf("y = %d, %d\n", y / WALL_DIMENSION, i / WALL_DIMENSION);
 		if (cub->data_rays->wasHitVertical)
 			mlx_put_pixel(cub->map_img, i, y, 0xFFFFFFFF);
 		else

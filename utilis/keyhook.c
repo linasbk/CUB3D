@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/12 13:43:33 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 14:13:41 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	ft_hook(void *param)
 	t_cub3d_data	*cub;
 	int				y1;
 	int				x1;
-	float			turn_dir;
-	float			walk_dir;
-	float			side_dir;
-	float			mv_step;
+	double			turn_dir;
+	double			walk_dir;
+	double			side_dir;
+	double			mv_step;
 
 	cub = param;
 	turn_dir = 0;

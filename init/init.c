@@ -6,13 +6,13 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 13:22:57 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 21:24:50 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-float	normalizeangle(float ray_angle)
+double	normalizeangle(double ray_angle)
 {
 	ray_angle = fmod(ray_angle, (2 * M_PI));
 	if (ray_angle < 0)
@@ -28,6 +28,11 @@ void	init_ray_data(t_cub3d_data *cub)
 	cub->data_rays->is_rayfacingright = 0;
 	cub->data_rays->is_rayfacingup = 0;
 	cub->data_rays->is_rayfacingleft = 0;
+	// cub->data_rays->hor_wallhitX = 0;
+	// cub->data_rays->hor_wallhitY = 0;
+	// cub->data_rays->vert_wallhitX = 0;
+	// cub->data_rays->vert_wallhitY = 0;
+	// cub->data_rays->wasHitVertical = 0;
 }
 
 void	ft_mlx_init(t_cub3d_data *cub)
