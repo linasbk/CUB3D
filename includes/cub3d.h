@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 18:09:08 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:03:17 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct data_rays
 	double	vert_wallhitY;
 	double	wasHitVertical;
 	double	distance;
+	double	wallhitX;
+	double	wallhitY;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -76,6 +78,7 @@ typedef struct cub3d_data
 	char			player_dir;
 	int				len_i;
 	int				len_j;
+	uint32_t		*texture;
 	t_ray_data		*data_rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
@@ -129,4 +132,5 @@ void			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
 void			ft_hook(void *param);
 //render
 void			renderwallproject(t_cub3d_data *cub, int i);
+void			ft_color(t_cub3d_data *cub);
 #endif

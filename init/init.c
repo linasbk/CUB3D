@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 21:24:50 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:20:42 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,26 @@ double	normalizeangle(double ray_angle)
 	if (ray_angle < 0)
 		ray_angle = (2 * M_PI) + ray_angle;
 	return (ray_angle);
+}
+
+void	ft_color(t_cub3d_data *cub)
+{
+	int	x = 0;
+	int	y = 0;
+	cub->texture = (uint32_t *)malloc(sizeof(uint32_t)*(uint32_t)TEXTUR_WIDTH * (uint32_t)TEXTUR_HEIGHT);
+	while (x < TEXTUR_WIDTH)
+	{
+		y = 0;
+		while (y < TEXTUR_HEIGHT)
+		{
+			if ((x % 4) && (y % 4))
+				cub->texture[(TEXTUR_WIDTH * y) + x] = 0x0000FFFF;
+			else
+				cub->texture[(TEXTUR_WIDTH * y) + x] = 0x000000FF;
+			y++;
+		}
+		x++;
+	}
 }
 
 void	init_ray_data(t_cub3d_data *cub)
