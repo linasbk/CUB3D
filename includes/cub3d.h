@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 14:16:58 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 18:03:02 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char			*ft_strtrim(char *s1, char *set);
 int				ft_isspace(char str);
 void			*ft_calloc(size_t count, size_t size);
 void			*ft_memset(void *b, int c, size_t len);
+char			**ft_free(char **str, int size);
 //GET_NEXT_LINE && SPLIT && ATOI
 char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);

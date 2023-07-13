@@ -6,17 +6,14 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 14:19:53 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 18:01:18 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	check_texture(t_cub3d_data *cub, char *line, int key)
+int	check_texture(t_cub3d_data *cub, char *line, int key, int i)
 {
-	int	i;
-
-	i = 2;
 	while (line[i])
 	{
 		if (line[i] == ' ' || line[i] == '\t')
@@ -39,8 +36,7 @@ int	check_texture(t_cub3d_data *cub, char *line, int key)
 				cub->c_c = valide_color(ft_strdup(&line[i]));
 			else
 				return (ft_error(TEXTURE_ERROR));
-			cub->t_index++;
-			return (SUCCESS);
+			return (free(line), cub->t_index++, SUCCESS);
 		}
 	}
 	return (ft_error(TEXTURE_ERROR));
@@ -51,33 +47,40 @@ int	get_key(char *line)
 	if (!line || !line[0])
 		return (-1);
 	if (line[0] == 'N' && line[1] == 'O')
-		return (T_NO);
+		return (free(line), T_NO);
 	else if (line[0] == 'S' && line[1] == 'O')
-		return (T_SO);
+		return (free(line), T_SO);
 	else if (line[0] == 'W' && line[1] == 'E')
-		return (T_WE);
+		return (free(line), T_WE);
 	else if (line[0] == 'E' && line[1] == 'A')
-		return (T_EA);
+		return (free(line), T_EA);
 	else if (line[0] == 'F')
-		return (C_F);
+		return (free(line), C_F);
 	else if (line[0] == 'C')
-		return (C_C);
+		return (free(line), C_C);
 	else if (line[0] == '1')
-		return (M_W);
+		return (free(line), M_W);
 	else if (line[0] == '\n')
-		return (RET_LINE);
+		return (free(line), RET_LINE);
 	else
-		return (FAILURE);
+		return (free(line), FAILURE);
 }
 
 int	check_lines(t_cub3d_data *cub, char *line)
 {
-	int	key;
+	int		key;
+	char	*tmp;
+	int		i;
 
-	key = get_key(ft_strtrim(ft_strtrim(line, " "), "\t"));
+	tmp = ft_strtrim(line, " ");
+	key = get_key(ft_strtrim(tmp, "\t"));
+	free(tmp);
 	if (key >= T_NO && key <= C_C)
-		return (check_texture(cub, ft_strtrim(ft_strtrim(line, " "), "\t"),
-				key));
+	{
+		tmp = ft_strtrim(line, " ");
+		i = check_texture(cub, ft_strtrim(tmp, "\t"),key, 2);
+		return (free(tmp), i);
+	}
 	else if (key == RET_LINE && cub->m_index != 0)
 	{
 		cub->line = ft_strjoin(cub->line, line);
@@ -86,11 +89,8 @@ int	check_lines(t_cub3d_data *cub, char *line)
 	else if (key == RET_LINE && cub->m_index == 0)
 		return (SUCCESS);
 	else if (key == M_W && cub->t_index == 6)
-	{
-		cub->m_index++;
-		cub->line = ft_strjoin(cub->line, line);
-		return (SUCCESS);
-	}
+		return (cub->m_index++, cub->line = ft_strjoin(cub->line, line), \
+			SUCCESS);
 	return (ft_error(CONFIG_ERROR));
 }
 
@@ -106,7 +106,10 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 	while (line)
 	{
 		if (check_lines(cub, line) == -1)
+		{
+			free(line);
 			return (FAILURE);
+		}
 		free(line);
 		line = get_next_line(fd);
 		if (line && ft_strlen(line) > cub->len_i)

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 14:22:48 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 16:50:18 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	check_retline(t_cub3d_data *cub)
 		j++;
 	}
 	cub->matrice = ft_split(line, '\n');
+	free(line);
 	return (SUCCESS);
 }
 
@@ -117,7 +118,7 @@ int	resizeMatrice(t_cub3d_data *cub, int num_lines)
 
         if (diff > 0)
 		{
-            cub->matrice[i] = realloc(cub->matrice[i], (currentLength + diff + 1) * sizeof(char));
+            cub->matrice[i] = realloc(cub->matrice[i], (currentLength + diff + 1) * sizeof(char));//do ure own realloc arbk
             ft_memset(cub->matrice[i] + currentLength, ' ', diff);
             cub->matrice[i][currentLength + diff] = '\0';
         }
