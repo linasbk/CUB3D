@@ -6,49 +6,58 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 15:26:59 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:35:12 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// int ft_pixel(int r, int g, int b, int a)
-// {
-//     return (r << 24 | g << 16 | b << 8 | a);
-// }
+double	normalizeangle(double ray_angle)
+{
+	ray_angle = fmod(ray_angle, (2 * M_PI));
+	if (ray_angle < 0)
+		ray_angle = (2 * M_PI) + ray_angle;
+	return (ray_angle);
+}
 
-// void ft_randomize(void* param)
-// {
-// 	for (int i = 0; i < image->width; ++i)
-// 	{
-// 		for (int y = 0; y < image->height; ++y)
-// 		{ 
-// 			int color = ft_pixel(
-// 				rand() % 0xFF, // R
-// 				rand() % 0xFF, // G
-// 				rand() % 0xFF, // B
-// 				rand() % 0xFF  // A
-// 			);
-// 			mlx_put_pixel(cub->player, i, y, color);
-// 		}
-// 	}
-// }
+void	init_ray_data(t_cub3d_data *cub)
+{
+	cub->data_rays = ft_calloc(1, sizeof(t_ray_data));
+	cub->data_rays->ray_angle = cub->player_data->rot_angle;
+	cub->data_rays->is_rayfacingdown = 0;
+	cub->data_rays->is_rayfacingright = 0;
+	cub->data_rays->is_rayfacingup = 0;
+	cub->data_rays->is_rayfacingleft = 0;
+}
+
 void	ft_mlx_init(t_cub3d_data *cub)
 {
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "MyCub3D", true);
 	if (!cub->mlx)
 	{
 		puts(mlx_strerror(mlx_errno));
-		exit(FAILURE);
+		exit(EXIT_FAILURE);
 	}
-	cub->player = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	if (!cub->player)
+	init_data_player(cub);
+	init_ray_data(cub);
+}
+
+void	init_data_player(t_cub3d_data *cub)
+{
+	cub->player_data = ft_calloc(1, sizeof(t_data_player));
+	if (cub->matrice[cub->player_y][cub->player_x])
 	{
-		mlx_close_window(cub->mlx);
-		puts(mlx_strerror(mlx_errno));
-		exit(FAILURE);
+		cub->player_data->x = cub->player_x * WALL_DIMENSION + 10;
+		cub->player_data->y = cub->player_y * WALL_DIMENSION + 10;
+		if (cub->player_dir == 'E')
+			cub->player_data->rot_angle = M_PI;
+		if (cub->player_dir == 'N')
+			cub->player_data->rot_angle = M_PI / 2;
+		if (cub->player_dir == 'S')
+			cub->player_data->rot_angle = (3 * M_PI) / 2;
+		if (cub->player_dir == 'W')
+			cub->player_data->rot_angle = 0;
 	}
-		// draw_circle(image->img, 100, 100, 50, 0xFFFFFFFF);
 }
 
 int	init_data(t_cub3d_data *cub)
@@ -60,9 +69,8 @@ int	init_data(t_cub3d_data *cub)
 	cub->c_c = NULL;
 	cub->c_f = NULL;
 	cub->line = NULL;
+	cub->player_dir = '\0';
 	cub->t_index = 0;
 	cub->m_index = 0;
-	cub->player_x = 0;
-	cub->player_y = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 15:40:10 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:19:53 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	check_texture(t_cub3d_data *cub, char *line, int key)
 {
 	int	i;
-	int	direc;
 
 	i = 2;
 	while (line[i])
@@ -35,9 +34,9 @@ int	check_texture(t_cub3d_data *cub, char *line, int key)
 			else if (key == T_EA && cub->t_ea == NULL)
 				cub->t_ea = ft_strdup(&line[i]);
 			else if (key == C_F && cub->c_f == NULL)
-				cub->c_f = valide_color(cub, ft_strdup(&line[i]));
+				cub->c_f = valide_color(ft_strdup(&line[i]));
 			else if (key == C_C && cub->c_c == NULL)
-				cub->c_c = valide_color(cub, ft_strdup(&line[i]));
+				cub->c_c = valide_color(ft_strdup(&line[i]));
 			else
 				return (ft_error(TEXTURE_ERROR));
 			cub->t_index++;
@@ -101,13 +100,17 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 	int		i;
 
 	i = 0;
+	(void)av;
 	line = get_next_line(fd);
+	cub->len_i = ft_strlen(line) - 1;
 	while (line)
 	{
 		if (check_lines(cub, line) == -1)
 			return (FAILURE);
 		free(line);
 		line = get_next_line(fd);
+		if (line && ft_strlen(line) > cub->len_i)
+			cub->len_i = ft_strlen(line) - 1;
 	}
 	free(line);
 	close(fd);

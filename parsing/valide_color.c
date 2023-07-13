@@ -6,13 +6,13 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:25:38 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 15:26:59 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 18:02:10 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	check_comma(t_cub3d_data *cube, char *line)
+int	check_comma( char *line)
 {
 	int	comma;
 	int	i;
@@ -32,14 +32,14 @@ int	check_comma(t_cub3d_data *cube, char *line)
 	return (SUCCESS);
 }
 
-t_map_color	*check_range(t_cub3d_data *cube, char *line)
+t_map_color	*check_range(char *line)
 {
 	t_map_color	*color;
 	char		**str;
 	int			i;
 
 	i = 0;
-	color = malloc(sizeof(t_map_color));
+	color = ft_calloc(1, sizeof(t_map_color));
 	color->r = 0;
 	color->g = 0;
 	color->b = 0;
@@ -57,12 +57,12 @@ t_map_color	*check_range(t_cub3d_data *cube, char *line)
 	return (color);
 }
 
-t_map_color	*valide_color(t_cub3d_data *cub, char *str)
+t_map_color	*valide_color(char *str)
 {
 	t_map_color	*color;
 
-	if (check_comma(cub, str) == FAILURE)
+	if (check_comma(str) == FAILURE)
 		exit(FAILURE);
-	color = check_range(cub, str);
+	color = check_range(str);
 	return (color);
 }

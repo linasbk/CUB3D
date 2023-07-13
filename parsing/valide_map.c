@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/07 15:39:20 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:22:48 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	parse_mid(t_cub3d_data *cub, int i, int ret, int j)
 		return (FAILURE);
 	while (j < len - 1)
 	{
-		if (valid_char(cub, cub->matrice[i][j]) == FAILURE)
+		if (valid_char(cub, cub->matrice[i][j], i, j) == FAILURE)
 			return (FAILURE);
 		else if (cub->matrice[i][j] == ' ')
 			ret = check_sides(cub, i, j);
@@ -72,7 +72,6 @@ int	parse_mid(t_cub3d_data *cub, int i, int ret, int j)
 			return (FAILURE);
 		j++;
 	}
-	printf("%d\n",ret);
 	return (ret);
 }
 
@@ -83,7 +82,7 @@ int	check_retline(t_cub3d_data *cub)
 	char	*line;
 
 	i = 0;
-	j = 0;
+	j = ft_strlen(cub->line);
 	if (!cub->line)
 		return (FAILURE);
 	line = ft_strtrim(cub->line, "\n");
@@ -94,8 +93,37 @@ int	check_retline(t_cub3d_data *cub)
 		else
 			i++;
 	}
+	while (j < cub->m_index)
+	{
+		if (cub->matrice[j][0] == '\0')
+			return (FAILURE);
+		j++;
+	}
 	cub->matrice = ft_split(line, '\n');
 	return (SUCCESS);
+}
+
+int	resizeMatrice(t_cub3d_data *cub, int num_lines)
+{
+	int	i;
+	int	currentLength;
+	int	diff;
+
+	i = 0;
+    while (i < num_lines)
+	{
+        currentLength = ft_strlen(cub->matrice[i]);
+        diff = cub->len_i - currentLength;
+
+        if (diff > 0)
+		{
+            cub->matrice[i] = realloc(cub->matrice[i], (currentLength + diff + 1) * sizeof(char));
+            ft_memset(cub->matrice[i] + currentLength, ' ', diff);
+            cub->matrice[i][currentLength + diff] = '\0';
+        }
+		i++;
+    }
+	return (num_lines);
 }
 
 int	check_map(t_cub3d_data *cub)
@@ -117,5 +145,8 @@ int	check_map(t_cub3d_data *cub)
 			return (FAILURE);
 		i++;
 	}
+	if (i == cub->m_index - 1 && cub->player_dir == '\0')
+		return (FAILURE);
+	cub->len_j = resizeMatrice(cub, cub->m_index);
 	return (ret);
 }

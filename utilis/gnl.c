@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:44 by lsabik            #+#    #+#             */
-/*   Updated: 2023/05/19 22:49:24 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/09 14:09:38 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(char *s1)
 	char	*str;
 	char	*res;
 
-	str = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	str = ft_calloc(1, sizeof(char) * (ft_strlen(s1) + 1));
 	if (!(str))
 		return (0);
 	res = str;
@@ -59,7 +59,7 @@ int	read_lines(int fd, char **static_buff, int buffer_size)
 	char	*buff;
 
 	readed = 1;
-	buff = malloc(sizeof(char) * buffer_size + 1);
+	buff = ft_calloc(1, sizeof(char) * buffer_size + 1);
 	if (!buff)
 		return (0);
 	while (ft_strchr(*static_buff, '\n') == -1 && readed)
