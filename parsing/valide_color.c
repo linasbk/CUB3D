@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:25:38 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 18:02:10 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 16:46:59 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,17 @@ t_map_color	*check_range(char *line)
 	color->b = ft_atoi(str[0]);
 	color->g = ft_atoi(str[1]);
 	color->r = ft_atoi(str[2]);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)
 	{
-		ft_error("Invalid coloor");
+		ft_error("Invalid color");
 		exit(FAILURE);
 	}
 	return (color);
@@ -64,5 +71,6 @@ t_map_color	*valide_color(char *str)
 	if (check_comma(str) == FAILURE)
 		exit(FAILURE);
 	color = check_range(str);
+	free(str);
 	return (color);
 }

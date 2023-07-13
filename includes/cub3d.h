@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 17:03:17 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/13 21:00:36 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,20 @@ typedef struct player_movement
 {
 	double	x;
 	double	y;
-	int		i;
-	int		j;
 	double	rot_angle;
 }				t_data_player;
+
+typedef struct m_texture
+{
+	mlx_texture_t	*t_no;
+	mlx_texture_t	*t_so;
+	mlx_texture_t	*t_we;
+	mlx_texture_t	*t_ea;
+}				t_textures;
 
 typedef struct cub3d_data
 {
 	mlx_t			*mlx;
-	char			**map;
 	char			*t_no;
 	char			*t_so;
 	char			*t_we;
@@ -78,7 +83,11 @@ typedef struct cub3d_data
 	char			player_dir;
 	int				len_i;
 	int				len_j;
-	uint32_t		*texture;
+	unsigned int	*txt;
+	unsigned int		*texture;
+	t_textures		*tex;
+	mlx_texture_t	*walltexture;
+	unsigned int		*color_buff;
 	t_ray_data		*data_rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
@@ -98,6 +107,7 @@ char			*ft_substr(char *s, unsigned int start, int len);
 char			*ft_strtrim(char *s1, char *set);
 int				ft_isspace(char str);
 void			*ft_calloc(size_t count, size_t size);
+void			*ft_memset(void *b, int c, size_t len);
 //GET_NEXT_LINE && SPLIT && ATOI
 char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);
@@ -130,7 +140,9 @@ void	 		ray_cast(t_cub3d_data *cub);
 void			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
 //HOOK
 void			ft_hook(void *param);
+//RAYCASTING
+void	ft_color(t_cub3d_data *cub);
+int		get_color(int r, int g, int b, int a);
 //render
 void			renderwallproject(t_cub3d_data *cub, int i);
-void			ft_color(t_cub3d_data *cub);
 #endif

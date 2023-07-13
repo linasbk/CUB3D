@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/12 14:13:41 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 15:32:46 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,11 @@ void	ft_hook(void *param)
     }
     put_map(cub);
     mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
+	// while (*cub->matrice && cub->matrice)
+	// {
+	// 	free(*cub->matrice);
+	// 	cub->matrice++;
+	// }
+	// free(cub->matrice);
+	// free(cub);
 }

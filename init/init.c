@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 17:20:42 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/13 21:06:55 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,32 @@ double	normalizeangle(double ray_angle)
 	return (ray_angle);
 }
 
+void	init_textures(t_cub3d_data *cub)
+{
+	cub->tex = ft_calloc(1, sizeof(t_textures));
+	cub->tex->t_no = mlx_load_png("./images/pikuma.png");
+	if (!cub->tex->t_no)
+		exit(1);
+}
 void	ft_color(t_cub3d_data *cub)
 {
-	int	x = 0;
-	int	y = 0;
-	cub->texture = (uint32_t *)malloc(sizeof(uint32_t)*(uint32_t)TEXTUR_WIDTH * (uint32_t)TEXTUR_HEIGHT);
-	while (x < TEXTUR_WIDTH)
-	{
-		y = 0;
-		while (y < TEXTUR_HEIGHT)
-		{
-			if ((x % 4) && (y % 4))
-				cub->texture[(TEXTUR_WIDTH * y) + x] = 0x0000FFFF;
-			else
-				cub->texture[(TEXTUR_WIDTH * y) + x] = 0x000000FF;
-			y++;
-		}
-		x++;
-	}
+	init_textures(cub);
+// 	// int	x = 0;
+// 	// int	y = 0;
+// 	// cub->texture = (unsigned int *)malloc(sizeof(unsigned int)*(unsigned int)TEXTUR_WIDTH * (unsigned int)TEXTUR_HEIGHT);
+// 	// while (x < TEXTUR_WIDTH)
+// 	// {
+// 	// 	y = 0;
+// 	// 	while (y < TEXTUR_HEIGHT)
+// 	// 	{
+// 	// 		if ((x % 8) && (y % 8))
+// 	// 			cub->texture[(TEXTUR_WIDTH * y) + x] = PURPLE_MP;
+// 	// 		else
+// 	// 			cub->texture[(TEXTUR_WIDTH * y) + x] = BLACK_MP;
+// 	// 		y++;
+// 	// 	}
+// 	// 	x++;
+// 	// }
 }
 
 void	init_ray_data(t_cub3d_data *cub)
@@ -48,11 +56,6 @@ void	init_ray_data(t_cub3d_data *cub)
 	cub->data_rays->is_rayfacingright = 0;
 	cub->data_rays->is_rayfacingup = 0;
 	cub->data_rays->is_rayfacingleft = 0;
-	// cub->data_rays->hor_wallhitX = 0;
-	// cub->data_rays->hor_wallhitY = 0;
-	// cub->data_rays->vert_wallhitX = 0;
-	// cub->data_rays->vert_wallhitY = 0;
-	// cub->data_rays->wasHitVertical = 0;
 }
 
 void	ft_mlx_init(t_cub3d_data *cub)
@@ -65,6 +68,7 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	}
 	init_data_player(cub);
 	init_ray_data(cub);
+	ft_color(cub);
 }
 
 void	init_data_player(t_cub3d_data *cub)
