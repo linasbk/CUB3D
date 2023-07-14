@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 19:18:53 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:44:22 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,7 @@ void			read_image_colors(t_cub3d_data *cub);
 int				get_color(int r, int g, int b, int a);
 void			read_color(t_cub3d_data *cub);
 void			sky_floor(t_cub3d_data *cub);
+void			put_mini_map(t_cub3d_data *cub);
+void			ft_put_minimap(t_cub3d_data *cub);
+int				distance(int i, int j, int x, int y);
 #endif

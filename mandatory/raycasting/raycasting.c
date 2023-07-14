@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 21:31:03 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:40:02 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	protect_matrice(double nextHorztouchX, double nextHorztouchY, t_cub3d_data *
 	y = floor(nextHorztouchY / WALL_DIMENSION);
 	if (x < 0 || x > cub->len_i || y < 0 || y > cub->len_j - 1)
 		return (1);
-	return(cub->matrice[y][x] == '1');
+	return(cub->matrice[y][x] == '1' || cub->matrice[y][x] == 'D');
 }
 
 double distance_between_points(double x1, double y1, double x2, double y2)

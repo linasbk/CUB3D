@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 21:30:04 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:41:00 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@
 
 # define WIDTH 1580
 # define HEIGHT 1500
-# define WALL_DIMENSION 32
 # define MINIMAP_WIDTH 150
+# define WALL_DIMENSION 32
 # define MINIMAP_HEIGHT 150
 # define TEXTUR_HEIGHT WALL_DIMENSION
 # define TEXTUR_WIDTH WALL_DIMENSION
 # define NUM_RAYS WIDTH
 # define FOV_ANGLE 60 * (M_PI / 180)
 # define P_RADIUS  5.0
-# define MV_SPEED 10.0
-# define ROT_SPEED 8.0 * (M_PI / 180)
+# define MV_SPEED 5.0
+# define ROT_SPEED 3.0 * (M_PI / 180)
 # define MINIMAP_SCALE_FACTOR 0.3
 # define WALL_STRIP_WIDTH 1
 

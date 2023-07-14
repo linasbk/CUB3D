@@ -8,7 +8,7 @@ SRCS =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c utilis/ft_atoi.c \
 OBJ = $(SRCS:.c=.o)
 MLX        := libs/libmlx.a
 LIBS    := -lglfw -L/Users/lsabik/.brew/opt/glfw/lib
-# LIBS    := -lglfw -L/Users/nobuahidi/.brew/opt/glfw/lib
+# LIBS    := -lglfw -L/Users/nouahidi/.brew/opt/glfw/lib
 
 OBJS := $(SRCS:.c=.o)
 
