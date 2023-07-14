@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:31:03 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/11 21:42:54 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 19:22:04 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color)
     int sy = y1 < y2 ? 1 : -1;
     int err = dx - dy;
 
-    while (x1 != x2 || y1 != y2) {
-        mlx_put_pixel(mlx_ptr, x1, y1, color);
-
+    while (x1 != x2 || y1 != y2)
+    {
+        if (x1 >= 0 && x1 < WIDTH && y1 >= 0 && y1 < HEIGHT)
+            mlx_put_pixel(mlx_ptr, x1, y1, color);
         int err2 = 2 * err;
 
         if (err2 > -dy) {

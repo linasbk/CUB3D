@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 18:28:48 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:33:45 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,65 @@ void	mini_map_framing(t_cub3d_data *cub)
 		mlx_put_pixel(cub->map_img, cub->len_i * WALL_DIMENSION - 2, j++, RED_MP);
 }
 
+void	ft_put_minimap(t_cub3d_data *cub)
+{
+	int	i;
+	int	j;
+	int	bx;
+	// int	px;
+	int	by;
+	// int	py;
+	int	tmpx;
+
+	i = 0;
+	j = 0;
+	// px = (cub->player_data->x - (WALL_DIMENSION / 2)) / WALL_DIMENSION;
+	// py = (cub->player_data->y - (WALL_DIMENSION / 2)) / WALL_DIMENSION;
+	bx = (cub->player_data->x) - 75;
+	tmpx = bx;
+	by = (cub->player_data->y) - 75;
+	while (j < MINIMAP_HEIGHT)
+	{
+		i = 0;
+		bx = tmpx;
+		while (i < MINIMAP_WIDTH)
+		{
+			if (cub->matrice[by / WALL_DIMENSION][bx / WALL_DIMENSION] == '1' && distance(MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, i, j) < 70)
+				mlx_put_pixel(cub->map_img, i, j, BLACK_MP);
+			else if (cub->matrice[by / WALL_DIMENSION][bx / WALL_DIMENSION] != '1' && distance(MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, i, j) < 70)
+				mlx_put_pixel(cub->map_img, i, j, YELLOW_MP);
+			i++;
+			bx++;
+		}
+		j++;
+		by++;
+	}
+}
+
+void	put_mini_map(t_cub3d_data *cub)
+{
+	int	x;
+	int	y;
+
+	ft_put_minimap(cub);
+	x = 0;
+	y = 0;
+	while (y < MINIMAP_HEIGHT)
+	{
+		x = 0;
+		while (x < MINIMAP_WIDTH)
+		{
+			if (distance(x, y, MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2) == 70 || distance(x, y, MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2) == 71 || distance(x, y, MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2) == 72)
+				mlx_put_pixel(cub->map_img, x, y, ORANGE_MP);
+			if (distance(x, y, MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2) <= 5)
+				mlx_put_pixel(cub->map_img, x, y, ORANGE_MP);
+			x++;
+		}
+		y++;
+	}
+	drawline(cub->map_img, MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, cos(cub->player_data->rot_angle + M_PI) * 30+ (MINIMAP_WIDTH/ 2), sin(cub->player_data->rot_angle + M_PI) * 30 + (MINIMAP_HEIGHT / 2), ORANGE_MP);
+}
+
 void	put_map(t_cub3d_data *cub)
 {
 	cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
@@ -103,4 +162,5 @@ void	put_map(t_cub3d_data *cub)
 		exit(EXIT_FAILURE);
 	}
 	cast_allrays(cub);
+	put_mini_map(cub);
 }

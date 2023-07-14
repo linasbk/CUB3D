@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 18:02:16 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:31:03 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	rayfacing_init(t_cub3d_data *cub)
 {
-	cub->data_rays->hor_wallhitX = WIDTH *20;
-	cub->data_rays->hor_wallhitY = HEIGHT *20;
-	cub->data_rays->vert_wallhitX = WIDTH *20;
-	cub->data_rays->vert_wallhitY = HEIGHT *20;
+	cub->data_rays->hor_wallhitX = cub->len_i * WALL_DIMENSION * 20;
+	cub->data_rays->hor_wallhitY = cub->len_j * WALL_DIMENSION * 20;
+	cub->data_rays->vert_wallhitX = cub->len_i * WALL_DIMENSION * 20;
+	cub->data_rays->vert_wallhitY = cub->len_j * WALL_DIMENSION * 20;
 	if (cub->data_rays->ray_angle > 0 && cub->data_rays->ray_angle < M_PI)
 	{
 		cub->data_rays->is_rayfacingup = 1;
@@ -91,56 +91,83 @@ void    wall_intersecloop(t_cub3d_data *cub, double x, double y, int type)
 	}
 }
 
-void    hor_intersec(t_cub3d_data *cub)
+void	calcs_horintercept(t_cub3d_data *cub)
 {
-	double	nextHorztouchX; 
-	double	nextHorztouchY;
-
-	cub->data_rays->foundverzwallhit = 0;
 	cub->data_rays->yintercept  = floor(cub->player_data->y / WALL_DIMENSION) * WALL_DIMENSION;
 	if (cub->data_rays->is_rayfacingdown)
 		cub->data_rays->yintercept  += WALL_DIMENSION;
 	cub->data_rays->xintercept = cub->player_data->x + (cub->data_rays->yintercept  - cub->player_data->y) / tan(cub->data_rays->ray_angle);
 	cub->data_rays->ystep = WALL_DIMENSION;
 	cub->data_rays->xstep = WALL_DIMENSION / tan(cub->data_rays->ray_angle);
-	if (cub->data_rays->is_rayfacingup)
-		cub->data_rays->ystep *= -1;
-	if (cub->data_rays->is_rayfacingleft && cub->data_rays->xstep > 0)
-		cub->data_rays->xstep *= -1;
-	if (cub->data_rays->is_rayfacingright && cub->data_rays->xstep < 0)
-		cub->data_rays->xstep *= -1;
-	nextHorztouchX = cub->data_rays->xintercept;
-	nextHorztouchY = cub->data_rays->yintercept ;
-	if (cub->data_rays->is_rayfacingup)
-		nextHorztouchY -= 0.01;
-	wall_intersecloop(cub, nextHorztouchX, nextHorztouchY, HORIZONTAL);
 }
 
-void    vert_intersec(t_cub3d_data *cub)
+void    hor_intersec(t_cub3d_data *cub)
 {
-	double	nextvert_touchX;
-	double	nextvert_touchY;
-
 	cub->data_rays->foundverzwallhit = 0;
+	calcs_horintercept(cub);
+	cub->data_rays->hor_wallhitX = cub->data_rays->xintercept;
+	cub->data_rays->hor_wallhitY = cub->data_rays->yintercept;
+	if (cub->data_rays->is_rayfacingup)
+	{
+		cub->data_rays->ystep *= -1;
+		cub->data_rays->xstep *= -1;
+		cub->data_rays->hor_wallhitY -= 0.01;
+	}
+	while (1)
+	{
+		if (protect_matrice(cub->data_rays->hor_wallhitX, cub->data_rays->hor_wallhitY, cub))
+		{
+				if (cub->data_rays->is_rayfacingup)
+					cub->data_rays->hor_wallhitY += 0.01;
+				cub->data_rays->foundhorzwallhit = 1;
+			break ;
+		}
+		else
+		{
+			cub->data_rays->hor_wallhitX += cub->data_rays->xstep;
+			cub->data_rays->hor_wallhitY += cub->data_rays->ystep;
+		}
+	}
+}
+
+void	calcs_vertintercept(t_cub3d_data *cub)
+{
 	cub->data_rays->xintercept = floor(cub->player_data->x / WALL_DIMENSION) * WALL_DIMENSION;
 	if (cub->data_rays->is_rayfacingright)
 		cub->data_rays->xintercept += WALL_DIMENSION;
 	cub->data_rays->yintercept  = cub->player_data->y + (cub->data_rays->xintercept - cub->player_data->x) * tan(cub->data_rays->ray_angle);
 	cub->data_rays->xstep = WALL_DIMENSION;
-	if (cub->data_rays->is_rayfacingleft)
-		cub->data_rays->xstep *= -1;
 	cub->data_rays->ystep = WALL_DIMENSION * tan(cub->data_rays->ray_angle);
-	if (cub->data_rays->is_rayfacingup && cub->data_rays->ystep > 0)
-		cub->data_rays->ystep *= -1;
-	if (cub->data_rays->is_rayfacingdown && cub->data_rays->ystep < 0)
-		cub->data_rays->ystep *= -1;
-	nextvert_touchX = cub->data_rays->xintercept;
-	nextvert_touchY = cub->data_rays->yintercept ;
-	if (cub->data_rays->is_rayfacingleft)
-		nextvert_touchX -= 0.01;
-	wall_intersecloop(cub, nextvert_touchX, nextvert_touchY, VERTICAL);
 }
 
+void    vert_intersec(t_cub3d_data *cub)
+{
+	cub->data_rays->foundverzwallhit = 0;
+	calcs_vertintercept(cub);
+	cub->data_rays->vert_wallhitX = cub->data_rays->xintercept;
+	cub->data_rays->vert_wallhitY = cub->data_rays->yintercept ;
+	if (cub->data_rays->is_rayfacingleft)
+	{
+		cub->data_rays->xstep *= -1;
+		cub->data_rays->ystep *= -1;
+		cub->data_rays->vert_wallhitX -= 0.01;
+	}	
+	while (1)
+	{
+		if (protect_matrice(cub->data_rays->vert_wallhitX, cub->data_rays->vert_wallhitY, cub))
+		{
+				if (cub->data_rays->is_rayfacingleft)
+					cub->data_rays->vert_wallhitX += 0.01;
+				cub->data_rays->foundverzwallhit = 1;
+			break ;
+		}
+		else
+		{
+			cub->data_rays->vert_wallhitX += cub->data_rays->xstep;
+			cub->data_rays->vert_wallhitY += cub->data_rays->ystep;
+		}
+	}
+}
 
 void	 ray_cast(t_cub3d_data *cub)
 {	
@@ -173,27 +200,6 @@ void	 ray_cast(t_cub3d_data *cub)
 		cub->data_rays->wasHitVertical = 0;
 	}
 	// drawline(cub->map_img, cub->player_data->x * MINIMAP_SCALE_FACTOR, cub->player_data->y* MINIMAP_SCALE_FACTOR, cub->data_rays->wallhitX* MINIMAP_SCALE_FACTOR, cub->data_rays->wallhitY* MINIMAP_SCALE_FACTOR, ORANGE_MP);
-}
-
-void	draw_rec(t_cub3d_data *cub, int x, int y, int width, int height)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < width)
-	{
-		j = 0;
-		while (j < height)
-		{
-			if ((x + i < WIDTH && x + i > 0)  && (y + j < HEIGHT && y + j > 0) && cub->data_rays->wasHitVertical)
-				mlx_put_pixel(cub->map_img, x + i, y + j, 0xCCCCCCFF);
-			else
-				mlx_put_pixel(cub->map_img, x + i, y + j, 0xFFFFFFFF);
-			j++;
-		}
-		i++;
-	}
 }
 
 unsigned int	*get_dir(t_cub3d_data *cub)

@@ -1,10 +1,10 @@
-NO  ./assets/textures/backrooms.png
-WE  ./assets/textures/backrooms.png
-EA  ./assets/textures/backrooms.png
-SO  ./assets/textures/backrooms.png
+NO ./images/c.png
+SO ./images/left.png
+WE ./images/c.png
+EA ./images/c.png
 
-F 105, 92, 36
-C 148, 147, 85
+F 72, 72, 79
+C 34, 36, 35
 
 111111111111111
 100000100000001

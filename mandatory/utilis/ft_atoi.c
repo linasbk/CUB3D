@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:58:45 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 14:16:48 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 19:13:08 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void	*str;
 
-	str = malloc (size * count);
+	str = malloc(size * count);
 	if (!str)
 		return (0);
 	ft_memset(str, 0, size * count);
