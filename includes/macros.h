@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 12:01:38 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 18:30:39 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 
 # define WIDTH 1580
 # define HEIGHT 1500
+# define MINIMAP_WIDTH 150
 # define WALL_DIMENSION 32
+# define MINIMAP_HEIGHT 150
 # define TEXTUR_HEIGHT WALL_DIMENSION
 # define TEXTUR_WIDTH WALL_DIMENSION
 # define NUM_RAYS WIDTH

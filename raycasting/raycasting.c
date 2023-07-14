@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 15:14:42 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 20:19:01 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	protect_matrice(double nextHorztouchX, double nextHorztouchY, t_cub3d_data *
 	y = floor(nextHorztouchY / WALL_DIMENSION);
 	if (x < 0 || x > cub->len_i || y < 0 || y > cub->len_j - 1)
 		return (1);
-	return(cub->matrice[y][x] == '1');
+	return(cub->matrice[y][x] == '1' || cub->matrice[y][x] == 'D');
 }
 
 double distance_between_points(double x1, double y1, double x2, double y2)
@@ -172,7 +172,7 @@ void	 ray_cast(t_cub3d_data *cub)
 		cub->data_rays->distance = horzhitdistance;
 		cub->data_rays->wasHitVertical = 0;
 	}
-	drawline(cub->map_img, cub->player_data->x * MINIMAP_SCALE_FACTOR, cub->player_data->y* MINIMAP_SCALE_FACTOR, cub->data_rays->wallhitX* MINIMAP_SCALE_FACTOR, cub->data_rays->wallhitY* MINIMAP_SCALE_FACTOR, ORANGE_MP);
+	// drawline(cub->map_img, cub->player_data->x * MINIMAP_SCALE_FACTOR, cub->player_data->y* MINIMAP_SCALE_FACTOR, cub->data_rays->wallhitX* MINIMAP_SCALE_FACTOR, cub->data_rays->wallhitY* MINIMAP_SCALE_FACTOR, ORANGE_MP);
 }
 
 void	draw_rec(t_cub3d_data *cub, int x, int y, int width, int height)
