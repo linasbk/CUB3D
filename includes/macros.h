@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 09:51:22 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 12:01:38 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define WIDTH 1580
 # define HEIGHT 1500
 # define WALL_DIMENSION 32
+# define TEXTUR_HEIGHT WALL_DIMENSION
+# define TEXTUR_WIDTH WALL_DIMENSION
 # define NUM_RAYS WIDTH
 # define FOV_ANGLE 60 * (M_PI / 180)
 # define P_RADIUS  5.0

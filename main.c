@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 13:37:36 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 14:46:25 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,49 @@ void	sky_floor(t_cub3d_data *cub)
 	free(cub->c_c);
 	free(cub->c_f);
 }
+int get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+
+void	png_info(t_cub3d_data *cub, int num, mlx_texture_t *text)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	j = 0;
+	if (text->height != WALL_DIMENSION || text->width != WALL_DIMENSION)
+	{
+		ft_error("Wrong texture dimension");
+		exit(EXIT_FAILURE);
+	}
+	cub->walltexture[num] = ft_calloc(1, (WALL_DIMENSION * WALL_DIMENSION * sizeof(unsigned int)));
+	while (j < (text->height * text->width))
+	{
+		cub->walltexture[num][j++] = get_rgba(text->pixels[i] ,text->pixels[i + 1], text->pixels[i + 2], 255);
+		if (i < (text->height * text->width * 4) - 4)
+			i += 4;
+	}
+}
+
+void	read_color(t_cub3d_data *cub)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+		cub->text[i++] = malloc(sizeof(mlx_texture_t));
+	cub->text[0] = mlx_load_png(cub->t_no);
+	cub->text[1] = mlx_load_png(cub->t_so);
+	cub->text[2] = mlx_load_png(cub->t_we);
+	cub->text[3] = mlx_load_png(cub->t_ea);
+	if (!cub->text[0] || !cub->text[1] || !cub->text[2] || !cub->text[3])
+		exit(EXIT_FAILURE);
+	i = -1;
+	while (++i < 4)
+		png_info(cub, i, cub->text[i]);
+}
 
 int	main(int ac, char **av)
 {
@@ -56,7 +99,7 @@ int	main(int ac, char **av)
 		return (FAILURE);  
 	ft_mlx_init(cub);
 	sky_floor(cub);
-	// read_image_colors(cub);
+	read_color(cub);
 	put_map(cub);
 	mlx_image_to_window(cub->mlx, cub->sky_floor, 0, 0);
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);

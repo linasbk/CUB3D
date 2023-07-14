@@ -6,40 +6,56 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 18:01:18 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 13:16:56 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	check_texture(t_cub3d_data *cub, char *line, int key, int i)
+int process_texture(t_cub3d_data *cub, char *line, int key, int i)
 {
-	while (line[i])
-	{
-		if (line[i] == ' ' || line[i] == '\t')
-			i++;
-		else if (line[i] == '\n' || line[i] == '\0')
-			return (ft_error(TEXTURE_ERROR));
-		else
-		{
-			if (key == T_NO && cub->t_no == NULL)
-				cub->t_no = ft_strdup(&line[i]);
-			else if (key == T_SO && cub->t_so == NULL)
-				cub->t_so = ft_strdup(&line[i]);
-			else if (key == T_WE && cub->t_we == NULL)
-				cub->t_we = ft_strdup(&line[i]);
-			else if (key == T_EA && cub->t_ea == NULL)
-				cub->t_ea = ft_strdup(&line[i]);
-			else if (key == C_F && cub->c_f == NULL)
-				cub->c_f = valide_color(ft_strdup(&line[i]));
-			else if (key == C_C && cub->c_c == NULL)
-				cub->c_c = valide_color(ft_strdup(&line[i]));
-			else
-				return (ft_error(TEXTURE_ERROR));
-			return (free(line), cub->t_index++, SUCCESS);
-		}
-	}
-	return (ft_error(TEXTURE_ERROR));
+	char *tmp;
+
+	tmp = ft_strtrim(&line[i], "\n");
+    if (key == T_NO && cub->t_no == NULL)
+        cub->t_no = ft_strdup(tmp);
+    else if (key == T_SO && cub->t_so == NULL)
+        cub->t_so = ft_strdup(tmp);
+    else if (key == T_WE && cub->t_we == NULL)
+        cub->t_we = ft_strdup(tmp);
+    else if (key == T_EA && cub->t_ea == NULL)
+        cub->t_ea = ft_strdup(tmp);
+    else if (key == C_F && cub->c_f == NULL)
+        cub->c_f = valide_color(ft_strdup(&line[i]));
+    else if (key == C_C && cub->c_c == NULL)
+        cub->c_c = valide_color(ft_strdup(&line[i]));
+    else
+    {
+        free(line);
+        free(tmp);
+        return ft_error(TEXTURE_ERROR);
+    }
+
+    free(line);
+    free(tmp);
+    cub->t_index++;
+    return SUCCESS;
+}
+int check_texture(t_cub3d_data *cub, char *line, int key, int i)
+{
+    while (line[i])
+    {
+        if (line[i] == ' ' || line[i] == '\t')
+            i++;
+        else if (line[i] == '\n' || line[i] == '\0')
+            return ft_error(TEXTURE_ERROR);
+        else
+        {
+            // tmp = ft_strtrim(&line[i], "\n");
+            return process_texture(cub, line, key, i);
+        }
+    }
+    return ft_error(TEXTURE_ERROR);
 }
 
 int	get_key(char *line)

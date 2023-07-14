@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 18:03:02 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 14:43:19 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct data_rays
 	double	vert_wallhitY;
 	double	wasHitVertical;
 	double	distance;
+	double	wallhitX;
+	double	wallhitY;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -76,8 +78,9 @@ typedef struct cub3d_data
 	char			player_dir;
 	int				len_i;
 	int				len_j;
-	mlx_texture_t	*walltexture;
-	uint32_t		*color_buff;
+	unsigned int	*texture;
+	unsigned int	*walltexture[4];
+	mlx_texture_t	*text[4];
 	t_ray_data		*data_rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
