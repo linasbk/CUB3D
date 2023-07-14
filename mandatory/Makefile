@@ -3,7 +3,7 @@ NAME := cub3D
 CFLAGS := -Wall -Wextra -Werror #-g -fsanitize=address
 SRCS =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c utilis/ft_atoi.c \
 			parsing/parsing.c parsing/errors.c parsing/valide_color.c parsing/valide_file.c parsing/valide_map.c raycasting/raycasting.c \
-			init/init.c  minimap.c  utilis/keyhook.c draw_line.c \
+			init/init.c  minimap.c  utilis/keyhook.c draw_line.c init/sky_floor.c\
 
 OBJ = $(SRCS:.c=.o)
 MLX        := libs/libmlx.a

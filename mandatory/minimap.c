@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 13:20:41 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 18:28:48 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,6 @@ void	mini_map_framing(t_cub3d_data *cub)
 
 void	put_map(t_cub3d_data *cub)
 {
-	int	i;
-	int	j;
-
-	j = 0;
 	cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->map_img)
 	{
@@ -107,19 +103,4 @@ void	put_map(t_cub3d_data *cub)
 		exit(EXIT_FAILURE);
 	}
 	cast_allrays(cub);
-	while (cub->matrice[j])
-	{
-		i = 0;
-		while (cub->matrice[j][i])
-		{
-			if (cub->matrice[j][i] == '1')
-				draw_square(cub->map_img, i * WALL_DIMENSION * MINIMAP_SCALE_FACTOR \
-				, j * WALL_DIMENSION * MINIMAP_SCALE_FACTOR \
-				, WALL_DIMENSION * MINIMAP_SCALE_FACTOR, WHITE_MP  );
-			i++;
-		}
-		j++;
-	}
-	put_player(cub);
-	// mini_map_framing(cub);
 }

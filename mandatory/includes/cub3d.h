@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 14:43:19 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 18:37:02 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,7 @@ void			ft_hook(void *param);
 //render
 void			renderwallproject(t_cub3d_data *cub, int i);
 void			read_image_colors(t_cub3d_data *cub);
+int				get_color(int r, int g, int b, int a);
+void			read_color(t_cub3d_data *cub);
+void			sky_floor(t_cub3d_data *cub);
 #endif
