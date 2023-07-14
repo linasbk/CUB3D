@@ -6,13 +6,12 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 21:58:45 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 14:16:48 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/12 18:01:12 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	*ft_memset(void *b, int c, size_t len)
+static void	*ft_memset(void *b, int c, size_t len)
 {
 	while (len--)
 	{

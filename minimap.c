@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/12 21:20:01 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/14 08:30:12 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,27 @@ void	mini_map_framing(t_cub3d_data *cub)
 		mlx_put_pixel(cub->map_img, cub->len_i * WALL_DIMENSION - 2, j++, RED_MP);
 }
 
+void	put_minimap(t_cub3d_data *cub)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < MINIMAP_HEIGHT)
+	{
+		x = 0;
+		while (x < MINIMAP_WIDTH)
+		{
+			if (distance(x, y, MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2) <= 8)
+				mlx_put_pixel(cub->mini_map, x, y, ORANGE_MP);
+			x++;
+		}
+		y++;
+	}
+	mlx_image_to_window(cub->mlx, cub->mini_map, 0, 0);
+}
+
 void	put_map(t_cub3d_data *cub)
 {
 	int	i;
@@ -101,6 +122,7 @@ void	put_map(t_cub3d_data *cub)
 
 	j = 0;
 	cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	cub->mini_map = mlx_new_image(cub->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	if (!cub->map_img)
 	{
 		puts(mlx_strerror(mlx_errno));
@@ -115,11 +137,12 @@ void	put_map(t_cub3d_data *cub)
 			if (cub->matrice[j][i] == '1')
 				draw_square(cub->map_img, i * WALL_DIMENSION * MINIMAP_SCALE_FACTOR \
 				, j * WALL_DIMENSION * MINIMAP_SCALE_FACTOR \
-				, WALL_DIMENSION * MINIMAP_SCALE_FACTOR, WHITE_MP  );
+				, WALL_DIMENSION * MINIMAP_SCALE_FACTOR, WHITE_MP);
 			i++;
 		}
 		j++;
 	}
 	put_player(cub);
+	// put_minimap(cub);
 	// mini_map_framing(cub);
 }

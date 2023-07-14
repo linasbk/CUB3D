@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 20:49:28 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/13 22:33:51 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ void	draw_rec(t_cub3d_data *cub, int x, int y, int width, int height)
 void	renderwallproject(t_cub3d_data *cub, int i)
 {
 	int	textoffsetx;
-	// ft_color(cub);
+	ft_color(cub);
 	if (cub->data_rays->distance == 0)
 		cub->data_rays->distance = 0.1;
 	double corr_dis = cub->data_rays->distance * cos(cub->data_rays->ray_angle - cub->player_data->rot_angle);
@@ -223,7 +223,8 @@ void	renderwallproject(t_cub3d_data *cub, int i)
 	{
 		int distancefromtop = y + (wallstripheight / 2) - (HEIGHT / 2);
 		int	textureoffsety = distancefromtop * ((float)TEXTUR_HEIGHT / wallstripheight);
-		unsigned int texelcolor = cub->txt[(TEXTUR_WIDTH * textureoffsety) + textoffsetx];
+		uint32_t texelcolor = cub->list_color[(TEXTUR_WIDTH * textureoffsety) + textoffsetx];
+		// uint32_t texelcolor = cub->texture[(TEXTUR_WIDTH * textureoffsety) + textoffsetx];
 			mlx_put_pixel(cub->map_img, i, y, texelcolor);
 		y++;
 	}
