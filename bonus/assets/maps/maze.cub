@@ -1,9 +1,9 @@
-NO ./images/c.png
-SO ./images/left.png
-WE ./images/c.png
-EA ./images/c.png
+NO ./images/BRICK_4A.png
+SO ./images/BRICK_4A.png
+WE ./images/BRICK_4A.png
+EA ./images/BRICK_4A.png
 
-F 72, 72, 79
+F 40,35,33
 C 34, 36, 35
 
 111111111111111
