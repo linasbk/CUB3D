@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 14:43:18 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 18:26:42 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,21 @@ void	ray_cast(t_cub3d_data *cub)
 		cub->rays->wallhit_y = cub->rays->hor_wallhity;
 		cub->rays->distance = horzhitdistance;
 		cub->rays->hit_verti = 0;
+	}
+	if (cub->tmpmatrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] == 'D' && cub->openflag)
+		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] = '0';
+	else if (cub->tmpmatrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] == 'D' && cub->openflag)
+		 cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] = '0';
+	else if (cub->tmpmatrice[((int)cub->player_data->y / WALL_DIMENSION) - 1][(int)cub->player_data->x / WALL_DIMENSION] == 'D' && cub->openflag)
+		cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) - 1][(int)cub->player_data->x / WALL_DIMENSION] = '0';
+	else if (cub->tmpmatrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) + 1] == 'D' && cub->openflag)
+		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) + 1] = '0';
+	else if (cub->tmpmatrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) - 1] == 'D' && cub->openflag)
+		cub->tmpmatrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) - 1] = '0';
+	else
+	{
+		cub->openflag = 0;
+		ft_init_map(cub);
 	}
 }
 

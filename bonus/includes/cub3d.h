@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 14:43:32 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 18:29:35 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@ typedef struct cub3d_data
 	char			*t_we;
 	char			*t_ea;
 	char			**matrice;
+	char			**tmpmatrice;
 	int				t_index;
 	int				m_index;
+	int				openflag;
 	char			*line;
 	int				player_x;
 	int				player_y;
@@ -88,8 +90,8 @@ typedef struct cub3d_data
 	int				len_i;
 	int				len_j;
 	unsigned int	*texture;
-	unsigned int	*walltexture[4];
-	mlx_texture_t	*text[4];
+	unsigned int	*walltexture[8];
+	mlx_texture_t	*text[8];
 	t_ray_data		*rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
@@ -157,4 +159,9 @@ int				get_color(int r, int g, int b, int a);
 void			read_color(t_cub3d_data *cub);
 void			sky_floor(t_cub3d_data *cub, int x, int y);
 int				distance(int i, int j, int x, int y);
+void			put_mini_map(t_cub3d_data *cub);
+void			ft_put_minimap(t_cub3d_data *cub);
+void 			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
+void			copy_the_map(t_cub3d_data *cub);
+void			ft_init_map(t_cub3d_data *cub);
 #endif

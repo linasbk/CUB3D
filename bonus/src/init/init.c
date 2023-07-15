@@ -3,14 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 18:29:10 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	ft_init_map(t_cub3d_data *cub)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	cub->matrice = (char **)malloc((cub->len_j + 1) * sizeof(char **));
+	while (cub->tmpmatrice[j])
+	{
+		i = 0;
+		cub->matrice[j] = malloc(ft_strlen(cub->tmpmatrice[j]) + 1);
+		while (cub->tmpmatrice[j][i])
+		{
+			cub->matrice[j][i] = cub->tmpmatrice[j][i];
+			i++;
+		}
+		cub->matrice[j][i] = '\0';
+		j++;
+	}
+	cub->matrice[j] = NULL;
+}
+
+void	copy_the_map(t_cub3d_data *cub)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	cub->tmpmatrice = (char **)malloc((cub->len_j + 1) * sizeof(char **));
+	while (j < cub->len_j)
+	{
+		i = 0;
+		cub->tmpmatrice[j] = malloc(ft_strlen(cub->matrice[j]) + 1);
+		while (cub->matrice[j][i])
+		{
+			cub->tmpmatrice[j][i] = cub->matrice[j][i];
+			i++;
+		}
+		cub->tmpmatrice[j][i] = '\0';
+		j++;
+	}
+	cub->tmpmatrice[j] = NULL;
+}
 
 double	normalizeangle(double ray_ang)
 {
