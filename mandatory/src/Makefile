@@ -1,9 +1,9 @@
 CC := cc
 NAME := cub3D
-CFLAGS := -Wall -Wextra -Werror -Ofast #-g -fsanitize=address
-SRCS =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c utilis/ft_atoi.c \
+CFLAGS := -Wall -Wextra -Werror -Ofast -g -fsanitize=address
+SRCS =	main.c utilis/gnl.c utilis/utils.c utilis/ft_split.c utilis/ft_atoi.c raycasting/raycasting_utils.c utilis/utils_2.c\
 			parsing/parsing.c parsing/errors.c parsing/valide_color.c parsing/valide_file.c parsing/valide_map.c raycasting/raycasting.c \
-			init/init.c  minimap.c  utilis/keyhook.c draw_line.c init/sky_floor.c\
+			init/init.c  minimap.c utilis/keyhook.c init/sky_floor.c utilis/texture_utils.c\
 
 OBJ = $(SRCS:.c=.o)
 MLX        := libs/libmlx.a
@@ -12,7 +12,7 @@ LIBS    := -lglfw -L/Users/lsabik/.brew/opt/glfw/lib
 
 OBJS := $(SRCS:.c=.o)
 
-%.o: %.c includes/cub3d.h 
+%.o: %.c ../includes/cub3d.h includes/macro.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)

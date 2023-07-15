@@ -1,7 +1,7 @@
-NO ./images/c.png
-SO ./images/left.png
-WE ./images/c.png
-EA ./images/c.png
+NO ../images/c.png
+SO ../images/left.png
+WE ../images/c.png
+EA ../images/c.png
 
 F 72, 72, 79
 C 34, 36, 35

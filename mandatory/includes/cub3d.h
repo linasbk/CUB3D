@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 21:44:22 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 12:30:27 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct data_rays
+typedef struct rays
 {
-	double	ray_angle;
+	double	ray_ang;
 	double	is_rayfacingdown;
 	double	is_rayfacingup;
 	double	is_rayfacingright;
@@ -34,15 +34,15 @@ typedef struct data_rays
 	double	ystep;
 	double	xstep;
 	int		foundhorzwallhit;
-	double	hor_wallhitX;
-	double	hor_wallhitY;
+	double	hor_wallhitx;
+	double	hor_wallhity;
 	int		foundverzwallhit;
-	double	vert_wallhitX;
-	double	vert_wallhitY;
-	double	wasHitVertical;
+	double	vert_wallhitx;
+	double	vert_wallhity;
+	double	hit_verti;
 	double	distance;
-	double	wallhitX;
-	double	wallhitY;
+	double	wallhit_x;
+	double	wallhit_y;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -81,7 +81,7 @@ typedef struct cub3d_data
 	unsigned int	*texture;
 	unsigned int	*walltexture[4];
 	mlx_texture_t	*text[4];
-	t_ray_data		*data_rays;
+	t_ray_data		*rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
 	mlx_image_t		*sky_floor;
@@ -107,8 +107,11 @@ char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);
 long			ft_atoi(char *str);
 //PARSING
+int				process_texture(t_cub3d_data *cub, char *line, int key, int i);
 int				map_parsing(t_cub3d_data *cub, int ac, char **av);
+int				resizematrice(t_cub3d_data *cub, int num_lines);
 int				cub_file(char *s);
+int				check_space(char str);
 //ERROR
 int				ft_error(char *s);
 //INIT
@@ -123,24 +126,26 @@ int				check_map(t_cub3d_data *cub);
 int				valid_char(t_cub3d_data *cub, char c, int i, int j);
 void			put_player(t_cub3d_data *cub);
 void			ft_update(t_cub3d_data *cub);
-void			put_map(t_cub3d_data *cub);
+void			cub_img(t_cub3d_data *cub);
 void			init_data_player(t_cub3d_data *cub);
 void			ft_hook(void	*param);
 void			cast_allrays(t_cub3d_data *cub);
 void			ray_cast(t_cub3d_data *cub);
-//DRAW_LINE
-void			draw_square(mlx_image_t *img, int x, int y, int size, int color);
-void	 		ray_cast(t_cub3d_data *cub);
-void			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
 //HOOK
 void			ft_hook(void *param);
+//RAYCASTING
+int				protect_matrice(double touchX, double touchY, \
+				t_cub3d_data *cub);
+double			distance_between_points(double x1, double y1, \
+				double x2, double y2);
+void			raycasting_init(t_cub3d_data *cub);
+void			calcs_vertintercept(t_cub3d_data *cub);
+void			calcs_horintercept(t_cub3d_data *cub);
 //render
 void			renderwallproject(t_cub3d_data *cub, int i);
 void			read_image_colors(t_cub3d_data *cub);
 int				get_color(int r, int g, int b, int a);
 void			read_color(t_cub3d_data *cub);
-void			sky_floor(t_cub3d_data *cub);
-void			put_mini_map(t_cub3d_data *cub);
-void			ft_put_minimap(t_cub3d_data *cub);
+void			sky_floor(t_cub3d_data *cub, int x, int y);
 int				distance(int i, int j, int x, int y);
 #endif

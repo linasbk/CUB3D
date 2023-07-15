@@ -6,24 +6,19 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 18:35:28 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 13:02:14 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	get_color(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	sky_floor(t_cub3d_data *cub)
+void	sky_floor(t_cub3d_data *cub, int x, int y)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
 	cub->sky_floor = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->sky_floor)
 	{
@@ -36,9 +31,11 @@ void	sky_floor(t_cub3d_data *cub)
 		while (y < HEIGHT)
 		{
 			if (y < HEIGHT / 2)
-				mlx_put_pixel(cub->sky_floor, x, y, get_color(cub->c_c->r, cub->c_c->g, cub->c_c->b, 255));
+				mlx_put_pixel(cub->sky_floor, x, y, get_color(cub->c_c->r, \
+					cub->c_c->g, cub->c_c->b, 255));
 			else
-				mlx_put_pixel(cub->sky_floor, x, y, get_color(cub->c_f->r, cub->c_f->g, cub->c_f->b, 255));
+				mlx_put_pixel(cub->sky_floor, x, y, get_color(cub->c_f->r, \
+					cub->c_f->g, cub->c_f->b, 255));
 			y++;
 		}
 		x++;
@@ -59,10 +56,12 @@ void	png_info(t_cub3d_data *cub, int num, mlx_texture_t *text)
 		ft_error("Wrong texture dimension");
 		exit(EXIT_FAILURE);
 	}
-	cub->walltexture[num] = ft_calloc(1, (WALL_DIMENSION * WALL_DIMENSION * sizeof(unsigned int)));
+	cub->walltexture[num] = ft_calloc(1, (WALL_DIMENSION * WALL_DIMENSION * \
+		sizeof(unsigned int)));
 	while (j < (text->height * text->width))
 	{
-		cub->walltexture[num][j++] = get_color(text->pixels[i] ,text->pixels[i + 1], text->pixels[i + 2], 255);
+		cub->walltexture[num][j++] = get_color(text->pixels[i], \
+			text->pixels[i + 1], text->pixels[i + 2], 255);
 		if (i < (text->height * text->width * 4) - 4)
 			i += 4;
 	}

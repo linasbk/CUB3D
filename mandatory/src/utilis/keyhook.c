@@ -6,11 +6,11 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/14 21:37:52 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	ft_hook(void *param)
 {
@@ -70,6 +70,6 @@ void	ft_hook(void *param)
             cub->player_data->y = y1;
         }
     }
-    put_map(cub);
+    cub_img(cub);
     mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 }

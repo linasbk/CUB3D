@@ -6,11 +6,11 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 16:50:18 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	parsetopbottom_line(t_cub3d_data *cub)
 {
@@ -38,31 +38,47 @@ int	parsetopbottom_line(t_cub3d_data *cub)
 
 int	check_sides(t_cub3d_data *cub, int i, int j)
 {
-	if ((ft_isspace(cub->matrice[i - 1][j]) || cub->matrice[i - 1][j] == '1'
-			|| cub->matrice[i - 1][j] == '\0') && (ft_isspace(cub->matrice[i
-				+ 1][j]) || cub->matrice[i + 1][j] == '1' || cub->matrice[i
-			+ 1][j] == '\0') && (ft_isspace(cub->matrice[i][j - 1])
-			|| cub->matrice[i][j - 1] == '1' || cub->matrice[i][j - 1] == '\0')
-		&& (ft_isspace(cub->matrice[i][j + 1]) || cub->matrice[i][j + 1] == '1'
-			|| cub->matrice[i][j + 1] == '\0'))
-		return (SUCCESS);
-	return (FAILURE);
+	if (ft_strlen(cub->matrice[i]) <= ft_strlen(cub->matrice[i - 1]))
+	{
+		if (!(check_space(cub->matrice[i - 1][j]) == 1 || cub->matrice[i - 1] \
+			[j] == '1' || cub->matrice[i - 1][j] == '\0'))
+			return (FAILURE);
+	}
+	if (ft_strlen(cub->matrice[i]) <= ft_strlen(cub->matrice[i + 1]))
+	{
+		if (!(check_space(cub->matrice[i + 1][j]) == 1 || cub->matrice[i + 1] \
+			[j] == '1' || cub->matrice[i + 1][j] == '\0'))
+			return (FAILURE);
+	}
+	if (cub->matrice[i][j - 1])
+	{
+		if (!(check_space(cub->matrice[i][j - 1]) == 1 || cub->matrice[i] \
+			[j - 1] == '1' || cub->matrice[i][j - 1] == '\0'))
+			return (FAILURE);
+	}
+	if (cub->matrice[i][j + 1])
+	{
+		if (!(check_space(cub->matrice[i][j + 1]) == 1 || cub->matrice[i] \
+			[j + 1] == '1' || cub->matrice[i][j + 1] == '\0'))
+			return (FAILURE);
+	}
+	return (SUCCESS);
 }
 
 int	parse_mid(t_cub3d_data *cub, int i, int ret, int j)
 {
 	int	len;
 
-	len = ft_strlen(cub->matrice[i]);
+	len = ft_strlen(cub->matrice[i]) - 1;
 	while (len > 0)
 	{
-		if (!(cub->matrice[i][len - 1] == ' '))
+		if (!(cub->matrice[i][len] == ' '))
 			break ;
 		len--;
 	}
-	if (cub->matrice[i][len - 1] != '1')
+	if (cub->matrice[i][len] != '1')
 		return (FAILURE);
-	while (j < len - 1)
+	while (j < len)
 	{
 		if (valid_char(cub, cub->matrice[i][j], i, j) == FAILURE)
 			return (FAILURE);
@@ -104,29 +120,6 @@ int	check_retline(t_cub3d_data *cub)
 	return (SUCCESS);
 }
 
-int	resizeMatrice(t_cub3d_data *cub, int num_lines)
-{
-	int	i;
-	int	currentLength;
-	int	diff;
-
-	i = 0;
-    while (i < num_lines)
-	{
-        currentLength = ft_strlen(cub->matrice[i]);
-        diff = cub->len_i - currentLength;
-
-        if (diff > 0)
-		{
-            cub->matrice[i] = realloc(cub->matrice[i], (currentLength + diff + 1) * sizeof(char));//do ure own realloc arbk
-            ft_memset(cub->matrice[i] + currentLength, ' ', diff);
-            cub->matrice[i][currentLength + diff] = '\0';
-        }
-		i++;
-    }
-	return (num_lines);
-}
-
 int	check_map(t_cub3d_data *cub)
 {
 	int	i;
@@ -136,9 +129,9 @@ int	check_map(t_cub3d_data *cub)
 	ret = 1;
 	if (check_retline(cub) == FAILURE)
 		return (FAILURE);
-	while (i < cub->m_index - 1)
+	while (i < cub->m_index)
 	{
-		if (i == 0 || i == cub->m_index)
+		if (i == 0 || i == cub->m_index - 1)
 			ret = parsetopbottom_line(cub);
 		else
 			ret = parse_mid(cub, i, 1, 1);
@@ -148,6 +141,6 @@ int	check_map(t_cub3d_data *cub)
 	}
 	if (i == cub->m_index - 1 && cub->player_dir == '\0')
 		return (FAILURE);
-	cub->len_j = resizeMatrice(cub, cub->m_index);
+	cub->len_j = resizematrice(cub, cub->m_index);
 	return (ret);
 }

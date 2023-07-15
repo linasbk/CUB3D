@@ -6,28 +6,28 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 14:35:12 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-double	normalizeangle(double ray_angle)
+double	normalizeangle(double ray_ang)
 {
-	ray_angle = fmod(ray_angle, (2 * M_PI));
-	if (ray_angle < 0)
-		ray_angle = (2 * M_PI) + ray_angle;
-	return (ray_angle);
+	ray_ang = fmod(ray_ang, (2 * M_PI));
+	if (ray_ang < 0)
+		ray_ang = (2 * M_PI) + ray_ang;
+	return (ray_ang);
 }
 
 void	init_ray_data(t_cub3d_data *cub)
 {
-	cub->data_rays = ft_calloc(1, sizeof(t_ray_data));
-	cub->data_rays->ray_angle = cub->player_data->rot_angle;
-	cub->data_rays->is_rayfacingdown = 0;
-	cub->data_rays->is_rayfacingright = 0;
-	cub->data_rays->is_rayfacingup = 0;
-	cub->data_rays->is_rayfacingleft = 0;
+	cub->rays = ft_calloc(1, sizeof(t_ray_data));
+	cub->rays->ray_ang = cub->player_data->rot_angle;
+	cub->rays->is_rayfacingdown = 0;
+	cub->rays->is_rayfacingright = 0;
+	cub->rays->is_rayfacingup = 0;
+	cub->rays->is_rayfacingleft = 0;
 }
 
 void	ft_mlx_init(t_cub3d_data *cub)

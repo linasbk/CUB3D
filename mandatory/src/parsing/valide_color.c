@@ -6,11 +6,11 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:25:38 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/13 18:04:28 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	check_comma( char *line)
 {

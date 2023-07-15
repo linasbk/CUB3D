@@ -6,11 +6,22 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:44 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/09 14:09:38 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../includes/cub3d.h"
+#include"../../includes/cub3d.h"
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*str;
+
+	str = malloc(size * count);
+	if (!str)
+		return (0);
+	ft_memset(str, 0, size * count);
+	return (str);
+}
 
 char	*ft_strdup(char *s1)
 {

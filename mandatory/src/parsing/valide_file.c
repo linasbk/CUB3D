@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   valide_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:37:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 18:47:40 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	valid_char(t_cub3d_data *cub, char c, int i, int j)
 {

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/14 21:41:00 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/15 13:12:00 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define YELLOW "\033[1;33m"
 # define BLUE "\033[1;34m"
 # define CYAN "\033[1;36m"
-
 # define WIDTH 1580
 # define HEIGHT 1500
 # define MINIMAP_WIDTH 150
