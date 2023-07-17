@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/15 18:37:37 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:28:40 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,13 @@ void	ft_hook(void *param)
     }
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_O))
 		cub->openflag = 1;
+	 if (mlx_is_key_down(cub->mlx, MLX_KEY_M))
+	{
+		cub_img(cub);
+		setting_map(cub);
+		mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
+		return ;
+	}
     cub_img(cub);
     mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 }

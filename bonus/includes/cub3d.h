@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 18:29:35 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:44:18 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_map_color
 typedef struct player_movement
 {
 	double	x;
+	double	mpx;
+	double	mpy;
 	double	y;
 	int		i;
 	int		j;
@@ -85,10 +87,16 @@ typedef struct cub3d_data
 	int				openflag;
 	char			*line;
 	int				player_x;
+	int				player_i;
+	int				player_j;
 	int				player_y;
 	char			player_dir;
 	int				len_i;
 	int				len_j;
+	int				lenx_fullmap;
+	int				beginx;
+	int				beginy;
+	int				leny_fullmap;
 	unsigned int	*texture;
 	unsigned int	*walltexture[8];
 	mlx_texture_t	*text[8];
@@ -164,4 +172,5 @@ void			ft_put_minimap(t_cub3d_data *cub);
 void 			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
 void			copy_the_map(t_cub3d_data *cub);
 void			ft_init_map(t_cub3d_data *cub);
+void			setting_map(t_cub3d_data *cub);
 #endif
