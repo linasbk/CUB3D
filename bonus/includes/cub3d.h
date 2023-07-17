@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 12:44:18 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:38:32 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
+# define MINIMAP_SCALE 0.3
 typedef struct sprites
 {
 	int		text;
 	double	x;
 	double	y;
 	double	dist;
+	bool	visible;
 	double	angle;
 }				t_sprites;
 
@@ -52,6 +53,9 @@ typedef struct rays
 	double	distance;
 	double	wallhit_x;
 	double	wallhit_y;
+	int		ver_cont;
+	int		hor_cont;
+	int		map_cont;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -64,8 +68,6 @@ typedef struct s_map_color
 typedef struct player_movement
 {
 	double	x;
-	double	mpx;
-	double	mpy;
 	double	y;
 	int		i;
 	int		j;
@@ -75,7 +77,6 @@ typedef struct player_movement
 typedef struct cub3d_data
 {
 	mlx_t			*mlx;
-	char			**map;
 	char			*t_no;
 	char			*t_so;
 	char			*t_we;
@@ -87,19 +88,16 @@ typedef struct cub3d_data
 	int				openflag;
 	char			*line;
 	int				player_x;
-	int				player_i;
-	int				player_j;
 	int				player_y;
 	char			player_dir;
 	int				len_i;
 	int				len_j;
-	int				lenx_fullmap;
-	int				beginx;
-	int				beginy;
-	int				leny_fullmap;
 	unsigned int	*texture;
-	unsigned int	*walltexture[8];
-	mlx_texture_t	*text[8];
+	unsigned int	*walltexture[14];
+	double			ray_dist[NUM_RAYS];
+	int				sprite_num;
+	t_sprites		*sprites;
+	mlx_texture_t	*text[14];
 	t_ray_data		*rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
@@ -172,5 +170,9 @@ void			ft_put_minimap(t_cub3d_data *cub);
 void 			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
 void			copy_the_map(t_cub3d_data *cub);
 void			ft_init_map(t_cub3d_data *cub);
-void			setting_map(t_cub3d_data *cub);
+
+//SPRITES
+void			render_sprite(t_cub3d_data *cub);
+void    		render_mapsprites(t_cub3d_data *cub);
+void    		find_sprites(t_cub3d_data *cub);
 #endif

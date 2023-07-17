@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 18:16:45 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:39:02 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,24 +88,70 @@ void	cast_allrays(t_cub3d_data *cub)
 	int		i;
 
 	i = 0;
-	cub->rays->ray_ang = cub->player_data->rot_angle - (FOV_ANGLE / 2);
+	// cub->rays->ray_ang = cub->player_data->rot_angle - (FOV_ANGLE / 2);
 	while (i < NUM_RAYS)
 	{
+		cub->rays->ray_ang = cub->player_data->rot_angle + atan((i - NUM_RAYS / 2) / DIST_PROJ_PLANE);
 		ray_cast(cub);
 		renderwallproject(cub, i);
 		cub->rays->ray_ang += FOV_ANGLE / NUM_RAYS;
+		cub->ray_dist[i] = cub->rays->distance;
 		i++;
 	}
-	put_mini_map(cub);
 }
 
 int	distance(int i, int j, int x, int y)
 {
 	return (sqrt(pow(x - i, 2) + pow(y - j, 2)));
 }
+void	draw_square(mlx_image_t *img, int x, int y, int size, int color)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < size + 1)
+	{
+		j = 0;
+		while (j < size + 1)
+		{
+			if (j == size || i == size || j == 0 || i == 0)
+				mlx_put_pixel(img, x + i, y + j, BLACK_MP);
+			else
+				mlx_put_pixel(img, x + i, y + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	put_player(t_cub3d_data *cub)
+{
+	int	x2;
+	int	y2;
+
+	x2 = 0;
+	y2 = 0;
+	while (y2 < cub->len_j * WALL_DIMENSION)
+	{
+		x2 = 0;
+		while (x2 < cub->len_i * WALL_DIMENSION)
+		{
+			if (distance(x2, y2, cub->player_data->x, cub->player_data->y) \
+				<= P_RADIUS)
+				mlx_put_pixel(cub->map_img, x2 * MINIMAP_SCALE_FACTOR, y2 * MINIMAP_SCALE_FACTOR, ORANGE_MP);
+			x2++;
+		}
+		y2++;
+	}
+}
 
 void	cub_img(t_cub3d_data *cub)
 {
+	int	i;
+	int	j;
+
+	j = 0;
 	cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->map_img)
 	{
@@ -113,4 +159,22 @@ void	cub_img(t_cub3d_data *cub)
 		exit(EXIT_FAILURE);
 	}
 	cast_allrays(cub);
+	while (cub->matrice[j])
+	{
+		i = 0;
+		while (cub->matrice[j][i])
+		{
+			if (cub->matrice[j][i] == '1')
+				draw_square(cub->map_img, i * WALL_DIMENSION * MINIMAP_SCALE_FACTOR \
+				, j * WALL_DIMENSION * MINIMAP_SCALE_FACTOR \
+				, WALL_DIMENSION * MINIMAP_SCALE_FACTOR, WHITE_MP  );
+			i++;
+		}
+		j++;
+	}
+	put_player(cub);
+	find_sprites(cub);
+	render_sprite(cub);
+	render_mapsprites(cub);
+	// put_mini_map(cub);
 }

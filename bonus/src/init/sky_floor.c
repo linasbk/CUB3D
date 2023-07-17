@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sky_floor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 18:03:46 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/16 22:18:55 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,22 @@ void	read_color(t_cub3d_data *cub)
 	cub->text[1] = mlx_load_png(cub->t_so);
 	cub->text[2] = mlx_load_png(cub->t_we);
 	cub->text[3] = mlx_load_png(cub->t_ea);
-	
-	if (!cub->text[0] || !cub->text[1] || !cub->text[2] || !cub->text[3])
-		exit(EXIT_FAILURE);
+	cub->text[4] = mlx_load_png("./images/barrel.png");
+	// cub->text[5] = mlx_load_png(cub->t_ea);
+	// cub->text[6] = mlx_load_png(cub->t_ea);
+	// cub->text[7] = mlx_load_png(cub->t_ea);
+	// cub->text[8] = mlx_load_png("./images/DOOR_1E.png");
+	// cub->text[9] = mlx_load_png(cub->t_ea);
+	// cub->text[10] = mlx_load_png(cub->t_ea);
+	// cub->text[11] = mlx_load_png("./images/DOOR_1E.png");
+	// cub->text[12] = mlx_load_png("./images/barrel.png");
+	// cub->text[13] = mlx_load_png(cub->t_ea);
+	while (i <= 4)
+	{
+		if (!cub->text[i++])
+			exit(EXIT_FAILURE);
+	}
 	i = -1;
-	while (++i < 4)
+	while (++i <= 4)
 		png_info(cub, i, cub->text[i]);
 }
