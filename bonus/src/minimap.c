@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 18:39:02 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/17 20:29:29 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	cub_img(t_cub3d_data *cub)
 	}
 	put_player(cub);
 	find_sprites(cub);
-	render_sprite(cub);
+	render_sprite(cub, 0);
 	render_mapsprites(cub);
 	// put_mini_map(cub);
 }

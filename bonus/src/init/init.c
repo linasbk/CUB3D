@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 16:45:20 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/17 20:54:23 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	init_data_player(t_cub3d_data *cub)
 	cub->player_data = ft_calloc(1, sizeof(t_data_player));
 	if (cub->matrice[cub->player_y][cub->player_x])
 	{
-		cub->player_data->x = cub->player_x * WALL_DIMENSION;
-		cub->player_data->y = cub->player_y * WALL_DIMENSION;
+		cub->player_data->x = cub->player_x * WALL_DIMENSION + 10;
+		cub->player_data->y = cub->player_y * WALL_DIMENSION + 10;
 		if (cub->player_dir == 'E')
 			cub->player_data->rot_angle = M_PI;
 		if (cub->player_dir == 'N')
