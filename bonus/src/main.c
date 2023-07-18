@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 14:35:53 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/18 12:21:27 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 	mlx_image_to_window(cub->mlx, cub->sky_floor, 0, 0);
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
+	mlx_texture_to_image(cub);
 	mlx_loop(cub->mlx);
 	mlx_terminate(cub->mlx);
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 21:02:35 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/17 22:22:46 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct cub3d_data
 	int				sprite_num;
 	t_spinfos		*sp;
 	t_sprites		*sprites;
-	mlx_texture_t	*text[14];
+	mlx_texture_t	*text[25];
 	t_ray_data		*rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
