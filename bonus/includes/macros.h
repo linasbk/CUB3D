@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 18:23:04 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:16:16 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
 # define YELLOW "\033[1;33m"
 # define BLUE "\033[1;34m"
 # define CYAN "\033[1;36m"
-# define WIDTH 1580
-# define HEIGHT 1500
+# define WIDTH 1800
+# define HEIGHT 1300
 # define MINIMAP_WIDTH 150
 # define WALL_DIMENSION 64
 # define MINIMAP_HEIGHT 150
+# define WIDTH_FULLMAP 1400
+# define HEIGHT_FULLMAP 905
 # define TEXTUR_HEIGHT WALL_DIMENSION
 # define TEXTUR_WIDTH WALL_DIMENSION
 # define NUM_RAYS WIDTH
@@ -33,7 +35,7 @@
 # define ROT_SPEED 3.0 * (M_PI / 180)
 # define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
 # define EPSILON 0.2
-# define MINIMAP_SCALE_FACTOR 0.3
+# define MINIMAP_SCALE_FACTOR 0.2
 # define WALL_STRIP_WIDTH 1
 
 # define ORANGE_MP 0xFF7000FF

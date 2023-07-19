@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:45:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/18 12:02:53 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:51:36 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,10 +147,13 @@ void	render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, int vis_sp)
 					// int i = 4;
 					// while (i < 8)
 					// {
-						wall_text = cub->walltexture[4];
-						texelcolor = wall_text[(TEXTUR_WIDTH * cub->sp->text_y) + cub->sp->text_x];
-						if (sprite.dist < cub->ray_dist[x] && texelcolor != 0x00000000)
-							mlx_put_pixel(cub->map_img, x, y, texelcolor);
+						if (sprite.dist < cub->ray_dist[x])
+						{
+							wall_text = cub->walltexture[4];
+							texelcolor = wall_text[(TEXTUR_WIDTH * cub->sp->text_y) + cub->sp->text_x];
+						 	if (texelcolor != 0x00000000)
+								mlx_put_pixel(cub->map_img, x, y, texelcolor);
+						}
 					// 	i++;
 					// }
 				}

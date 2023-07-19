@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 22:22:46 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/19 17:20:42 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct rays
 	int		ver_cont;
 	int		hor_cont;
 	int		map_cont;
+	int		flag;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -85,6 +86,8 @@ typedef struct s_map_color
 
 typedef struct player_movement
 {
+	double	mpx;
+	double	mpy;
 	double	x;
 	double	y;
 	int		i;
@@ -100,7 +103,6 @@ typedef struct cub3d_data
 	char			*t_we;
 	char			*t_ea;
 	char			**matrice;
-	char			**tmpmatrice;
 	int				t_index;
 	int				m_index;
 	int				openflag;
@@ -114,6 +116,16 @@ typedef struct cub3d_data
 	unsigned int	*walltexture[14];
 	double			ray_dist[NUM_RAYS];
 	int				sprite_num;
+	int				beginx;
+	int				beginy;
+	int				lenx_fullmap;
+	int				leny_fullmap;
+	int				xdoor;
+	int				ydoor;
+	int				doorflag;
+	int				tm;
+	int				x_wall;
+	int				y_wall;
 	t_spinfos		*sp;
 	t_sprites		*sprites;
 	mlx_texture_t	*text[25];
@@ -187,11 +199,11 @@ int				distance(int i, int j, int x, int y);
 void			put_mini_map(t_cub3d_data *cub);
 void			ft_put_minimap(t_cub3d_data *cub);
 void 			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
-void			copy_the_map(t_cub3d_data *cub);
-void			ft_init_map(t_cub3d_data *cub);
+void			setting_map(t_cub3d_data *cub);
 
 //SPRITES
 void			render_sprite(t_cub3d_data *cub, int index);
 void    		render_mapsprites(t_cub3d_data *cub);
 void    		find_sprites(t_cub3d_data *cub);
+void			add_door(t_cub3d_data *cub, char c1, char c2);
 #endif

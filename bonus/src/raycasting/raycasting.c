@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 18:36:58 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:23:45 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,21 @@ int get_content(t_cub3d_data *cub, int i, int j)
 	y = floor(j / WALL_DIMENSION);
 	if (x < 0 || x > cub->len_i || y < 0 || y > cub->len_j - 1)
 		return (1);
-	return (((int)cub->matrice[y][x] % 10) + 3);
+	return ((int)cub->matrice[y][x]);
 }
 
-void	add_door(t_cub3d_data *cub)
+void	add_door(t_cub3d_data *cub, char c1, char c2)
 {
-	if (cub->tmpmatrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] == 'D' && cub->openflag)
-		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] = '0';
-	else if (cub->tmpmatrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] == 'D' && cub->openflag)
-		 cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] = '0';
-	else if (cub->tmpmatrice[((int)cub->player_data->y / WALL_DIMENSION) - 1][(int)cub->player_data->x / WALL_DIMENSION] == 'D' && cub->openflag)
-		cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) - 1][(int)cub->player_data->x / WALL_DIMENSION] = '0';
-	else if (cub->tmpmatrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) + 1] == 'D' && cub->openflag)
-		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) + 1] = '0';
-	else if (cub->tmpmatrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) - 1] == 'D' && cub->openflag)
-		cub->tmpmatrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) - 1] = '0';
-	else
-	{
-		cub->openflag = 0;
-		ft_init_map(cub);
-	}
+	if (cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] == c1)
+		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] = c2;
+	else if (cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] == c1)
+		cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] = c2;
+	else if (cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) - 1][(int)cub->player_data->x / WALL_DIMENSION] == c1)
+		cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) - 1][(int)cub->player_data->x / WALL_DIMENSION] = c2;
+	else if (cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) + 1] == c1)
+		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) + 1] = c2;
+	else if (cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) - 1] == c1)
+		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][((int)cub->player_data->x / WALL_DIMENSION) - 1] = c2;
 }
 
 void	hor_intersec(t_cub3d_data *cub)
@@ -60,6 +55,9 @@ void	hor_intersec(t_cub3d_data *cub)
 		if (protect_matrice(cub->rays->hor_wallhitx, \
 			cub->rays->hor_wallhity, cub))
 		{
+			// if (protect_matrice(cub->rays->hor_wallhitx, \
+			// 	cub->rays->hor_wallhity, cub) == 2)
+			// 	cub->rays->flag = 1;
 			cub->rays->hor_cont = get_content(cub, cub->rays->hor_wallhitx, cub->rays->hor_wallhity);
 			if (cub->rays->is_rayfacingup)
 				cub->rays->hor_wallhity += 0.01;
@@ -90,6 +88,9 @@ void    vert_intersec(t_cub3d_data *cub)
 		if (protect_matrice(cub->rays->vert_wallhitx, \
 			cub->rays->vert_wallhity, cub))
 		{
+			// if (protect_matrice(cub->rays->hor_wallhitx, \
+			// 	cub->rays->hor_wallhity, cub) == 2)
+			// 	cub->rays->flag = 1;
 			cub->rays->ver_cont = get_content(cub, cub->rays->vert_wallhitx, cub->rays->vert_wallhity);
 			if (cub->rays->is_rayfacingleft)
 				cub->rays->vert_wallhitx += 0.01;
@@ -125,6 +126,8 @@ void	ray_cast(t_cub3d_data *cub)
 		cub->rays->wallhit_y = cub->rays->vert_wallhity;
 		cub->rays->distance = vertzhitdistance;
 		cub->rays->map_cont = cub->rays->ver_cont;
+		if (cub->rays->map_cont == 'D')
+			cub->rays->flag = 1;
 		cub->rays->hit_verti = 1;
 	}
 	else
@@ -133,10 +136,11 @@ void	ray_cast(t_cub3d_data *cub)
 		cub->rays->wallhit_y = cub->rays->hor_wallhity;
 		cub->rays->distance = horzhitdistance;
 		cub->rays->map_cont = cub->rays->hor_cont;
+		if (cub->rays->map_cont == 'D')
+			cub->rays->flag = 1;
 		cub->rays->hit_verti = 0;
 	}
-	add_door(cub);
-	drawline(cub->map_img, cub->player_data->x * MINIMAP_SCALE, cub->player_data->y * MINIMAP_SCALE, cub->rays->wallhit_x * MINIMAP_SCALE, cub->rays->wallhit_y * MINIMAP_SCALE, RED_MP);
+	// drawline(cub->map_img, cub->player_data->x * MINIMAP_SCALE, cub->player_data->y * MINIMAP_SCALE, cub->rays->wallhit_x * MINIMAP_SCALE, cub->rays->wallhit_y * MINIMAP_SCALE, RED_MP);
 }
 
 unsigned int	*get_dir(t_cub3d_data *cub)
@@ -144,14 +148,23 @@ unsigned int	*get_dir(t_cub3d_data *cub)
 	unsigned int	*wall_text;
 
 	wall_text = NULL;
-	if (cub->rays->is_rayfacingup && !cub->rays->hit_verti)
+	if (cub->rays->is_rayfacingup && !cub->rays->hit_verti && cub->rays->flag == 1)
+		wall_text = cub->walltexture[7];
+	else if (cub->rays->is_rayfacingup && !cub->rays->hit_verti)
 		wall_text = cub->walltexture[0];
+	else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti && cub->rays->flag == 1)
+		wall_text = cub->walltexture[7];
 	else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti)
 		wall_text = cub->walltexture[1];
+	else if (cub->rays->is_rayfacingright && cub->rays->hit_verti && cub->rays->flag == 1)
+		wall_text = cub->walltexture[7];
 	else if (cub->rays->is_rayfacingright && cub->rays->hit_verti)
 		wall_text = cub->walltexture[2];
+	else if (cub->rays->is_rayfacingleft && cub->rays->hit_verti && cub->rays->flag == 1)
+		wall_text = cub->walltexture[7];
 	else if (cub->rays->is_rayfacingleft && cub->rays->hit_verti)
 		wall_text = cub->walltexture[3];
+	cub->rays->flag = 0;
 	return (wall_text);
 }
 

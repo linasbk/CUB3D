@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhook.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/17 21:06:47 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:54:21 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,26 @@ void	ft_hook(void *param)
             cub->player_data->y = y1;
         }
     }
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_O))
-		cub->openflag = 1;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_O) || mlx_is_key_down(cub->mlx, MLX_KEY_C))
+	{
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_C))
+		{
+			cub->openflag = 1;
+			add_door(cub, 'd', 'D');
+		}
+		else
+		{
+			cub->openflag = -1;
+			add_door(cub, 'D', 'd');
+		}
+	}
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_M))
+	{
+		cub_img(cub);
+		setting_map(cub);
+		mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
+		return ;
+	}
     cub_img(cub);
     mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 }

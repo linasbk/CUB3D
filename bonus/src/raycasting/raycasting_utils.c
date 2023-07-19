@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:11:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/16 16:09:49 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/18 16:11:03 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ int	protect_matrice(double touchX, double touchY, t_cub3d_data *cub)
 	y = floor(touchY / WALL_DIMENSION);
 	if (x < 0 || x > cub->len_i || y < 0 || y > cub->len_j - 1)
 		return (1);
+	if (cub->matrice[y][x] == 'D')
+		return (2);
+	return (cub->matrice[y][x] == '1');
 	// return (cub->matrice[y][x] != '0' && cub->matrice[y][x] != 'N' && cub->matrice[y][x] != 'S' && cub->matrice[y][x] != 'E' && cub->matrice[y][x] != 'W');
-	return(cub->matrice[y][x] == '1');
+	// return(cub->matrice[y][x] == '1' || cub->matrice[y][x] == 'D');
 }
 
 void	raycasting_init(t_cub3d_data *cub)

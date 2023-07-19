@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 20:29:29 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/19 17:35:16 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_put_minimap(t_cub3d_data *cub)
 
 	i = 0;
 	j = 0;
-	bx = (cub->player_data->x) - 75;
+	bx = cub->player_data->x - 75;
 	tmpx = bx;
-	by = (cub->player_data->y) - 75;
+	by = cub->player_data->y - 75;
 	if (bx < 0 || by < 0)
 	{
 		if (bx < 0)
@@ -125,33 +125,33 @@ void	draw_square(mlx_image_t *img, int x, int y, int size, int color)
 	}
 }
 
-void	put_player(t_cub3d_data *cub)
-{
-	int	x2;
-	int	y2;
+// void	put_player(t_cub3d_data *cub)
+// {
+// 	int	x2;
+// 	int	y2;
 
-	x2 = 0;
-	y2 = 0;
-	while (y2 < cub->len_j * WALL_DIMENSION)
-	{
-		x2 = 0;
-		while (x2 < cub->len_i * WALL_DIMENSION)
-		{
-			if (distance(x2, y2, cub->player_data->x, cub->player_data->y) \
-				<= P_RADIUS)
-				mlx_put_pixel(cub->map_img, x2 * MINIMAP_SCALE_FACTOR, y2 * MINIMAP_SCALE_FACTOR, ORANGE_MP);
-			x2++;
-		}
-		y2++;
-	}
-}
+// 	x2 = 0;
+// 	y2 = 0;
+// 	while (y2 < cub->len_j * WALL_DIMENSION)
+// 	{
+// 		x2 = 0;
+// 		while (x2 < cub->len_i * WALL_DIMENSION)
+// 		{
+// 			if (distance(x2, y2, cub->player_data->x, cub->player_data->y) \
+// 				<= P_RADIUS)
+// 				mlx_put_pixel(cub->map_img, x2 * MINIMAP_SCALE_FACTOR, y2 * MINIMAP_SCALE_FACTOR, ORANGE_MP);
+// 			x2++;
+// 		}
+// 		y2++;
+// 	}
+// }
 
 void	cub_img(t_cub3d_data *cub)
 {
-	int	i;
 	int	j;
 
 	j = 0;
+	cub->rays->flag = 0;
 	cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->map_img)
 	{
@@ -159,22 +159,8 @@ void	cub_img(t_cub3d_data *cub)
 		exit(EXIT_FAILURE);
 	}
 	cast_allrays(cub);
-	while (cub->matrice[j])
-	{
-		i = 0;
-		while (cub->matrice[j][i])
-		{
-			if (cub->matrice[j][i] == '1')
-				draw_square(cub->map_img, i * WALL_DIMENSION * MINIMAP_SCALE_FACTOR \
-				, j * WALL_DIMENSION * MINIMAP_SCALE_FACTOR \
-				, WALL_DIMENSION * MINIMAP_SCALE_FACTOR, WHITE_MP  );
-			i++;
-		}
-		j++;
-	}
-	put_player(cub);
 	find_sprites(cub);
 	render_sprite(cub, 0);
-	render_mapsprites(cub);
-	// put_mini_map(cub);
+	// render_mapsprites(cub);
+	put_mini_map(cub);
 }
