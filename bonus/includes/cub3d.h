@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/19 17:20:42 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 09:52:22 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ typedef struct cub3d_data
 	int				sprite_num;
 	int				beginx;
 	int				beginy;
+	int				mouse_x;
+	int				mouse_y;
 	int				lenx_fullmap;
 	int				leny_fullmap;
 	int				xdoor;

@@ -6,17 +6,29 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/19 21:01:29 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:43:18 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-mlx_mousefunc	*ft_mouse(int x, int y, void *param)
+void	ft_mouse(void *param)
 {
-	(void)param;
-	printf ("%d\n%d\n", x, y);
-	return (0);
+	static int		xp;
+	t_cub3d_data	*cub;
+	static int		yp;
+	int				turn_dir;
+
+	cub = param;
+	xp = cub->mouse_x;
+	yp = cub->mouse_y;
+	turn_dir = 0;
+	mlx_get_mouse_pos(cub->mlx, &cub->mouse_x, &cub->mouse_y);
+	if (cub->mouse_x > xp && cub->mouse_x >= 0 && cub->mouse_x <= WIDTH)
+		turn_dir = 1.0;
+	else if (cub->mouse_x <= xp && cub->mouse_x >= 0 && cub->mouse_x <= WIDTH)
+		turn_dir = -1.0;
+	cub->player_data->rot_angle += (turn_dir * ROT_SPEED);
 }
 
 int	main(int ac, char **av)
@@ -32,7 +44,7 @@ int	main(int ac, char **av)
 	cub_img(cub);
 	mlx_image_to_window(cub->mlx, cub->sky_floor, 0, 0);
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
-	mlx_mouse_hook(cub->mlx, *(mlx_mousefunc *)ft_mouse, NULL);
+	mlx_cursor_hook(cub->mlx, (void *)ft_mouse, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
 	// mlx_texture_to_image(cub);
 	mlx_loop(cub->mlx);

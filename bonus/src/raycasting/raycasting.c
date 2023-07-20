@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/19 15:23:45 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:07:18 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,12 +193,27 @@ void	renderwallproject(t_cub3d_data *cub, int i)
 		textoffsetx = (int)cub->rays->wallhit_x % WALL_DIMENSION;
 	// int tex_num = cub->rays->map_cont;
 	text_wall = get_dir(cub);
-	while (y < wallBottomPixel)
-	{
-		int distancefromtop = y + (wallstripheight / 2) - (HEIGHT / 2);
-		int	textureoffsety = distancefromtop * ((float)TEXTUR_HEIGHT / wallstripheight);
-		unsigned int texelcolor = text_wall[(TEXTUR_WIDTH * textureoffsety) + textoffsetx];
-			mlx_put_pixel(cub->map_img, i, y, texelcolor);
-		y++;
-	}
+	if (cub->rays->hit_verti)
+        textoffsetx = (cub->rays->wallhit_y / WALL_DIMENSION - (int)cub->rays->wallhit_y / WALL_DIMENSION) * cub->text[0]->width;
+    else
+        textoffsetx = (cub->rays->wallhit_x / WALL_DIMENSION - (int)cub->rays->wallhit_x / WALL_DIMENSION) * cub->text[0]->width;
+    text_wall = cub->walltexture[0];
+    unsigned int texelcolor;
+    while (y < wallBottomPixel)
+    {
+        int textureoffsety = (y - wallTopPixel) * ((double)cub->text[0]->height / wallstripheight);
+            texelcolor = text_wall[(cub->text[0]->width * textureoffsety) + textoffsetx];
+            if (i > 0 && i < WIDTH && y > 0 && y < HEIGHT)
+            mlx_put_pixel(cub->map_img, i, y, texelcolor);
+        y++;
+    }
+}
+	// while (y < wallBottomPixel)
+	// {
+	// 	int distancefromtop = y + (wallstripheight / 2) - (HEIGHT / 2);
+	// 	int	textureoffsety = distancefromtop * ((float)TEXTUR_HEIGHT / wallstripheight);
+	// 	unsigned int texelcolor = text_wall[(TEXTUR_WIDTH * textureoffsety) + textoffsetx];
+	// 		mlx_put_pixel(cub->map_img, i, y, texelcolor);
+	// 	y++;
+	// }
 }

@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/19 17:56:40 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 09:51:15 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	cub->openflag = 1;
 	cub->doorflag = 0;
 	cub->tm = 1;
+	cub->mouse_x = WIDTH / 2;
+	cub->mouse_y = HEIGHT / 2;
 }
 
 void	init_data_player(t_cub3d_data *cub)

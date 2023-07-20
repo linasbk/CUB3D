@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/19 15:54:21 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:03:03 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_hook(void *param)
 	double			walk_dir;
 	double			side_dir;
 	double			mv_step;
+	static int		xp;
+	static int		yp;
 
 	cub = param;
 	turn_dir = 0;
@@ -93,6 +95,18 @@ void	ft_hook(void *param)
 		setting_map(cub);
 		mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 		return ;
+	}
+	if (mlx_is_mouse_down(cub->mlx, 0))
+	{
+		xp = cub->mouse_x;
+		yp = cub->mouse_y;
+		mlx_get_mouse_pos(cub->mlx, &cub->mouse_x, &cub->mouse_y);
+		if (cub->mouse_x > xp)
+			turn_dir = 1.0;
+		else if (cub->mouse_x < xp)
+			turn_dir = -1.0;
+		cub->player_data->rot_angle += (turn_dir * ROT_SPEED);
+			
 	}
     cub_img(cub);
     mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
