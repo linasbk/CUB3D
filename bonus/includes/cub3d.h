@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 09:52:22 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:28:07 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,13 @@ typedef struct cub3d_data
 	int				tm;
 	int				x_wall;
 	int				y_wall;
+    int                text_offsetx;
+    double            d_pr_plane;
+    double            pr_wallheight;
+    int                wallstripheight;
+    int                wallTopPixel;
+    int                wallBottomPixel;
+    int                text_offsety;
 	t_spinfos		*sp;
 	t_sprites		*sprites;
 	mlx_texture_t	*text[25];
@@ -208,4 +215,8 @@ void			render_sprite(t_cub3d_data *cub, int index);
 void    		render_mapsprites(t_cub3d_data *cub);
 void    		find_sprites(t_cub3d_data *cub);
 void			add_door(t_cub3d_data *cub, char c1, char c2);
+void			ft_tur_direction(t_cub3d_data *cub);
+void			walk_direction(t_cub3d_data *cub, int flag);
+void			side_direction(t_cub3d_data *cub, int flag);
+void			ft_door(t_cub3d_data *cub);
 #endif

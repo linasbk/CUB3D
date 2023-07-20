@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valide_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:26:38 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	check_map(t_cub3d_data *cub)
 			return (FAILURE);
 		i++;
 	}
-	if (i == cub->m_index - 1 && cub->player_dir == '\0')
+	if (i == cub->m_index && cub->player_dir == '\0')
 		return (FAILURE);
 	cub->len_j = resizematrice(cub, cub->m_index);
 	return (ret);

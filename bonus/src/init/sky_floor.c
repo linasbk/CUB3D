@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/18 15:55:27 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:13:13 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ void	read_color(t_cub3d_data *cub)
 	cub->text[4] = mlx_load_png("images/spike-064.png");
 	cub->text[5] = mlx_load_png("images/spike-164.png");
 	cub->text[6] = mlx_load_png("images/spike-464.png");
-	cub->text[7] = mlx_load_png("images/spike-564.png");
+	// cub->text[7] = mlx_load_png("images/spike-564.png");
 	cub->text[8] = mlx_load_png("images/spike-764.png");
 	cub->text[5] = mlx_load_png("images/spike-964.png");
 	cub->text[6] = mlx_load_png("./images/spike-1164.png");
-	cub->text[7] = mlx_load_png("./images/BRICK_1A.png");
+	cub->text[7] = mlx_load_png("./images/BRICK_3B.png");
 	// cub->text[8] = mlx_load_png("./images/spike-4.png");
 	// cub->text[9] = mlx_load_png("./images/spike-5.png");
 	// cub->text[10] = mlx_load_png("./images/spike-6.png");

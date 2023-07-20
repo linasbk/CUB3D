@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 11:07:18 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:34:05 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int get_content(t_cub3d_data *cub, int i, int j)
 
 void	add_door(t_cub3d_data *cub, char c1, char c2)
 {
-	if (cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] == c1)
-		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION][(int)cub->player_data->x / WALL_DIMENSION] = c2;
-	else if (cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] == c1)
+	if (cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] == c1)
 		cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1][(int)cub->player_data->x / WALL_DIMENSION] = c2;
 	else if (cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) - 1][(int)cub->player_data->x / WALL_DIMENSION] == c1)
 		cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) - 1][(int)cub->player_data->x / WALL_DIMENSION] = c2;
@@ -55,9 +53,6 @@ void	hor_intersec(t_cub3d_data *cub)
 		if (protect_matrice(cub->rays->hor_wallhitx, \
 			cub->rays->hor_wallhity, cub))
 		{
-			// if (protect_matrice(cub->rays->hor_wallhitx, \
-			// 	cub->rays->hor_wallhity, cub) == 2)
-			// 	cub->rays->flag = 1;
 			cub->rays->hor_cont = get_content(cub, cub->rays->hor_wallhitx, cub->rays->hor_wallhity);
 			if (cub->rays->is_rayfacingup)
 				cub->rays->hor_wallhity += 0.01;
@@ -88,9 +83,6 @@ void    vert_intersec(t_cub3d_data *cub)
 		if (protect_matrice(cub->rays->vert_wallhitx, \
 			cub->rays->vert_wallhity, cub))
 		{
-			// if (protect_matrice(cub->rays->hor_wallhitx, \
-			// 	cub->rays->hor_wallhity, cub) == 2)
-			// 	cub->rays->flag = 1;
 			cub->rays->ver_cont = get_content(cub, cub->rays->vert_wallhitx, cub->rays->vert_wallhity);
 			if (cub->rays->is_rayfacingleft)
 				cub->rays->vert_wallhitx += 0.01;
@@ -143,77 +135,99 @@ void	ray_cast(t_cub3d_data *cub)
 	// drawline(cub->map_img, cub->player_data->x * MINIMAP_SCALE, cub->player_data->y * MINIMAP_SCALE, cub->rays->wallhit_x * MINIMAP_SCALE, cub->rays->wallhit_y * MINIMAP_SCALE, RED_MP);
 }
 
-unsigned int	*get_dir(t_cub3d_data *cub)
-{
-	unsigned int	*wall_text;
+// unsigned int	*get_dir(t_cub3d_data *cub)
+// {
+// 	unsigned int	*wall_text;
 
-	wall_text = NULL;
+// 	wall_text = NULL;
+// 	if (cub->rays->is_rayfacingup && !cub->rays->hit_verti && cub->rays->flag == 1)
+// 		i =7;
+// 	else if (cub->rays->is_rayfacingup && !cub->rays->hit_verti)
+// 		i =0;
+// 	else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti && cub->rays->flag == 1)
+// 		i =7;
+// 	else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti)
+// 		i =1;
+// 	else if (cub->rays->is_rayfacingright && cub->rays->hit_verti && cub->rays->flag == 1)
+// 		i =7;
+// 	else if (cub->rays->is_rayfacingright && cub->rays->hit_verti)
+// 		i =2;
+// 	else if (cub->rays->is_rayfacingleft && cub->rays->hit_verti && cub->rays->flag == 1)
+// 		i =7;
+// 	else if (cub->rays->is_rayfacingleft && cub->rays->hit_verti)
+// 		i =3;
+// 	cub->rays->flag = 0;
+// 	return (wall_text);
+// }
+
+int    index_dir(t_cub3d_data *cub)
+{
+    int    i;
+
+    i = 0;
 	if (cub->rays->is_rayfacingup && !cub->rays->hit_verti && cub->rays->flag == 1)
-		wall_text = cub->walltexture[7];
-	else if (cub->rays->is_rayfacingup && !cub->rays->hit_verti)
-		wall_text = cub->walltexture[0];
+		i = 7;
+    else if (cub->rays->is_rayfacingup && !cub->rays->hit_verti)
+        i = 0;
 	else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti && cub->rays->flag == 1)
-		wall_text = cub->walltexture[7];
-	else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti)
-		wall_text = cub->walltexture[1];
+		i =7;
 	else if (cub->rays->is_rayfacingright && cub->rays->hit_verti && cub->rays->flag == 1)
-		wall_text = cub->walltexture[7];
-	else if (cub->rays->is_rayfacingright && cub->rays->hit_verti)
-		wall_text = cub->walltexture[2];
+		i =7;
 	else if (cub->rays->is_rayfacingleft && cub->rays->hit_verti && cub->rays->flag == 1)
-		wall_text = cub->walltexture[7];
-	else if (cub->rays->is_rayfacingleft && cub->rays->hit_verti)
-		wall_text = cub->walltexture[3];
+		i =7;
+    else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti)
+        i = 1;
+    else if (cub->rays->is_rayfacingright && cub->rays->hit_verti)
+        i = 2;
+    else if (cub->rays->is_rayfacingleft && cub->rays->hit_verti)
+        i = 3;
 	cub->rays->flag = 0;
-	return (wall_text);
+    return (i);
 }
 
-void	renderwallproject(t_cub3d_data *cub, int i)
+void    caluc_offest_x(t_cub3d_data *cub)
 {
-	int				textoffsetx;
-	unsigned int	*text_wall;
-
-	if (cub->rays->distance == 0)
-		cub->rays->distance = 0.1;
-	double corr_dis = cub->rays->distance * cos(cub->rays->ray_ang - cub->player_data->rot_angle);
-	double d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
-	double pr_wallheight = (WALL_DIMENSION / corr_dis) * d_pr_plane;
-	int wallstripheight =(int) pr_wallheight;
-    // render the wall from wallTopPixel to wallBottomPixel
-	int wallTopPixel = (HEIGHT / 2) - (wallstripheight / 2);
-	if (wallTopPixel < 0)
-		wallTopPixel = 0;
-	int wallBottomPixel = (HEIGHT / 2) + (wallstripheight / 2);
-	if (wallBottomPixel > HEIGHT)
-		wallBottomPixel = HEIGHT;
-	int y = wallTopPixel;
-	if (cub->rays->hit_verti)
-		textoffsetx = (int)cub->rays->wallhit_y % WALL_DIMENSION;
-	else
-		textoffsetx = (int)cub->rays->wallhit_x % WALL_DIMENSION;
-	// int tex_num = cub->rays->map_cont;
-	text_wall = get_dir(cub);
-	if (cub->rays->hit_verti)
-        textoffsetx = (cub->rays->wallhit_y / WALL_DIMENSION - (int)cub->rays->wallhit_y / WALL_DIMENSION) * cub->text[0]->width;
+    if (cub->rays->hit_verti)
+        cub->text_offsetx = (cub->rays->wallhit_y / WALL_DIMENSION - (int)cub->rays->wallhit_y \
+            / WALL_DIMENSION) * cub->text[index_dir(cub)]->width;
     else
-        textoffsetx = (cub->rays->wallhit_x / WALL_DIMENSION - (int)cub->rays->wallhit_x / WALL_DIMENSION) * cub->text[0]->width;
-    text_wall = cub->walltexture[0];
-    unsigned int texelcolor;
-    while (y < wallBottomPixel)
+        cub->text_offsetx = (cub->rays->wallhit_x / WALL_DIMENSION - (int)cub->rays->wallhit_x \
+            / WALL_DIMENSION) * cub->text[index_dir(cub)]->width;
+}
+
+double    fix_fishbowl(t_cub3d_data *cub)
+{
+    if (cub->rays->distance == 0)
+        cub->rays->distance = 0.1;
+    return (cub->rays->distance *= cos(cub->rays->ray_ang - cub->player_data->rot_angle));
+}
+
+void    renderwallproject(t_cub3d_data *cub, int x)
+{
+    int             y;
+    unsigned int    *text_wall;
+    double            corr_dis;
+    unsigned int    texelcolor;
+    
+    corr_dis = fix_fishbowl(cub);
+    cub->d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
+    cub->wallstripheight =(int) ((WALL_DIMENSION / corr_dis) * cub->d_pr_plane);
+    cub->wallTopPixel = (HEIGHT / 2) - (cub->wallstripheight / 2);
+    cub->wallBottomPixel = (HEIGHT / 2) + (cub->wallstripheight / 2);
+    text_wall = cub->walltexture[index_dir(cub)];
+    caluc_offest_x(cub);
+    y = cub->wallTopPixel;
+    while (y < cub->wallBottomPixel)
     {
-        int textureoffsety = (y - wallTopPixel) * ((double)cub->text[0]->height / wallstripheight);
-            texelcolor = text_wall[(cub->text[0]->width * textureoffsety) + textoffsetx];
-            if (i > 0 && i < WIDTH && y > 0 && y < HEIGHT)
-            mlx_put_pixel(cub->map_img, i, y, texelcolor);
+		if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
+		{
+            cub->text_offsety = (y - cub->wallTopPixel) * \
+                ((double)cub->text[index_dir(cub)]->height / cub->wallstripheight);
+            texelcolor = text_wall[(cub->text[index_dir(cub)]->width \
+                * cub->text_offsety) + cub->text_offsetx];
+            // if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
+                mlx_put_pixel(cub->map_img, x, y, texelcolor);
+		}
         y++;
     }
-}
-	// while (y < wallBottomPixel)
-	// {
-	// 	int distancefromtop = y + (wallstripheight / 2) - (HEIGHT / 2);
-	// 	int	textureoffsety = distancefromtop * ((float)TEXTUR_HEIGHT / wallstripheight);
-	// 	unsigned int texelcolor = text_wall[(TEXTUR_WIDTH * textureoffsety) + textoffsetx];
-	// 		mlx_put_pixel(cub->map_img, i, y, texelcolor);
-	// 	y++;
-	// }
 }

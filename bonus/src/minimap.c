@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/19 17:35:16 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:58:01 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ void	ft_put_minimap(t_cub3d_data *cub)
 			{
 				if (cub->matrice[by / WALL_DIMENSION][bx / WALL_DIMENSION] == '1' && distance(MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, i, j) < 70)
 					mlx_put_pixel(cub->map_img, i, j, get_color(0, 0, 0, 50));
-				else if (cub->matrice[by / WALL_DIMENSION][bx / WALL_DIMENSION] != '1' && distance(MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, i, j) < 70)
+				else if (cub->matrice[by / WALL_DIMENSION][bx / WALL_DIMENSION] == 'D' && distance(MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, i, j) < 70)
+					mlx_put_pixel(cub->map_img, i, j, YELLOW_MP);
+				else if (cub->matrice[by / WALL_DIMENSION][bx / WALL_DIMENSION] == 'd' && distance(MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, i, j) < 70)
+					mlx_put_pixel(cub->map_img, i, j, get_color(255, 255, 0, get_color(255, 255, 255, 50)));
+				else if (distance(MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2, i, j) < 70)
 					mlx_put_pixel(cub->map_img, i, j, get_color(255, 255, 0, get_color(255, 255, 0, 50)));
 			}
 			i++;

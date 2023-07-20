@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/20 10:03:03 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:09:25 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,99 +15,23 @@
 void	ft_hook(void *param)
 {
 	t_cub3d_data	*cub;
-	int				y1;
-	int				x1;
-	double			turn_dir;
-	double			walk_dir;
-	double			side_dir;
-	double			mv_step;
-	static int		xp;
-	static int		yp;
 
 	cub = param;
-	turn_dir = 0;
-	walk_dir = 0;
-	side_dir = 0;
-	// ft_memset(cub->map_img->pixels, 0,cub->map_img->width * cub->map_img->height * sizeof(int32_t));
 	mlx_delete_image(cub->mlx, cub->map_img);
-	// cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT) || mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-	{
-		turn_dir = 1.0;
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
-			turn_dir = -1.0;
-		cub->player_data->rot_angle += (turn_dir * ROT_SPEED);
-	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) || mlx_is_key_down(cub->mlx, MLX_KEY_W))
-	{
-		walk_dir = 1.0;
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-			walk_dir = -1.0;
-		x1 = cub->player_data->x;
-		y1 = cub->player_data->y;
-		mv_step = walk_dir * MV_SPEED;
-		cub->player_data->x += cos(cub->player_data->rot_angle) * mv_step;
-		cub->player_data->y += sin(cub->player_data->rot_angle) * mv_step;
-        if (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == '1' 
-        || (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(x1 / WALL_DIMENSION)] == '1' && cub->matrice[(int)(y1 / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == '1') ||
-		cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == 'D')
-        {
-            cub->player_data->x = x1;
-            cub->player_data->y = y1;
-        }
-    }
-    if (mlx_is_key_down(cub->mlx, MLX_KEY_D) || mlx_is_key_down(cub->mlx, MLX_KEY_A))
-    {
-        x1 = cub->player_data->x;
-        y1 = cub->player_data->y;
-        side_dir = -1;
-        if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-            side_dir = 1;
-        mv_step = side_dir * MV_SPEED;
-        cub->player_data->x += cos(cub->player_data->rot_angle + (M_PI / 2)) * mv_step;
-        cub->player_data->y += sin(cub->player_data->rot_angle + (M_PI / 2)) * mv_step;
-        if (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == '1'
-        || (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(x1 / WALL_DIMENSION)] == '1' && cub->matrice[(int)(y1 / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == '1') ||
-		cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] == 'D')
-        {
-            cub->player_data->x = x1;
-            cub->player_data->y = y1;
-        }
-    }
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_O) || mlx_is_key_down(cub->mlx, MLX_KEY_C))
-	{
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_C))
-		{
-			cub->openflag = 1;
-			add_door(cub, 'd', 'D');
-		}
-		else
-		{
-			cub->openflag = -1;
-			add_door(cub, 'D', 'd');
-		}
-	}
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
+		walk_direction(cub, 1);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+		walk_direction(cub, -1);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+		side_direction(cub, -1);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+		side_direction(cub, 1);
+	ft_tur_direction(cub);
+	ft_door(cub);
+	cub_img(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_M))
-	{
-		cub_img(cub);
 		setting_map(cub);
-		mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
-		return ;
-	}
-	if (mlx_is_mouse_down(cub->mlx, 0))
-	{
-		xp = cub->mouse_x;
-		yp = cub->mouse_y;
-		mlx_get_mouse_pos(cub->mlx, &cub->mouse_x, &cub->mouse_y);
-		if (cub->mouse_x > xp)
-			turn_dir = 1.0;
-		else if (cub->mouse_x < xp)
-			turn_dir = -1.0;
-		cub->player_data->rot_angle += (turn_dir * ROT_SPEED);
-			
-	}
-    cub_img(cub);
-    mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
+	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 }
