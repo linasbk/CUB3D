@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sky_floor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 13:13:13 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 18:40:39 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	png_info(t_cub3d_data *cub, int num, mlx_texture_t *text)
 
 	i = 0;
 	j = 0;
-	if (text->height != WALL_DIMENSION || text->width != WALL_DIMENSION)
-	{
-		ft_error("Wrong texture dimension");
-		exit(EXIT_FAILURE);
-	}
-	cub->walltexture[num] = ft_calloc(1, (WALL_DIMENSION * WALL_DIMENSION * \
-		sizeof(unsigned int)));
+	// if (text->height != WALL_DIMENSION || text->width != WALL_DIMENSION)
+	// {
+	// 	ft_error("Wrong texture dimension");
+	// 	exit(EXIT_FAILURE);
+	// }
+	cub->walltexture[num] = ft_calloc(1, ((text->width * text->height * \
+		+ 1) * sizeof(unsigned int)));
 	while (j < (text->height * text->width))
 	{
 		cub->walltexture[num][j++] = get_color(text->pixels[i], \
@@ -72,32 +72,33 @@ void	read_color(t_cub3d_data *cub)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	// cub->texture = ft_calloc(1, sizeof(mlx_texture_t));
+	while (i < 6)
 		cub->text[i++] = malloc(sizeof(mlx_texture_t));
 	cub->text[0] = mlx_load_png(cub->t_no);
 	cub->text[1] = mlx_load_png(cub->t_so);
 	cub->text[2] = mlx_load_png(cub->t_we);
 	cub->text[3] = mlx_load_png(cub->t_ea);
-	cub->text[4] = mlx_load_png("images/spike-064.png");
-	cub->text[5] = mlx_load_png("images/spike-164.png");
-	cub->text[6] = mlx_load_png("images/spike-464.png");
+	cub->text[4] = mlx_load_png("images/barrel.png");
+	cub->text[5] = mlx_load_png("images/DOOR.png");
+	// cub->text[6] = mlx_load_png("images/spike-464.png");
 	// cub->text[7] = mlx_load_png("images/spike-564.png");
-	cub->text[8] = mlx_load_png("images/spike-764.png");
-	cub->text[5] = mlx_load_png("images/spike-964.png");
-	cub->text[6] = mlx_load_png("./images/spike-1164.png");
-	cub->text[7] = mlx_load_png("./images/BRICK_3B.png");
+	// cub->text[8] = mlx_load_png("images/spike-764.png");
+	// cub->text[5] = mlx_load_png("images/spike-964.png");
+	// cub->text[6] = mlx_load_png("./images/spike-1164.png");
+	// cub->text[7] = mlx_load_png("./images/spike-1164.png");
 	// cub->text[8] = mlx_load_png("./images/spike-4.png");
 	// cub->text[9] = mlx_load_png("./images/spike-5.png");
 	// cub->text[10] = mlx_load_png("./images/spike-6.png");
 	// cub->text[11] = mlx_load_png("./images/spike-7.png");
 	// cub->text[12] = mlx_load_png("./images/spike-8.png");
 	// cub->text[13] = mlx_load_png("./images/spike-9.png");
-	while (i < 8)
+	while (i < 6)
 	{
 		if (!cub->text[i++])
 			exit(EXIT_FAILURE);
 	}
 	i = -1;
-	while (++i < 8)
+	while (++i < 6)
 		png_info(cub, i, cub->text[i]);
 }

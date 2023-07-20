@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 13:58:01 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 18:52:08 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,11 @@ void	cast_allrays(t_cub3d_data *cub)
 	int		i;
 
 	i = 0;
-	// cub->rays->ray_ang = cub->player_data->rot_angle - (FOV_ANGLE / 2);
 	while (i < NUM_RAYS)
 	{
 		cub->rays->ray_ang = cub->player_data->rot_angle + atan((i - NUM_RAYS / 2) / DIST_PROJ_PLANE);
-		ray_cast(cub);
-		renderwallproject(cub, i);
+		ray_cast(cub, INT_MAX, INT_MAX);
+		renderwallproject(cub, i, index_dir(cub));
 		cub->rays->ray_ang += FOV_ANGLE / NUM_RAYS;
 		cub->ray_dist[i] = cub->rays->distance;
 		i++;
@@ -163,8 +162,8 @@ void	cub_img(t_cub3d_data *cub)
 		exit(EXIT_FAILURE);
 	}
 	cast_allrays(cub);
-	find_sprites(cub);
-	render_sprite(cub, 0);
+	// find_sprites(cub);
+	// render_sprite(cub, 0);
 	// render_mapsprites(cub);
 	put_mini_map(cub);
 }

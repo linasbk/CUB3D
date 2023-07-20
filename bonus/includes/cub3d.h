@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 15:28:07 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 18:59:43 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,8 @@ void			cub_img(t_cub3d_data *cub);
 void			init_data_player(t_cub3d_data *cub);
 void			ft_hook(void	*param);
 void			cast_allrays(t_cub3d_data *cub);
-void			ray_cast(t_cub3d_data *cub);
+void			ray_cast(t_cub3d_data *cub, double horz_dist, double ver_dist);
+// void    ray_cast(t_cub3d_data *cub);
 //HOOK
 void			ft_hook(void *param);
 //RAYCASTING
@@ -199,7 +200,7 @@ void			raycasting_init(t_cub3d_data *cub);
 void			calcs_vertintercept(t_cub3d_data *cub);
 void			calcs_horintercept(t_cub3d_data *cub);
 //render
-void			renderwallproject(t_cub3d_data *cub, int i);
+void			renderwallproject(t_cub3d_data *cub, int i, int x);
 void			read_image_colors(t_cub3d_data *cub);
 int				get_color(int r, int g, int b, int a);
 void			read_color(t_cub3d_data *cub);
@@ -219,4 +220,5 @@ void			ft_tur_direction(t_cub3d_data *cub);
 void			walk_direction(t_cub3d_data *cub, int flag);
 void			side_direction(t_cub3d_data *cub, int flag);
 void			ft_door(t_cub3d_data *cub);
+int				index_dir(t_cub3d_data *cub);
 #endif

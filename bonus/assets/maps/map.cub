@@ -1,7 +1,7 @@
-NO ./images/BRICK_2B.png
+NO ./images/88.png
 SO ./images/BRICK_2B.png
-WE ./images/BRICK_2B.png
-EA ./images/BRICK_2B.png
+WE ./images/88.png
+EA ./images/88.png
 
 F 60,44,36
 C 92,68,44

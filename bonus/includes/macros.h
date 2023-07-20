@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 15:37:45 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:24:56 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define FOV_ANGLE 60 * (M_PI / 180)
 # define P_RADIUS  5.0
 # define MV_SPEED 10.0
-# define ROT_SPEED 5.0 * (M_PI / 180)
+# define ROT_SPEED 8.0 * (M_PI / 180)
 # define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
 # define EPSILON 0.2
 # define MINIMAP_SCALE_FACTOR 0.2
