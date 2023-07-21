@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 17:30:38 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 19:03:08 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,4 +233,13 @@ int				index_dir(t_cub3d_data *cub);
 void			draw_fullmap(t_cub3d_data *cub);
 void			png_info(t_cub3d_data *cub, int num, mlx_texture_t *text);
 void			calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite);
+void			sort_by_distance(t_sprites *vis_sprites, int vis_sp);
+void			draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
+				int vis_sp);
+void			render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
+				int vis_sp, int *first);
+void			calcs_offset_y(t_cub3d_data *cub, int y, int *first);
+void			calcs_offset_x(t_cub3d_data *cub, int x, int *first);
+void			sprites_animation(int *first);
+void			norm_angle(double *angle);
 #endif

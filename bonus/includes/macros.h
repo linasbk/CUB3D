@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 16:00:14 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 18:34:01 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@
 # define FOV_ANGLE 1.0471975512
 # define P_RADIUS  5.0
 # define MV_SPEED 10.0
-# define ROT_SPEED 0.1396263402
-// # define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
+# define ROT_SPEED 0.14
 # define EPSILON 0.2
 # define MINIMAP_SCALE_FACTOR 0.2
 # define WALL_STRIP_WIDTH 1

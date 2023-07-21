@@ -6,32 +6,11 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 17:30:53 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 19:03:59 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	draw_square1(mlx_image_t *img, int x, int y, int size, int color)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i <= size)
-	{
-		j = 0;
-		while (j <= size)
-		{
-			if (j == size || i == size || j == 0 || i == 0)
-				mlx_put_pixel(img, x + i, y + j, BLACK_MP);
-			else
-				mlx_put_pixel(img, x + i, y + j, color);
-			j++;
-		}
-		i++;
-	}
-}
 
 void	find_coordinates(t_cub3d_data *cub)
 {
@@ -73,7 +52,7 @@ void	find_sprites(t_cub3d_data *cub, int i, int j, int n)
 		j++;
 	}
 	cub->sp = ft_calloc(1, sizeof(t_spinfos));
-	cub->sprites = (t_sprites*)malloc(n * sizeof(t_sprites));
+	cub->sprites = (t_sprites *)malloc(n * sizeof(t_sprites));
 	if (!cub->sprites)
 	{
 		puts("Memory allocation failed!\n");
@@ -81,6 +60,30 @@ void	find_sprites(t_cub3d_data *cub, int i, int j, int n)
 	}
 	cub->sprite_num = n;
 	find_coordinates(cub);
+}
+
+void	sort_by_distance(t_sprites *vis_sprites, int vis_sp)
+{
+	int			i;
+	int			j;
+	t_sprites	temp;
+
+	i = 0;
+	while (i < vis_sp)
+	{
+		j = i + 1;
+		while (j < vis_sp)
+		{
+			if (vis_sprites[i].dist < vis_sprites[j].dist)
+			{
+				temp = vis_sprites[i];
+				vis_sprites[i] = vis_sprites[j];
+				vis_sprites[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 void	calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite)
@@ -103,6 +106,41 @@ void	calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite)
 		(cub->sp->sp_width / 2);
 	cub->sp->sp_rightx = cub->sp->sp_leftx + cub->sp->sp_width;
 }
+
+void	draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, int vis_sp)
+{
+	int			i;
+	static int	first;
+
+	i = -1;
+	first = 4;
+	while (++i < cub->sprite_num)
+	{
+		sort_by_distance(vis_sprites, vis_sp);
+		render_vis_sprites(cub, vis_sprites, vis_sp, &first);
+	}
+}
+
+// void	draw_square1(mlx_image_t *img, int x, int y, int size, int color)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	while (i <= size)
+// 	{
+// 		j = 0;
+// 		while (j <= size)
+// 		{
+// 			if (j == size || i == size || j == 0 || i == 0)
+// 				mlx_put_pixel(img, x + i, y + j, BLACK_MP);
+// 			else
+// 				mlx_put_pixel(img, x + i, y + j, color);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 // void    render_mapsprites(t_cub3d_data *cub)
 // {
