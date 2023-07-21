@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 09:28:39 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/21 14:33:41 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 18:21:47 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ void	setting_map(t_cub3d_data *cub)
 	framing_fullmap(cub);
 	background_fullmap(cub);
 	cub->y_wall = HEIGHT_FULLMAP / cub->len_j;
-	cub->x_wall = cub->y_wall;
+	cub->x_wall = WIDTH_FULLMAP / cub->len_i;
+	if (cub->y_wall < cub->x_wall)
+		cub->x_wall = cub->y_wall;
+	else
+		cub->y_wall = cub->x_wall;
 	cub->beginx = (WIDTH / 2) - ((cub->len_i * cub->x_wall) / 2);
 	cub->beginy = (HEIGHT / 2) - ((cub->len_j * cub->y_wall) / 2);
 	draw_fullmap(cub);
