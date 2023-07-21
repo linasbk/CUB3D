@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:16:55 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 14:35:02 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 16:12:48 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,24 @@ int	resizematrice(t_cub3d_data *cub, int num_lines)
 	int	i;
 	int	currentlength;
 	int	diff;
+	int	oldlen;
 
 	i = 0;
+	oldlen = ft_strlen(cub->matrice[i]);
 	while (i < num_lines)
 	{
 		currentlength = ft_strlen(cub->matrice[i]);
-		diff = cub->len_i - currentlength;
+		diff = oldlen - currentlength;
 		if (diff > 0)
 		{
 			cub->matrice[i] = ft_realloc(cub->matrice[i], \
-				(cub->len_i * sizeof(char)), currentlength);
+				(currentlength * sizeof(char)), currentlength);
 			ft_memset(cub->matrice[i] + currentlength, ' ', diff);
 			cub->matrice[i][currentlength + diff] = '\0';
 		}
 		i++;
 	}
+	cub->len_i = oldlen;
 	return (num_lines);
 }
 

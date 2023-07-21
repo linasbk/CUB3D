@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 17:08:54 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 14:38:12 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 16:17:03 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	renderwallproject(t_cub3d_data *cub, int x, int text_index)
 	unsigned int	texelcolor;
 
 	corr_dis = fix_fishbowl(cub);
-	cub->d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
 	cub->wallstripheight = (int)((WALL_DIMENSION / corr_dis) * cub->d_pr_plane);
 	cub->walltop = (HEIGHT / 2) - (cub->wallstripheight / 2);
 	cub->wallbottom = (HEIGHT / 2) + (cub->wallstripheight / 2);

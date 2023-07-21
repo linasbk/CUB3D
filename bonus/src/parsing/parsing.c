@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 13:01:45 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 16:15:13 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 	i = 0;
 	(void)av;
 	line = get_next_line(fd);
-	cub->len_i = ft_strlen(line) - 1;
 	while (line)
 	{
 		if (check_lines(cub, line) == -1)
@@ -98,8 +97,6 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 		}
 		free(line);
 		line = get_next_line(fd);
-		if (line && ft_strlen(line) > cub->len_i)
-			cub->len_i = ft_strlen(line) - 1;
 	}
 	free(line);
 	close(fd);

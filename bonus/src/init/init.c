@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 14:33:41 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 15:59:49 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_ray_data(t_cub3d_data *cub)
 	cub->rays->is_rayfacingright = 0;
 	cub->rays->is_rayfacingup = 0;
 	cub->rays->is_rayfacingleft = 0;
+	cub->d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
 }
 
 void	ft_mlx_init(t_cub3d_data *cub)
