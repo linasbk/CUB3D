@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valide_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 15:26:38 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:17:13 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ int	check_map(t_cub3d_data *cub)
 		return (FAILURE);
 	while (i < cub->m_index)
 	{
+		if (ft_strlen(cub->matrice[i]) > cub->len_i)
+			cub->len_i = ft_strlen(cub->matrice[i]);
 		if (i == 0 || i == cub->m_index - 1)
 			ret = parsetopbottom_line(cub);
 		else
