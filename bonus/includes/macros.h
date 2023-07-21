@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/16 17:38:43 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:24:56 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,22 @@
 # define BLUE "\033[1;34m"
 # define CYAN "\033[1;36m"
 # define WIDTH 1800
-# define WIDTH_FULLMAP 1400
 # define HEIGHT 1300
-# define HEIGHT_FULLMAP 900
 # define MINIMAP_WIDTH 150
 # define WALL_DIMENSION 64
 # define MINIMAP_HEIGHT 150
+# define WIDTH_FULLMAP 1400
+# define HEIGHT_FULLMAP 905
 # define TEXTUR_HEIGHT WALL_DIMENSION
 # define TEXTUR_WIDTH WALL_DIMENSION
 # define NUM_RAYS WIDTH
 # define FOV_ANGLE 60 * (M_PI / 180)
 # define P_RADIUS  5.0
-# define MV_SPEED 5.0
-# define ROT_SPEED 3.0 * (M_PI / 180)
-# define MINIMAP_SCALE_FACTOR 0.3
+# define MV_SPEED 10.0
+# define ROT_SPEED 8.0 * (M_PI / 180)
+# define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
+# define EPSILON 0.2
+# define MINIMAP_SCALE_FACTOR 0.2
 # define WALL_STRIP_WIDTH 1
 
 # define ORANGE_MP 0xFF7000FF

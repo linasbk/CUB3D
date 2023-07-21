@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:11:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 18:33:52 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:57:52 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,21 @@ int	protect_matrice(double touchX, double touchY, t_cub3d_data *cub)
 	y = floor(touchY / WALL_DIMENSION);
 	if (x < 0 || x > cub->len_i || y < 0 || y > cub->len_j - 1)
 		return (1);
-	return (cub->matrice[y][x] == '1' || cub->matrice[y][x] == 'D');
+	if (cub->matrice[y][x] == 'D')
+		return (2);
+	return (cub->matrice[y][x] == '1');
 }
 
 void	raycasting_init(t_cub3d_data *cub)
 {
-	cub->rays->hor_wallhitx = cub->len_i * WALL_DIMENSION * 20;
-	cub->rays->hor_wallhity = cub->len_j * WALL_DIMENSION * 20;
-	cub->rays->vert_wallhitx = cub->len_i * WALL_DIMENSION * 20;
-	cub->rays->vert_wallhity = cub->len_j * WALL_DIMENSION * 20;
+	cub->rays->wallhit_x = 0;
+	cub->rays->wallhit_y = 0;
+	cub->rays->distance = 0;
+	cub->rays->ray_ang = normalizeangle(cub->rays->ray_ang);
+	cub->rays->hor_wallhitx = WIDTH * 2;
+	cub->rays->hor_wallhity = HEIGHT * 2;
+	cub->rays->vert_wallhitx = WIDTH * 2;
+	cub->rays->vert_wallhity = HEIGHT * 2;
 	if (cub->rays->ray_ang > 0 && cub->rays->ray_ang < M_PI)
 		cub->rays->is_rayfacingup = 1;
 	else
@@ -58,6 +64,8 @@ void	calcs_vertintercept(t_cub3d_data *cub)
 		cub->player_data->x) * tan(cub->rays->ray_ang);
 	cub->rays->xstep = WALL_DIMENSION;
 	cub->rays->ystep = WALL_DIMENSION * tan(cub->rays->ray_ang);
+	cub->rays->vert_wallhitx = cub->rays->xintercept;
+	cub->rays->vert_wallhity = cub->rays->yintercept ;
 }
 
 void	calcs_horintercept(t_cub3d_data *cub)
@@ -71,4 +79,6 @@ void	calcs_horintercept(t_cub3d_data *cub)
 		- cub->player_data->y) / tan(cub->rays->ray_ang);
 	cub->rays->ystep = WALL_DIMENSION;
 	cub->rays->xstep = WALL_DIMENSION / tan(cub->rays->ray_ang);
+	cub->rays->hor_wallhitx = cub->rays->xintercept;
+	cub->rays->hor_wallhity = cub->rays->yintercept;
 }

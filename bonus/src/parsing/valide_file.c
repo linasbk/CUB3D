@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:37:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/16 15:52:00 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	valid_char(t_cub3d_data *cub, char c, int i, int j)
 		cub->player_dir = c;
 	}
 	if ((c == '1' || c == '0' || c == ' ' || c == 'N' || c == 'S' || c == 'E'\
-		|| c == 'W' || c == 'D') && cub->t_index < 8)
+		|| c == 'W' || c == 'D' || c == 'Y') && cub->t_index < 8)
 		return (SUCCESS);
 	else
 		return (FAILURE);

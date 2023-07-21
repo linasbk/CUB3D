@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/17 12:44:18 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:00:22 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,33 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# define MINIMAP_SCALE 0.3
+
+typedef struct spinfos
+{
+	double	sp_height;
+	double	sp_width;
+	double	sp_topy;
+	double	sp_bottomy;
+	double	sp_angle;
+	double	sp_screenpos;
+	double	sp_leftx;
+	double	sp_rightx;
+	double	texelwidth;
+	double	correct_dist;
+	int		text_x;
+	int		text_y;
+	int		dist_fromtop;
+}				t_spinfos;
 
 typedef struct sprites
 {
-	int		text;
-	double	x;
-	double	y;
-	double	dist;
-	double	angle;
+	int			text;
+	double		x;
+	double		y;
+	double		dist;
+	bool		visible;
+	double		angle;
 }				t_sprites;
 
 typedef struct rays
@@ -52,6 +71,10 @@ typedef struct rays
 	double	distance;
 	double	wallhit_x;
 	double	wallhit_y;
+	int		ver_cont;
+	int		hor_cont;
+	int		map_cont;
+	int		flag;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -63,9 +86,9 @@ typedef struct s_map_color
 
 typedef struct player_movement
 {
-	double	x;
 	double	mpx;
 	double	mpy;
+	double	x;
 	double	y;
 	int		i;
 	int		j;
@@ -75,31 +98,51 @@ typedef struct player_movement
 typedef struct cub3d_data
 {
 	mlx_t			*mlx;
-	char			**map;
 	char			*t_no;
 	char			*t_so;
 	char			*t_we;
 	char			*t_ea;
 	char			**matrice;
-	char			**tmpmatrice;
 	int				t_index;
 	int				m_index;
 	int				openflag;
 	char			*line;
 	int				player_x;
-	int				player_i;
-	int				player_j;
 	int				player_y;
 	char			player_dir;
 	int				len_i;
 	int				len_j;
-	int				lenx_fullmap;
+	unsigned int	*texture;
+	unsigned int	*walltexture[14];
+	double			ray_dist[NUM_RAYS];
+	int				sprite_num;
 	int				beginx;
 	int				beginy;
+	int				mouse_x;
+	int				mouse_y;
+	int				lenx_fullmap;
 	int				leny_fullmap;
-	unsigned int	*texture;
-	unsigned int	*walltexture[8];
-	mlx_texture_t	*text[8];
+	int				xdoor;
+	int				ydoor;
+	int				doorflag;
+	int				tm;
+	int				x_wall;
+	int				y_wall;
+	int				text_offsetx;
+	double			d_pr_plane;
+	double			pr_wallheight;
+	int				wallstripheight;
+	int				walltoppixel;
+	int				wallbottompixel;
+	int				text_offsety;
+	int				tmpi;
+	int				dx;
+	int				dy;
+	int				sx;
+	int				sy;
+	t_spinfos		*sp;
+	t_sprites		*sprites;
+	mlx_texture_t	*text[25];
 	t_ray_data		*rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
@@ -147,9 +190,9 @@ void			put_player(t_cub3d_data *cub);
 void			ft_update(t_cub3d_data *cub);
 void			cub_img(t_cub3d_data *cub);
 void			init_data_player(t_cub3d_data *cub);
-void			ft_hook(void	*param);
 void			cast_allrays(t_cub3d_data *cub);
-void			ray_cast(t_cub3d_data *cub);
+void			ray_cast(t_cub3d_data *cub, double horz_dist, double ver_dist);
+// void    ray_cast(t_cub3d_data *cub);
 //HOOK
 void			ft_hook(void *param);
 //RAYCASTING
@@ -161,7 +204,7 @@ void			raycasting_init(t_cub3d_data *cub);
 void			calcs_vertintercept(t_cub3d_data *cub);
 void			calcs_horintercept(t_cub3d_data *cub);
 //render
-void			renderwallproject(t_cub3d_data *cub, int i);
+void			renderwallproject(t_cub3d_data *cub, int i, int x);
 void			read_image_colors(t_cub3d_data *cub);
 int				get_color(int r, int g, int b, int a);
 void			read_color(t_cub3d_data *cub);
@@ -169,8 +212,18 @@ void			sky_floor(t_cub3d_data *cub, int x, int y);
 int				distance(int i, int j, int x, int y);
 void			put_mini_map(t_cub3d_data *cub);
 void			ft_put_minimap(t_cub3d_data *cub);
-void 			drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color);
-void			copy_the_map(t_cub3d_data *cub);
-void			ft_init_map(t_cub3d_data *cub);
+void			drawline(t_cub3d_data *cub, int x2, int y2);
 void			setting_map(t_cub3d_data *cub);
+
+//SPRITES
+void			render_sprite(t_cub3d_data *cub, int index);
+void			render_mapsprites(t_cub3d_data *cub);
+void			find_sprites(t_cub3d_data *cub);
+void			add_door(t_cub3d_data *cub, char c1, char c2);
+void			ft_tur_direction(t_cub3d_data *cub);
+void			walk_direction(t_cub3d_data *cub, int flag);
+void			side_direction(t_cub3d_data *cub, int flag);
+void			ft_door(t_cub3d_data *cub);
+int				index_dir(t_cub3d_data *cub);
+void			draw_fullmap(t_cub3d_data *cub);
 #endif

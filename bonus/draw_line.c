@@ -6,33 +6,55 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:31:03 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 18:22:28 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:51:10 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-void drawline(void *mlx_ptr, int x1, int y1, int x2, int y2, int color)
+void	drawline_norm(t_cub3d_data *cub, int x2, int y2)
 {
-    int dx = abs(x2 - x1);
-    int dy = abs(y2 - y1);
-    int sx = x1 < x2 ? 1 : -1;
-    int sy = y1 < y2 ? 1 : -1;
-    int err = dx - dy;
+	int	x1;
+	int	y1;
+	int	err;
+	int	err2;
 
-    while (x1 != x2 || y1 != y2) {
-        mlx_put_pixel(mlx_ptr, x1, y1, color);
+	x1 = (MINIMAP_WIDTH / 2);
+	y1 = (MINIMAP_HEIGHT / 2);
+	err = cub->dx - cub->dy;
+	while (x1 != x2 || y1 != y2)
+	{
+		mlx_put_pixel(cub->map_img, x1, y1, ORANGE_MP);
+		err2 = 2 * err;
+		if (err2 > -cub->dy)
+		{
+			err -= cub->dy;
+			x1 += cub->sx;
+		}
+		if (err2 < cub->dx)
+		{
+			err += cub->dx;
+			y1 += cub->sy;
+		}
+	}
+}
 
-        int err2 = 2 * err;
+void	drawline(t_cub3d_data *cub, int x2, int y2)
+{
+	int	x1;
+	int	y1;
 
-        if (err2 > -dy) {
-            err -= dy;
-            x1 += sx;
-        }
-
-        if (err2 < dx) {
-            err += dx;
-            y1 += sy;
-        }
-    }
+	x1 = (MINIMAP_WIDTH / 2);
+	y1 = (MINIMAP_HEIGHT / 2);
+	cub->dx = abs(x2 - x1);
+	cub->dy = abs(y2 - y1);
+	if (x1 < x2)
+		cub->sx = 1;
+	else
+		cub->sx = -1;
+	if (y1 < y2)
+		cub->sy = 1;
+	else
+		cub->sy = -1;
+	drawline_norm(cub, x2, y2);
 }

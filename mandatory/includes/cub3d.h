@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 14:43:32 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 12:13:45 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,33 @@ typedef struct sprites
 
 typedef struct rays
 {
-	double	ray_ang;
-	double	is_rayfacingdown;
-	double	is_rayfacingup;
-	double	is_rayfacingright;
-	double	is_rayfacingleft;
-	double	yintercept;
-	double	xintercept;
-	double	ystep;
-	double	xstep;
-	int		foundhorzwallhit;
-	double	hor_wallhitx;
-	double	hor_wallhity;
-	int		foundverzwallhit;
-	double	vert_wallhitx;
-	double	vert_wallhity;
-	double	hit_verti;
-	double	distance;
-	double	wallhit_x;
-	double	wallhit_y;
+	double			ray_ang;
+	double			is_rayfacingdown;
+	double			is_rayfacingup;
+	double			is_rayfacingright;
+	double			is_rayfacingleft;
+	double			yintercept;
+	double			xintercept;
+	double			ystep;
+	double			xstep;
+	int				foundhorzwallhit;
+	double			hor_wallhitx;
+	double			hor_wallhity;
+	int				foundverzwallhit;
+	double			vert_wallhitx;
+	double			vert_wallhity;
+	double			hit_verti;
+	double			distance;
+	double			wallhit_x;
+	double			wallhit_y;
+	int				wl_strip_h;
+	int				walltoppixel;
+	int				wallbottom;
+	int				textureoffsety;
+	int				textoffsetx;
+	int				dis_fromtop;
+	double			pr_wallheight;
+	unsigned int	*text_wall;
 }				t_ray_data;
 
 typedef struct s_map_color
@@ -157,4 +165,8 @@ int				get_color(int r, int g, int b, int a);
 void			read_color(t_cub3d_data *cub);
 void			sky_floor(t_cub3d_data *cub, int x, int y);
 int				distance(int i, int j, int x, int y);
+void			walk_direction(t_cub3d_data *cub, int flag);
+void			side_direction(t_cub3d_data *cub, int flag);
+void			ft_tur_direction(t_cub3d_data *cub);
+unsigned int	*get_dir(t_cub3d_data *cub);
 #endif
