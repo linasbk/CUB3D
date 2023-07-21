@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 14:31:37 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 17:02:46 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	read_color(t_cub3d_data *cub)
 	cub->text[1] = mlx_load_png(cub->t_so);
 	cub->text[2] = mlx_load_png(cub->t_we);
 	cub->text[3] = mlx_load_png(cub->t_ea);
-	cub->text[4] = mlx_load_png("images/barrel.png");
+	cub->text[4] = mlx_load_png("images/KILL.png");
 	cub->text[5] = mlx_load_png("images/DOOR.png");
 	while (i < 6)
 	{
