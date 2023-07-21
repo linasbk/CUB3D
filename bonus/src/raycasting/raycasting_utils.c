@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:11:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 17:57:52 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 14:40:02 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	raycasting_init(t_cub3d_data *cub)
 	else
 		cub->rays->is_rayfacingleft = 0;
 	cub->rays->is_rayfacingright = !cub->rays->is_rayfacingleft;
+	hor_intersec(cub);
+	vert_intersec(cub);
 }
 
 double	distance_between_points(double x1, double y1, double x2, double y2)
@@ -56,12 +58,12 @@ double	distance_between_points(double x1, double y1, double x2, double y2)
 void	calcs_vertintercept(t_cub3d_data *cub)
 {
 	cub->rays->foundverzwallhit = 0;
-	cub->rays->xintercept = floor(cub->player_data->x / WALL_DIMENSION) * \
+	cub->rays->xintercept = floor(cub->player->x / WALL_DIMENSION) * \
 		WALL_DIMENSION;
 	if (cub->rays->is_rayfacingright)
 		cub->rays->xintercept += WALL_DIMENSION;
-	cub->rays->yintercept = cub->player_data->y + (cub->rays->xintercept - \
-		cub->player_data->x) * tan(cub->rays->ray_ang);
+	cub->rays->yintercept = cub->player->y + (cub->rays->xintercept - \
+		cub->player->x) * tan(cub->rays->ray_ang);
 	cub->rays->xstep = WALL_DIMENSION;
 	cub->rays->ystep = WALL_DIMENSION * tan(cub->rays->ray_ang);
 	cub->rays->vert_wallhitx = cub->rays->xintercept;
@@ -71,12 +73,12 @@ void	calcs_vertintercept(t_cub3d_data *cub)
 void	calcs_horintercept(t_cub3d_data *cub)
 {
 	cub->rays->foundverzwallhit = 0;
-	cub->rays->yintercept = floor(cub->player_data->y / WALL_DIMENSION) \
+	cub->rays->yintercept = floor(cub->player->y / WALL_DIMENSION) \
 		* WALL_DIMENSION;
 	if (cub->rays->is_rayfacingdown)
 		cub->rays->yintercept += WALL_DIMENSION;
-	cub->rays->xintercept = cub->player_data->x + (cub->rays->yintercept \
-		- cub->player_data->y) / tan(cub->rays->ray_ang);
+	cub->rays->xintercept = cub->player->x + (cub->rays->yintercept \
+		- cub->player->y) / tan(cub->rays->ray_ang);
 	cub->rays->ystep = WALL_DIMENSION;
 	cub->rays->xstep = WALL_DIMENSION / tan(cub->rays->ray_ang);
 	cub->rays->hor_wallhitx = cub->rays->xintercept;

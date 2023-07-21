@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 09:54:45 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 14:34:39 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@ int	get_content(t_cub3d_data *cub, int i, int j)
 
 void	add_door(t_cub3d_data *cub, char c1, char c2)
 {
-	if (cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1] \
-		[(int)cub->player_data->x / WALL_DIMENSION] == c1)
-		cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) + 1] \
-			[(int)cub->player_data->x / WALL_DIMENSION] = c2;
-	else if (cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) - 1] \
-		[(int)cub->player_data->x / WALL_DIMENSION] == c1)
-		cub->matrice[((int)cub->player_data->y / WALL_DIMENSION) - 1] \
-			[(int)cub->player_data->x / WALL_DIMENSION] = c2;
-	else if (cub->matrice[(int)cub->player_data->y / WALL_DIMENSION] \
-		[((int)cub->player_data->x / WALL_DIMENSION) + 1] == c1)
-		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION] \
-			[((int)cub->player_data->x / WALL_DIMENSION) + 1] = c2;
-	else if (cub->matrice[(int)cub->player_data->y / WALL_DIMENSION] \
-		[((int)cub->player_data->x / WALL_DIMENSION) - 1] == c1)
-		cub->matrice[(int)cub->player_data->y / WALL_DIMENSION] \
-			[((int)cub->player_data->x / WALL_DIMENSION) - 1] = c2;
+	if (cub->matrice[((int)cub->player->y / WALL_DIMENSION) + 1] \
+		[(int)cub->player->x / WALL_DIMENSION] == c1)
+		cub->matrice[((int)cub->player->y / WALL_DIMENSION) + 1] \
+			[(int)cub->player->x / WALL_DIMENSION] = c2;
+	else if (cub->matrice[((int)cub->player->y / WALL_DIMENSION) - 1] \
+		[(int)cub->player->x / WALL_DIMENSION] == c1)
+		cub->matrice[((int)cub->player->y / WALL_DIMENSION) - 1] \
+			[(int)cub->player->x / WALL_DIMENSION] = c2;
+	else if (cub->matrice[(int)cub->player->y / WALL_DIMENSION] \
+		[((int)cub->player->x / WALL_DIMENSION) + 1] == c1)
+		cub->matrice[(int)cub->player->y / WALL_DIMENSION] \
+			[((int)cub->player->x / WALL_DIMENSION) + 1] = c2;
+	else if (cub->matrice[(int)cub->player->y / WALL_DIMENSION] \
+		[((int)cub->player->x / WALL_DIMENSION) - 1] == c1)
+		cub->matrice[(int)cub->player->y / WALL_DIMENSION] \
+			[((int)cub->player->x / WALL_DIMENSION) - 1] = c2;
 }
 
 void	hor_intersec(t_cub3d_data *cub)
@@ -102,24 +102,15 @@ void	vert_intersec(t_cub3d_data *cub)
 	}
 }
 
-void	found_door(t_cub3d_data *cub)
-{
-	if (cub->rays->map_cont == 'D')
-		cub->rays->flag = 1;
-}
-
 void	ray_cast(t_cub3d_data *cub, double horz_dist, double vert_dist)
 {
 	raycasting_init(cub);
-	hor_intersec(cub);
-	vert_intersec(cub);
 	if (cub->rays->foundhorzwallhit)
-		horz_dist = distance_between_points(cub->player_data->x, \
-		cub->player_data->y, cub->rays->hor_wallhitx, cub->rays->hor_wallhity);
+		horz_dist = distance_between_points(cub->player->x, cub->player->y, \
+			cub->rays->hor_wallhitx, cub->rays->hor_wallhity);
 	if (cub->rays->foundverzwallhit)
-		vert_dist = distance_between_points(cub->player_data->x, \
-		cub->player_data->y, cub->rays->vert_wallhitx, \
-		cub->rays->vert_wallhity);
+		vert_dist = distance_between_points(cub->player->x, cub->player->y, \
+			cub->rays->vert_wallhitx, cub->rays->vert_wallhity);
 	if (vert_dist < horz_dist)
 	{
 		cub->rays->wallhit_x = cub->rays->vert_wallhitx;

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 17:24:56 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 14:45:48 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@
 # define TEXTUR_HEIGHT WALL_DIMENSION
 # define TEXTUR_WIDTH WALL_DIMENSION
 # define NUM_RAYS WIDTH
-# define FOV_ANGLE 60 * (M_PI / 180)
+# define FOV_ANGLE 1.0471975512
 # define P_RADIUS  5.0
 # define MV_SPEED 10.0
-# define ROT_SPEED 8.0 * (M_PI / 180)
-# define DIST_PROJ_PLANE ((WIDTH / 2) / tan(FOV_ANGLE / 2))
+# define ROT_SPEED 0.1396263402
 # define EPSILON 0.2
 # define MINIMAP_SCALE_FACTOR 0.2
 # define WALL_STRIP_WIDTH 1

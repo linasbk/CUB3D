@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 08:34:40 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 14:45:28 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	ft_put_minimap(t_cub3d_data *cub)
 	int	by;
 
 	j = 0;
-	bx = cub->player_data->x - 75;
-	by = cub->player_data->y - 75;
+	bx = cub->player->x - 75;
+	by = cub->player->y - 75;
 	if (bx < 0)
 	{
 		cub->tmpi = (bx * -1);
@@ -87,8 +87,8 @@ void	put_mini_map(t_cub3d_data *cub)
 		}
 		y++;
 	}
-	drawline(cub, cos(cub->player_data->rot_angle + M_PI) * 30 + \
-	(MINIMAP_WIDTH / 2), sin(cub->player_data->rot_angle + M_PI) * 30 \
+	drawline(cub, cos(cub->player->rot_angle + M_PI) * 30 + \
+	(MINIMAP_WIDTH / 2), sin(cub->player->rot_angle + M_PI) * 30 \
 	+ (MINIMAP_HEIGHT / 2));
 }
 
@@ -99,19 +99,14 @@ void	cast_allrays(t_cub3d_data *cub)
 	i = 0;
 	while (i < NUM_RAYS)
 	{
-		cub->rays->ray_ang = cub->player_data->rot_angle + \
-		atan((i - NUM_RAYS / 2) / DIST_PROJ_PLANE);
+		cub->rays->ray_ang = cub->player->rot_angle + \
+		atan((i - NUM_RAYS / 2) / cub->d_pr_plane);
 		ray_cast(cub, INT_MAX, INT_MAX);
 		renderwallproject(cub, i, index_dir(cub));
 		cub->rays->ray_ang += FOV_ANGLE / NUM_RAYS;
 		cub->ray_dist[i] = cub->rays->distance;
 		i++;
 	}
-}
-
-int	distance(int i, int j, int x, int y)
-{
-	return (sqrt(pow(x - i, 2) + pow(y - j, 2)));
 }
 
 void	cub_img(t_cub3d_data *cub)
@@ -127,7 +122,7 @@ void	cub_img(t_cub3d_data *cub)
 		exit(EXIT_FAILURE);
 	}
 	cast_allrays(cub);
-	// find_sprites(cub);
-	// render_sprite(cub, 0);
+	find_sprites(cub);
+	render_sprite(cub, 0);
 	put_mini_map(cub);
 }

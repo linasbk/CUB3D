@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fullmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 09:28:39 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/21 09:36:48 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 14:33:41 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	puts_player(t_cub3d_data *cub)
 	int	x;
 	int	y;
 
-	x = cub->player_data->mpx - 5;
-	y = cub->player_data->mpy - 4;
-	while (++y < cub->player_data->mpy + 5)
+	x = cub->player->mpx - 5;
+	y = cub->player->mpy - 4;
+	while (++y < cub->player->mpy + 5)
 	{
-		x = cub->player_data->mpx - 5;
-		while (x < cub->player_data->mpx + 5)
+		x = cub->player->mpx - 5;
+		while (x < cub->player->mpx + 5)
 		{
-			if (distance(cub->player_data->mpx, \
-			cub->player_data->mpy, x, y) < 5)
+			if (distance(cub->player->mpx, \
+			cub->player->mpy, x, y) < 5)
 				mlx_put_pixel(cub->map_img, x, y, BLACK_MP);
 			x++;
 		}
@@ -99,9 +99,9 @@ void	setting_map(t_cub3d_data *cub)
 	cub->beginx = (WIDTH / 2) - ((cub->len_i * cub->x_wall) / 2);
 	cub->beginy = (HEIGHT / 2) - ((cub->len_j * cub->y_wall) / 2);
 	draw_fullmap(cub);
-	cub->player_data->mpx = ((cub->player_data->x / WALL_DIMENSION) \
+	cub->player->mpx = ((cub->player->x / WALL_DIMENSION) \
 	* cub->x_wall) + cub->beginx;
-	cub->player_data->mpy = ((cub->player_data->y / WALL_DIMENSION) \
+	cub->player->mpy = ((cub->player->y / WALL_DIMENSION) \
 	* cub->y_wall) + cub->beginy;
 	puts_player(cub);
 }

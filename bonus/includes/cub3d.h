@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 10:00:22 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 14:41:03 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ typedef struct rays
 	double	ystep;
 	double	xstep;
 	int		foundhorzwallhit;
-	double	hor_wallhitx;
+	double	hor_itx;
 	double	hor_wallhity;
+	double	hor_wallhitx;
 	int		foundverzwallhit;
 	double	vert_wallhitx;
 	double	vert_wallhity;
@@ -132,8 +133,8 @@ typedef struct cub3d_data
 	double			d_pr_plane;
 	double			pr_wallheight;
 	int				wallstripheight;
-	int				walltoppixel;
-	int				wallbottompixel;
+	int				walltop;
+	int				wallbottom;
 	int				text_offsety;
 	int				tmpi;
 	int				dx;
@@ -148,7 +149,7 @@ typedef struct cub3d_data
 	t_map_color		*c_c;
 	mlx_image_t		*sky_floor;
 	mlx_image_t		*map_img;
-	t_data_player	*player_data;
+	t_data_player	*player;
 }					t_cub3d_data;
 
 // UTILS
@@ -164,6 +165,8 @@ int				ft_isspace(char str);
 void			*ft_calloc(size_t count, size_t size);
 void			*ft_memset(void *b, int c, size_t len);
 char			**ft_free(char **str, int size);
+void			found_door(t_cub3d_data *cub);
+int				distance(int i, int j, int x, int y);
 //GET_NEXT_LINE && SPLIT && ATOI
 char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);
@@ -203,6 +206,8 @@ double			distance_between_points(double x1, double y1, \
 void			raycasting_init(t_cub3d_data *cub);
 void			calcs_vertintercept(t_cub3d_data *cub);
 void			calcs_horintercept(t_cub3d_data *cub);
+void			vert_intersec(t_cub3d_data *cub);
+void			hor_intersec(t_cub3d_data *cub);
 //render
 void			renderwallproject(t_cub3d_data *cub, int i, int x);
 void			read_image_colors(t_cub3d_data *cub);
@@ -226,4 +231,5 @@ void			side_direction(t_cub3d_data *cub, int flag);
 void			ft_door(t_cub3d_data *cub);
 int				index_dir(t_cub3d_data *cub);
 void			draw_fullmap(t_cub3d_data *cub);
+void			png_info(t_cub3d_data *cub, int num, mlx_texture_t *text);
 #endif

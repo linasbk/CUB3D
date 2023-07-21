@@ -6,11 +6,16 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:15:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 14:36:19 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	distance(int i, int j, int x, int y)
+{
+	return (sqrt(pow(x - i, 2) + pow(y - j, 2)));
+}
 
 int	process_texture(t_cub3d_data *cub, char *line, int key, int i)
 {

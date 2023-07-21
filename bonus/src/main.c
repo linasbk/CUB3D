@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/20 13:49:46 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 14:33:41 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_mouse(void *param)
 		turn_dir = 1.0;
 	else if (cub->mouse_x <= xp && cub->mouse_x >= 0 && cub->mouse_x <= WIDTH)
 		turn_dir = -1.0;
-	cub->player_data->rot_angle += (turn_dir * ROT_SPEED);
+	cub->player->rot_angle += (turn_dir * ROT_SPEED);
 }
 
 int	main(int ac, char **av)
@@ -46,7 +46,6 @@ int	main(int ac, char **av)
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 	mlx_cursor_hook(cub->mlx, (void *)ft_mouse, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
-	// mlx_texture_to_image(cub);
 	mlx_loop(cub->mlx);
 	mlx_terminate(cub->mlx);
 	return (SUCCESS);

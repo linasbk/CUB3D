@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 17:08:54 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 10:01:54 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/21 14:38:12 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ double	fix_fishbowl(t_cub3d_data *cub)
 	if (cub->rays->distance == 0)
 		cub->rays->distance = 0.1;
 	return (cub->rays->distance *= cos(cub->rays->ray_ang - \
-		cub->player_data->rot_angle));
+		cub->player->rot_angle));
 }
 
 void	renderwallproject(t_cub3d_data *cub, int x, int text_index)
@@ -68,21 +68,21 @@ void	renderwallproject(t_cub3d_data *cub, int x, int text_index)
 
 	corr_dis = fix_fishbowl(cub);
 	cub->d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
-	cub->wallstripheight =(int)((WALL_DIMENSION / corr_dis) * cub->d_pr_plane);
-	cub->walltoppixel = (HEIGHT / 2) - (cub->wallstripheight / 2);
-	cub->wallbottompixel = (HEIGHT / 2) + (cub->wallstripheight / 2);
+	cub->wallstripheight = (int)((WALL_DIMENSION / corr_dis) * cub->d_pr_plane);
+	cub->walltop = (HEIGHT / 2) - (cub->wallstripheight / 2);
+	cub->wallbottom = (HEIGHT / 2) + (cub->wallstripheight / 2);
 	text_wall = cub->walltexture[text_index];
 	caluc_offest_x(cub, text_index);
-	y = cub->walltoppixel;
-	while (y < cub->wallbottompixel)
+	y = cub->walltop;
+	while (y < cub->wallbottom)
 	{
 		if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 		{
-			cub->text_offsety = (y - cub->walltoppixel) * \
+			cub->text_offsety = (y - cub->walltop) * \
 				((double)cub->text[text_index]->height / cub->wallstripheight);
 			texelcolor = text_wall[(cub->text[text_index]->width \
 				* cub->text_offsety) + cub->text_offsetx];
-				mlx_put_pixel(cub->map_img, x, y, texelcolor);
+			mlx_put_pixel(cub->map_img, x, y, texelcolor);
 		}
 		y++;
 	}

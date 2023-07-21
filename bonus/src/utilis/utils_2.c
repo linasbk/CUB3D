@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:16:55 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 16:29:41 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 14:35:02 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,10 @@ int	resizematrice(t_cub3d_data *cub, int num_lines)
 		i++;
 	}
 	return (num_lines);
+}
+
+void	found_door(t_cub3d_data *cub)
+{
+	if (cub->rays->map_cont == 'D')
+		cub->rays->flag = 1;
 }
