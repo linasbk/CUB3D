@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 14:41:03 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/21 17:30:38 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ void			setting_map(t_cub3d_data *cub);
 //SPRITES
 void			render_sprite(t_cub3d_data *cub, int index);
 void			render_mapsprites(t_cub3d_data *cub);
-void			find_sprites(t_cub3d_data *cub);
+void			find_sprites(t_cub3d_data *cub, int i, int j, int n);
 void			add_door(t_cub3d_data *cub, char c1, char c2);
 void			ft_tur_direction(t_cub3d_data *cub);
 void			walk_direction(t_cub3d_data *cub, int flag);
@@ -232,4 +232,5 @@ void			ft_door(t_cub3d_data *cub);
 int				index_dir(t_cub3d_data *cub);
 void			draw_fullmap(t_cub3d_data *cub);
 void			png_info(t_cub3d_data *cub, int num, mlx_texture_t *text);
+void			calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite);
 #endif
