@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:48:19 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ void	ft_mlx_init(t_cub3d_data *cub)
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
+	cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	if (!cub->map_img)
+	{
+		puts(mlx_strerror(mlx_errno));
+		exit(EXIT_FAILURE);
+	}
+	cub->vandal = mlx_load_png("images/barrel.png");
+	cub->vandal_img = mlx_texture_to_image(cub->mlx, cub->vandal);
 	init_data_player(cub);
 	init_ray_data(cub);
 	cub->openflag = 1;

@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:26:05 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:47:37 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,9 @@ typedef struct cub3d_data
 	t_map_color		*c_c;
 	mlx_image_t		*sky_floor;
 	mlx_image_t		*map_img;
+	mlx_texture_t	*vandal;
+	mlx_image_t	*vandal_img;
+
 	t_data_player	*player;
 }					t_cub3d_data;
 

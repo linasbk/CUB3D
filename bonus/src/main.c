@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:23:33 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:49:40 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	main(int ac, char **av)
 	cub_img(cub);
 	mlx_image_to_window(cub->mlx, cub->sky_floor, 0, 0);
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
+	mlx_image_to_window(cub->mlx, cub->vandal_img, (WIDTH / 2) - (cub->vandal_img->width / 2), HEIGHT - cub->vandal_img->height);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 	mlx_cursor_hook(cub->mlx, (void *)ft_mouse, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);

@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:24:43 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:37:45 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,12 @@ void	cub_img(t_cub3d_data *cub)
 
 	j = 0;
 	cub->rays->flag = 0;
-	cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	if (!cub->map_img)
-	{
-		puts(mlx_strerror(mlx_errno));
-		exit(EXIT_FAILURE);
-	}
+	// cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	// if (!cub->map_img)
+	// {
+	// 	puts(mlx_strerror(mlx_errno));
+	// 	exit(EXIT_FAILURE);
+	// }
 	cast_allrays(cub);
 	find_sprites(cub, 0, 0, 0);
 	render_sprite(cub, -1);

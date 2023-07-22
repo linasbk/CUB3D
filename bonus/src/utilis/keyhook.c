@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/22 15:01:07 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:40:25 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ft_hook(void *param)
 	t_cub3d_data	*cub;
 
 	cub = param;
-	mlx_delete_image(cub->mlx, cub->map_img);
+	ft_memset(cub->map_img->pixels, 0,
+		cub->map_img->width * cub->map_img->height * sizeof(int32_t));
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
@@ -33,5 +34,4 @@ void	ft_hook(void *param)
 	cub_img(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_M))
 		setting_map(cub);
-	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
 }
