@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:49:40 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:06:21 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@ void	ft_mouse(void *param)
 	x = WIDTH / 2;
 	turn_dir = 0;
 	mlx_get_mouse_pos(cub->mlx, &cub->mouse_x, &cub->mouse_y);
-	if (cub->mouse_x > x)
-		turn_dir = 0.30;
-	else
-		turn_dir = -0.30;
-	cub->player->rot_angle += (turn_dir * ROT_SPEED);
-	mlx_set_mouse_pos(cub->mlx, WIDTH / 2, HEIGHT / 2);
+	cub->player->rot_angle += (cub->mouse_x - 500) / 500.0 * SENSE;
+	mlx_set_mouse_pos(cub->mlx, 500, 500);
 }
 
 void	free_all(t_cub3d_data *cub)

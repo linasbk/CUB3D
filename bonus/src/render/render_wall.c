@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 17:08:54 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:09:18 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ int	index_dir(t_cub3d_data *cub)
 	i = 0;
 	if (cub->rays->is_rayfacingup && !cub->rays->hit_verti \
 		&& cub->rays->flag == 1)
-		i = 5;
+		i = 4;
 	else if (cub->rays->is_rayfacingup && !cub->rays->hit_verti)
 		i = 0;
 	else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti \
 		&& cub->rays->flag == 1)
-		i = 5;
+		i = 4;
 	else if (cub->rays->is_rayfacingright && cub->rays->hit_verti \
 		&& cub->rays->flag == 1)
-		i = 5;
+		i = 4;
 	else if (cub->rays->is_rayfacingleft && cub->rays->hit_verti && \
 		cub->rays->flag == 1)
-		i = 5;
+		i = 4;
 	else if (cub->rays->is_rayfacingdown && !cub->rays->hit_verti)
 		i = 1;
 	else if (cub->rays->is_rayfacingright && cub->rays->hit_verti)

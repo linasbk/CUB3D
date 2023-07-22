@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:45:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 15:32:39 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:08:26 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, int *first)
 				{
 					texelcolor = wall_text[(cub->text[*first]->width * \
 					cub->sp->text_y) + cub->sp->text_x];
-					if (texelcolor != 0)
+					if (texelcolor != 0x00000000)
 						mlx_put_pixel(cub->map_img, x, y, texelcolor);
 				}
 			}

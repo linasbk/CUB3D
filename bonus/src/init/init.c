@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:48:19 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:55:52 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_mlx_init(t_cub3d_data *cub)
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
-	cub->vandal = mlx_load_png("images/barrel.png");
+	cub->vandal = mlx_load_png("images/Vandal.png");
 	cub->vandal_img = mlx_texture_to_image(cub->mlx, cub->vandal);
 	init_data_player(cub);
 	init_ray_data(cub);

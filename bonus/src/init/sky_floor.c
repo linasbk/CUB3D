@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sky_floor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 15:36:53 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:07:29 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,39 @@ void	png_info(t_cub3d_data *cub, int num, mlx_texture_t *text)
 	}
 }
 
+void	load_png(mlx_texture_t **text, char *path)
+{
+	*text = mlx_load_png(path);
+	if (!*text)
+	{
+		puts(mlx_strerror(mlx_errno));
+		exit(EXIT_FAILURE);
+	}
+}
+
 void	read_color(t_cub3d_data *cub)
 {
 	int	i;
 
 	i = 0;
-	cub->text[0] = mlx_load_png(cub->t_no);
-	cub->text[1] = mlx_load_png(cub->t_so);
-	cub->text[2] = mlx_load_png(cub->t_we);
-	cub->text[3] = mlx_load_png(cub->t_ea);
-	cub->text[4] = mlx_load_png("images/KILL.png");
-	cub->text[5] = mlx_load_png("images/DOOR.png");
-	while (i < 6)
-	{
-		if (!cub->text[i++])
-			exit(EXIT_FAILURE);
-	}
+	while (i < 15)
+		cub->text[i++] = malloc(sizeof(mlx_texture_t));
+	load_png(&(cub->text[0]), cub->t_no);
+	load_png(&(cub->text[1]), cub->t_so);
+	load_png(&(cub->text[2]), cub->t_we);
+	load_png(&(cub->text[3]), cub->t_ea);
+	load_png(&(cub->text[4]), "images/DOOR.png");
+	load_png(&(cub->text[5]), "images/kill0.png");
+	load_png(&(cub->text[6]), "images/kill1.png");
+	load_png(&(cub->text[7]), "images/kill2.png");
+	load_png(&(cub->text[8]), "images/kill3.png");
+	load_png(&(cub->text[9]), "images/kill4.png");
+	load_png(&(cub->text[10]), "images/kill5.png");
+	load_png(&(cub->text[11]), "images/kill6.png");
+	load_png(&(cub->text[12]), "images/kill7.png");
+	load_png(&(cub->text[13]), "images/kill8.png");
+	load_png(&(cub->text[14]), "images/kill9.png");
 	i = -1;
-	while (++i < 6)
+	while (++i < 15)
 		png_info(cub, i, cub->text[i]);
 }
