@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:15:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 14:36:19 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:29:59 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 int	distance(int i, int j, int x, int y)
 {
 	return (sqrt(pow(x - i, 2) + pow(y - j, 2)));
+}
+
+int	check_ch(t_cub3d_data *cub, int bx, int by, char c)
+{
+	if (cub->matrice[by / (W_DM / 2)][bx / (W_DM / 2)] == c)
+		return (1);
+	return (0);
 }
 
 int	process_texture(t_cub3d_data *cub, char *line, int key, int i)

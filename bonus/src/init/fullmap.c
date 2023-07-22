@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fullmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 09:28:39 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/21 18:21:47 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@ void	puts_player(t_cub3d_data *cub)
 	int	x;
 	int	y;
 
-	x = cub->player->mpx - 5;
-	y = cub->player->mpy - 4;
-	while (++y < cub->player->mpy + 5)
+	y = cub->player->mpy - (cub->y_wall / 3) - 1;
+	while (++y < cub->player->mpy + (cub->y_wall / 3))
 	{
-		x = cub->player->mpx - 5;
-		while (x < cub->player->mpx + 5)
+		x = cub->player->mpx - (cub->y_wall / 3);
+		while (x < cub->player->mpx + (cub->x_wall / 3))
 		{
 			if (distance(cub->player->mpx, \
-			cub->player->mpy, x, y) < 5)
+			cub->player->mpy, x, y) < (cub->y_wall / 3))
 				mlx_put_pixel(cub->map_img, x, y, BLACK_MP);
 			x++;
 		}
@@ -103,9 +102,9 @@ void	setting_map(t_cub3d_data *cub)
 	cub->beginx = (WIDTH / 2) - ((cub->len_i * cub->x_wall) / 2);
 	cub->beginy = (HEIGHT / 2) - ((cub->len_j * cub->y_wall) / 2);
 	draw_fullmap(cub);
-	cub->player->mpx = ((cub->player->x / WALL_DIMENSION) \
+	cub->player->mpx = ((cub->player->x / W_DM) \
 	* cub->x_wall) + cub->beginx;
-	cub->player->mpy = ((cub->player->y / WALL_DIMENSION) \
+	cub->player->mpy = ((cub->player->y / W_DM) \
 	* cub->y_wall) + cub->beginy;
 	puts_player(cub);
 }

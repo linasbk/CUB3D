@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 19:03:59 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	find_coordinates(t_cub3d_data *cub)
 		{
 			if (cub->matrice[j][i] == 'Y')
 			{
-				cub->sprites[k].x = i * WALL_DIMENSION;
-				cub->sprites[k].y = j * WALL_DIMENSION;
+				cub->sprites[k].x = i * W_DM;
+				cub->sprites[k].y = j * W_DM;
 				k++;
 			}
 			i++;
@@ -89,7 +89,7 @@ void	sort_by_distance(t_sprites *vis_sprites, int vis_sp)
 void	calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite)
 {
 	cub->sp->correct_dist = sprite.dist * cos(sprite.angle);
-	cub->sp->sp_height = (WALL_DIMENSION / cub->sp->correct_dist) \
+	cub->sp->sp_height = (W_DM / cub->sp->correct_dist) \
 		* cub->d_pr_plane;
 	cub->sp->sp_width = cub->sp->sp_height;
 	cub->sp->sp_topy = (HEIGHT / 2) - (cub->sp->sp_height / 2);
@@ -119,37 +119,7 @@ void	draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, int vis_sp)
 		sort_by_distance(vis_sprites, vis_sp);
 		render_vis_sprites(cub, vis_sprites, vis_sp, &first);
 	}
+	free(vis_sprites);
+	free(cub->sprites);
+	free(cub->sp);
 }
-
-// void	draw_square1(mlx_image_t *img, int x, int y, int size, int color)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (i <= size)
-// 	{
-// 		j = 0;
-// 		while (j <= size)
-// 		{
-// 			if (j == size || i == size || j == 0 || i == 0)
-// 				mlx_put_pixel(img, x + i, y + j, BLACK_MP);
-// 			else
-// 				mlx_put_pixel(img, x + i, y + j, color);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-// void    render_mapsprites(t_cub3d_data *cub)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < cub->sprite_num)
-// 	{
-// 		draw_square1(cub->map_img, cub->sprites[i].x *  MINIMAP_SCALE_FACTOR, cub->sprites[i].y *  MINIMAP_SCALE_FACTOR, 64 * MINIMAP_SCALE_FACTOR, (cub->sprites[i].visible) ? YELLOW_MP : BLUE_MP);
-// 		i++;
-// 	}
-// }

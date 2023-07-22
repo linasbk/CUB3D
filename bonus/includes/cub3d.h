@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 19:03:08 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:26:05 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct cub3d_data
 	int				len_i;
 	int				len_j;
 	unsigned int	*texture;
-	unsigned int	*walltexture[14];
+	unsigned int	*walltexture[25];
 	double			ray_dist[NUM_RAYS];
 	int				sprite_num;
 	int				beginx;
@@ -195,7 +195,7 @@ void			cub_img(t_cub3d_data *cub);
 void			init_data_player(t_cub3d_data *cub);
 void			cast_allrays(t_cub3d_data *cub);
 void			ray_cast(t_cub3d_data *cub, double horz_dist, double ver_dist);
-// void    ray_cast(t_cub3d_data *cub);
+int				check_ch(t_cub3d_data *cub, int bx, int by, char c);
 //HOOK
 void			ft_hook(void *param);
 //RAYCASTING

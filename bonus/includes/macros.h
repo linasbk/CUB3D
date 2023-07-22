@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 18:34:01 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 # define CYAN "\033[1;36m"
 # define WIDTH 1800
 # define HEIGHT 1300
-# define MINIMAP_WIDTH 150
-# define WALL_DIMENSION 64
-# define MINIMAP_HEIGHT 150
+# define MP_WIDTH 150
+# define W_DM 64
+# define MP_HEIGHT 150
 # define WIDTH_FULLMAP 1400
 # define HEIGHT_FULLMAP 905
-# define TEXTUR_HEIGHT WALL_DIMENSION
-# define TEXTUR_WIDTH WALL_DIMENSION
+# define TEXTUR_HEIGHT W_DM
+# define TEXTUR_WIDTH W_DM
 # define NUM_RAYS WIDTH
 # define FOV_ANGLE 1.0471975512
 # define P_RADIUS  5.0

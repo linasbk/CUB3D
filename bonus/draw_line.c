@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:31:03 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 09:51:10 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:44:57 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	drawline_norm(t_cub3d_data *cub, int x2, int y2)
 	int	err;
 	int	err2;
 
-	x1 = (MINIMAP_WIDTH / 2);
-	y1 = (MINIMAP_HEIGHT / 2);
+	x1 = (MP_WIDTH / 2);
+	y1 = (MP_HEIGHT / 2);
 	err = cub->dx - cub->dy;
 	while (x1 != x2 || y1 != y2)
 	{
@@ -44,8 +44,8 @@ void	drawline(t_cub3d_data *cub, int x2, int y2)
 	int	x1;
 	int	y1;
 
-	x1 = (MINIMAP_WIDTH / 2);
-	y1 = (MINIMAP_HEIGHT / 2);
+	x1 = (MP_WIDTH / 2);
+	y1 = (MP_HEIGHT / 2);
 	cub->dx = abs(x2 - x1);
 	cub->dy = abs(y2 - y1);
 	if (x1 < x2)

@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 09:34:44 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/21 09:37:17 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 11:16:15 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	draw_fullmap(t_cub3d_data *cub)
 				puts_walls(x, y, cub, 1);
 			else if (cub->matrice[j][i] == 'D')
 				puts_walls(x, y, cub, 2);
-			else if (cub->matrice[j][i] == 'y')
+			else if (cub->matrice[j][i] == 'Y')
 				puts_walls(x, y, cub, 0);
 			i++;
 			x += cub->x_wall;

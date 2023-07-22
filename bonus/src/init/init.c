@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 15:59:49 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	init_data_player(t_cub3d_data *cub)
 	cub->player = ft_calloc(1, sizeof(t_data_player));
 	if (cub->matrice[cub->player_y][cub->player_x])
 	{
-		cub->player->x = cub->player_x * WALL_DIMENSION + 10;
-		cub->player->y = cub->player_y * WALL_DIMENSION + 10;
+		cub->player->x = cub->player_x * W_DM + 32;
+		cub->player->y = cub->player_y * W_DM + 32;
 		if (cub->player_dir == 'E')
 			cub->player->rot_angle = M_PI;
 		if (cub->player_dir == 'N')

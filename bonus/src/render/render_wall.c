@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 17:08:54 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 16:17:03 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int	index_dir(t_cub3d_data *cub)
 void	caluc_offest_x(t_cub3d_data *cub, int f)
 {
 	if (cub->rays->hit_verti)
-		cub->text_offsetx = (cub->rays->wallhit_y / WALL_DIMENSION \
-		- (int)cub->rays->wallhit_y / WALL_DIMENSION) * cub->text[f]->width;
+		cub->text_offsetx = (cub->rays->wallhit_y / W_DM \
+		- (int)cub->rays->wallhit_y / W_DM) * cub->text[f]->width;
 	else
-		cub->text_offsetx = (cub->rays->wallhit_x / WALL_DIMENSION - \
-		(int)cub->rays->wallhit_x / WALL_DIMENSION) * cub->text[f]->width;
+		cub->text_offsetx = (cub->rays->wallhit_x / W_DM - \
+		(int)cub->rays->wallhit_x / W_DM) * cub->text[f]->width;
 }
 
 double	fix_fishbowl(t_cub3d_data *cub)
@@ -67,7 +67,7 @@ void	renderwallproject(t_cub3d_data *cub, int x, int text_index)
 	unsigned int	texelcolor;
 
 	corr_dis = fix_fishbowl(cub);
-	cub->wallstripheight = (int)((WALL_DIMENSION / corr_dis) * cub->d_pr_plane);
+	cub->wallstripheight = (int)((W_DM / corr_dis) * cub->d_pr_plane);
 	cub->walltop = (HEIGHT / 2) - (cub->wallstripheight / 2);
 	cub->wallbottom = (HEIGHT / 2) + (cub->wallstripheight / 2);
 	text_wall = cub->walltexture[text_index];

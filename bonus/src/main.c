@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 16:15:31 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 16:23:33 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,35 @@
 
 void	ft_mouse(void *param)
 {
-	static int		xp;
 	t_cub3d_data	*cub;
-	static int		yp;
-	int				turn_dir;
+	int				x;
+	double			turn_dir;
 
 	cub = param;
-	xp = cub->mouse_x;
-	yp = cub->mouse_y;
+	x = WIDTH / 2;
 	turn_dir = 0;
 	mlx_get_mouse_pos(cub->mlx, &cub->mouse_x, &cub->mouse_y);
-	if (cub->mouse_x > xp && cub->mouse_x >= 0 && cub->mouse_x <= WIDTH)
-		turn_dir = 1.0;
-	else if (cub->mouse_x <= xp && cub->mouse_x >= 0 && cub->mouse_x <= WIDTH)
-		turn_dir = -1.0;
+	if (cub->mouse_x > x)
+		turn_dir = 0.30;
+	else
+		turn_dir = -0.30;
 	cub->player->rot_angle += (turn_dir * ROT_SPEED);
+	mlx_set_mouse_pos(cub->mlx, WIDTH / 2, HEIGHT / 2);
+}
+
+void	free_all(t_cub3d_data *cub)
+{
+	free(cub->t_no);
+	free(cub->t_so);
+	free(cub->t_ea);
+	free(cub->t_we);
+	free(cub->player);
+	free(cub->rays);
+	while (*cub->matrice)
+	{
+		free(*cub->matrice);
+		cub->matrice++;
+	}
 }
 
 int	main(int ac, char **av)
@@ -44,12 +58,11 @@ int	main(int ac, char **av)
 	cub_img(cub);
 	mlx_image_to_window(cub->mlx, cub->sky_floor, 0, 0);
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
+	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 	mlx_cursor_hook(cub->mlx, (void *)ft_mouse, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
 	mlx_loop(cub->mlx);
 	mlx_terminate(cub->mlx);
-	free(cub->player);
-	free(cub->rays);
-	free(cub);
+	free_all(cub);
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valide_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 18:17:13 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 15:36:09 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,33 @@ int	parsetopbottom_line(t_cub3d_data *cub)
 	i = 0;
 	while (cub->matrice[0][i])
 	{
-		if (cub->matrice[0][i] == '1' || ft_isspace(cub->matrice[0][i]))
+		if (cub->matrice[0][i] == '1')
 			i++;
+		else if (ft_isspace(cub->matrice[0][i]))
+		{
+			if (ft_strlen(cub->matrice[0]) <= ft_strlen(cub->matrice[1]) && \
+				cub->matrice[1][i] != ' ' && cub->matrice[1][i] != '1')
+				return (FAILURE);
+			else
+				i++;
+		}
 		else
 			return (FAILURE);
 	}
 	i = 0;
 	while (cub->matrice[cub->m_index - 1][i])
 	{
-		if (cub->matrice[cub->m_index - 1][i] == '1'
-			|| ft_isspace(cub->matrice[cub->m_index - 1][i]))
+		if (cub->matrice[cub->m_index - 1][i] == '1')
 			i++;
+		else if (ft_isspace(cub->matrice[cub->m_index - 1][i]))
+		{
+			if (ft_strlen(cub->matrice[cub->m_index - 1]) <= ft_strlen(\
+			cub->matrice[cub->m_index - 2]) && cub->matrice[cub->m_index - 2][i] \
+			!= ' ' && cub->matrice[cub->m_index - 2][i] != '1')
+				return (FAILURE);
+			else
+				i++;
+		}
 		else
 			return (FAILURE);
 	}
@@ -102,6 +118,7 @@ int	check_retline(t_cub3d_data *cub)
 	if (!cub->line)
 		return (FAILURE);
 	line = ft_strtrim(cub->line, "\n");
+	free(cub->line);
 	while (line[i])
 	{
 		if (line[i] == '\n' && line[i + 1] == '\n')
