@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 09:28:39 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 21:17:53 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	puts_player(t_cub3d_data *cub)
 		{
 			if (distance(cub->player->mpx, \
 			cub->player->mpy, x, y) < (cub->y_wall / 3))
-				mlx_put_pixel(cub->map_img, x, y, BLACK_MP);
+				mlx_put_pixel(cub->full_map, x, y, BLACK_MP);
 			x++;
 		}
 	}
@@ -36,13 +36,12 @@ void	background_fullmap(t_cub3d_data *cub)
 	int	x;
 	int	y;
 
-	x = 200;
-	y = 199;
-	while (++y < HEIGHT_FULLMAP + 195)
+	y = -1;
+	while (++y < HEIGHT_FULLMAP)
 	{
-		x = 200;
-		while (x < WIDTH_FULLMAP + 195)
-			mlx_put_pixel(cub->map_img, x++, y, get_color(255, 255, 255, 50));
+		x = 0;
+		while (x < WIDTH_FULLMAP)
+			mlx_put_pixel(cub->full_map, x++, y, get_color(255, 255, 255, 50));
 	}
 }
 
@@ -51,19 +50,19 @@ void	framing_norm(t_cub3d_data *cub)
 	int			x;
 	int			y;
 
-	y = HEIGHT_FULLMAP + 194;
-	while (++y < HEIGHT_FULLMAP + 200)
+	y = HEIGHT_FULLMAP - 6;
+	while (++y < HEIGHT_FULLMAP)
 	{
-		x = 195;
-		while (x < WIDTH_FULLMAP + 200)
-			mlx_put_pixel(cub->map_img, x++, y, BLACK_MP);
+		x = 0;
+		while (x < WIDTH_FULLMAP)
+			mlx_put_pixel(cub->full_map, x++, y, BLACK_MP);
 	}
-	y = 194;
-	while (++y < HEIGHT_FULLMAP + 200)
+	y = -1;
+	while (++y < HEIGHT_FULLMAP)
 	{
-		x = WIDTH_FULLMAP + 195;
-		while (x < WIDTH_FULLMAP + 200)
-			mlx_put_pixel(cub->map_img, x++, y, BLACK_MP);
+		x = WIDTH_FULLMAP - 5;
+		while (x < WIDTH_FULLMAP)
+			mlx_put_pixel(cub->full_map, x++, y, BLACK_MP);
 	}
 }
 
@@ -72,35 +71,35 @@ void	framing_fullmap(t_cub3d_data *cub)
 	int			x;
 	int			y;
 
-	y = 194;
-	while (++y < 200)
+	y = -1;
+	while (++y < 5)
 	{
-		x = 195;
-		while (x < WIDTH_FULLMAP + 200)
-			mlx_put_pixel(cub->map_img, x++, y, BLACK_MP);
+		x = 0;
+		while (x < WIDTH_FULLMAP)
+			mlx_put_pixel(cub->full_map, x++, y, BLACK_MP);
 	}
-	y = 194;
-	while (++y < HEIGHT_FULLMAP + 200)
+	y = -1;
+	while (++y < HEIGHT_FULLMAP)
 	{
-		x = 195;
-		while (x < 200)
-			mlx_put_pixel(cub->map_img, x++, y, BLACK_MP);
+		x = 0;
+		while (x < 5)
+			mlx_put_pixel(cub->full_map, x++, y, BLACK_MP);
 	}
 	framing_norm(cub);
 }
 
 void	setting_map(t_cub3d_data *cub)
 {
-	framing_fullmap(cub);
 	background_fullmap(cub);
+	framing_fullmap(cub);
 	cub->y_wall = HEIGHT_FULLMAP / cub->len_j;
 	cub->x_wall = WIDTH_FULLMAP / cub->len_i;
 	if (cub->y_wall < cub->x_wall)
 		cub->x_wall = cub->y_wall;
 	else
 		cub->y_wall = cub->x_wall;
-	cub->beginx = (WIDTH / 2) - ((cub->len_i * cub->x_wall) / 2);
-	cub->beginy = (HEIGHT / 2) - ((cub->len_j * cub->y_wall) / 2);
+	cub->beginx = (WIDTH_FULLMAP / 2) - ((cub->len_i * cub->x_wall) / 2);
+	cub->beginy = (HEIGHT_FULLMAP / 2) - ((cub->len_j * cub->y_wall) / 2);
 	draw_fullmap(cub);
 	cub->player->mpx = ((cub->player->x / W_DM) \
 	* cub->x_wall) + cub->beginx;

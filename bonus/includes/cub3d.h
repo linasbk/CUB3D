@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:47:37 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:37:16 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct cub3d_data
 	int				dy;
 	int				sx;
 	int				sy;
+	int				anim_flag;
 	t_spinfos		*sp;
 	t_sprites		*sprites;
 	mlx_texture_t	*text[25];
@@ -149,6 +150,8 @@ typedef struct cub3d_data
 	t_map_color		*c_c;
 	mlx_image_t		*sky_floor;
 	mlx_image_t		*map_img;
+	mlx_image_t		*full_map;
+	mlx_image_t		*minimap;
 	mlx_texture_t	*vandal;
 	mlx_image_t	*vandal_img;
 
@@ -240,9 +243,9 @@ void			sort_by_distance(t_sprites *vis_sprites, int vis_sp);
 void			draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 				int vis_sp);
 void			render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
-				int vis_sp, int *first);
-void			calcs_offset_y(t_cub3d_data *cub, int y, int *first);
-void			calcs_offset_x(t_cub3d_data *cub, int x, int *first);
-void			sprites_animation(int *first);
+				int vis_sp);
+void			calcs_offset_y(t_cub3d_data *cub, int y);
+void			calcs_offset_x(t_cub3d_data *cub, int x);
+void			sprites_animation(t_cub3d_data *cub);
 void			norm_angle(double *angle);
 #endif

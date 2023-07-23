@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 09:34:44 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/22 11:16:15 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 21:17:03 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	puts_walls(int x, int y, t_cub3d_data *cub, int flag)
 		while (x < tmpx + cub->x_wall - 1)
 		{
 			if (flag == 1)
-				mlx_put_pixel(cub->map_img, x++, y, GREEN_MP);
+				mlx_put_pixel(cub->full_map, x++, y, GREEN_MP);
 			else if (flag == 2)
-				mlx_put_pixel(cub->map_img, x++, y, YELLOW_MP);
+				mlx_put_pixel(cub->full_map, x++, y, YELLOW_MP);
 			else
-				mlx_put_pixel(cub->map_img, x++, y, BLUE_MP);
+				mlx_put_pixel(cub->full_map, x++, y, BLUE_MP);
 		}
 		y++;
 	}

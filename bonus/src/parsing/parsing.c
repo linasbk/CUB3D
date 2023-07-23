@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 12:10:47 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/23 11:43:57 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 	i = 0;
 	(void)av;
 	line = get_next_line(fd);
+	if (!line)
+		exit(EXIT_FAILURE);
 	while (line)
 	{
 		if (check_lines(cub, line) == -1)

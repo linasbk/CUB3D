@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:45:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 17:08:26 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 18:31:37 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	check_texture_bounds(t_cub3d_data *cub, t_spinfos *sp, int *first)
+int	check_texture_bounds(t_cub3d_data *cub, t_spinfos *sp)
 {
 	unsigned int	texel_index;
 
-	texel_index = (cub->text[*first]->width * sp->text_y) + sp->text_x;
-	return (texel_index > 0 && texel_index < (cub->text[*first]->width \
-		* cub->text[*first]->height));
+	texel_index = (cub->text[cub->anim_flag]->width * sp->text_y) + sp->text_x;
+	return (texel_index > 0 && texel_index < (cub->text[cub->anim_flag]->width \
+		* cub->text[cub->anim_flag]->height));
 }
 
-void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, int *first)
+void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp)
 {
 	int				y;
 	unsigned int	texelcolor;
@@ -32,13 +32,13 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, int *first)
 	{
 		if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 		{
-			calcs_offset_y(cub, y, first);
+			calcs_offset_y(cub, y);
 			if (sp.dist < cub->ray_dist[x])
 			{
-				wall_text = cub->walltexture[*first];
-				if (check_texture_bounds(cub, cub->sp, first))
+				wall_text = cub->walltexture[cub->anim_flag];
+				if (check_texture_bounds(cub, cub->sp))
 				{
-					texelcolor = wall_text[(cub->text[*first]->width * \
+					texelcolor = wall_text[(cub->text[cub->anim_flag]->width * \
 					cub->sp->text_y) + cub->sp->text_x];
 					if (texelcolor != 0x00000000)
 						mlx_put_pixel(cub->map_img, x, y, texelcolor);
@@ -50,7 +50,7 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, int *first)
 }
 
 void	render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
-		int vis_sp, int *first)
+		int vis_sp)
 {
 	int				i;
 	int				x;
@@ -64,13 +64,13 @@ void	render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 		x = cub->sp->sp_leftx;
 		while (x < cub->sp->sp_rightx)
 		{
-			calcs_offset_x(cub, x, first);
-			render_vert_stripe(cub, x, sprite, first);
+			calcs_offset_x(cub, x);
+			render_vert_stripe(cub, x, sprite);
 			x++;
 		}
 		i++;
 	}
-	sprites_animation(first);
+	// sprites_animation(cub->anim_flag);
 }
 
 void	render_sprite(t_cub3d_data *cub, int i)

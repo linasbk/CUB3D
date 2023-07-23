@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:37:45 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/22 21:25:02 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ void	ft_puts_pixel(t_cub3d_data *cub, int by, int tmpx, int j)
 		{
 			if (check_ch(cub, bx, by, '1') && distance(MP_WIDTH / 2, \
 				MP_HEIGHT / 2, i, j) < 70)
-				mlx_put_pixel(cub->map_img, i, j, WHITE_MP);
+				mlx_put_pixel(cub->minimap, i, j, WHITE_MP);
 			else if (check_ch(cub, bx, by, 'D') && distance(MP_WIDTH / 2, \
 				MP_HEIGHT / 2, i, j) < 70)
-				mlx_put_pixel(cub->map_img, i, j, BLACK_MP);
+				mlx_put_pixel(cub->minimap, i, j, BLACK_MP);
 			else if (check_ch(cub, bx, by, 'Y') && distance(MP_WIDTH / 2, \
 				MP_HEIGHT / 2, i, j) < 70)
-				mlx_put_pixel(cub->map_img, i, j, PURPLE_MP);
+				mlx_put_pixel(cub->minimap, i, j, PURPLE_MP);
 			else if (check_ch(cub, bx, by, 'd') && distance(MP_WIDTH / 2, \
 				MP_HEIGHT / 2, i, j) < 70)
-				mlx_put_pixel(cub->map_img, i, j, YELLOW_MP);
+				mlx_put_pixel(cub->minimap, i, j, YELLOW_MP);
 		}
 		bx++;
 		i++;
@@ -114,18 +114,13 @@ void	cast_allrays(t_cub3d_data *cub)
 
 void	cub_img(t_cub3d_data *cub)
 {
-	int	j;
-
+	int			j;
+	
 	j = 0;
 	cub->rays->flag = 0;
-	// cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	// if (!cub->map_img)
-	// {
-	// 	puts(mlx_strerror(mlx_errno));
-	// 	exit(EXIT_FAILURE);
-	// }
 	cast_allrays(cub);
 	find_sprites(cub, 0, 0, 0);
 	render_sprite(cub, -1);
 	put_mini_map(cub);
+	sprites_animation(cub);
 }

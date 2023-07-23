@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:55:52 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/23 11:23:53 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,16 @@ void	ft_mlx_init(t_cub3d_data *cub)
 		exit(EXIT_FAILURE);
 	}
 	cub->map_img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	cub->full_map = mlx_new_image(cub->mlx, WIDTH_FULLMAP, HEIGHT_FULLMAP);
+	cub->minimap = mlx_new_image(cub->mlx, MP_WIDTH, MP_HEIGHT);
 	if (!cub->map_img)
 	{
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
-	cub->vandal = mlx_load_png("images/Vandal.png");
+	cub->vandal = mlx_load_png("images/forza.png");
+	if (!cub->vandal)
+		puts("here");
 	cub->vandal_img = mlx_texture_to_image(cub->mlx, cub->vandal);
 	init_data_player(cub);
 	init_ray_data(cub);
@@ -54,6 +58,7 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	cub->tm = 1;
 	cub->mouse_x = WIDTH / 2;
 	cub->mouse_y = HEIGHT / 2;
+	cub->anim_flag = 5;
 }
 
 void	init_data_player(t_cub3d_data *cub)
