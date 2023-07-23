@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sky_floor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 17:49:18 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/22 21:30:38 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ void	read_color(t_cub3d_data *cub)
 	int	i;
 
 	i = 0;
-	while (i < 4)
-		cub->text[i++] = malloc(sizeof(mlx_texture_t));
 	cub->text[0] = mlx_load_png(cub->t_no);
 	cub->text[1] = mlx_load_png(cub->t_so);
 	cub->text[2] = mlx_load_png(cub->t_we);
