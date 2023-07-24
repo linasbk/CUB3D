@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 18:30:48 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/23 23:11:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite)
 	cub->sp->sp_angle = atan2(sprite.y - cub->player->y, sprite.x \
 		- cub->player->x) - cub->player->rot_angle;
 	cub->sp->sp_angle = normalizeangle(cub->sp->sp_angle);
-	cub->sp->sp_screenpos = tan(cub->sp->sp_angle) * cub->d_pr_plane;
-	cub->sp->sp_leftx = (WIDTH / 2) + cub->sp->sp_screenpos - \
+	cub->sp->sp_screen_imgpos = tan(cub->sp->sp_angle) * cub->d_pr_plane;
+	cub->sp->sp_leftx = (WIDTH / 2) + cub->sp->sp_screen_imgpos - \
 		(cub->sp->sp_width / 2);
 	cub->sp->sp_rightx = cub->sp->sp_leftx + cub->sp->sp_width;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhookutil.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:01:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:17:32 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	walk_direction(t_cub3d_data *cub, int flag)
 	px = cub->player->x;
 	py = cub->player->y;
 	walk_dir = flag;
+	mlx_delete_image(cub->mlx, cub->mode);
+	cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->anim_flag]);
 	mv_step = walk_dir * MV_SPEED;
 	cub->player->x += cos(cub->player->rot_angle) * mv_step;
 	cub->player->y += sin(cub->player->rot_angle) * mv_step;
@@ -52,6 +54,8 @@ void	walk_direction(t_cub3d_data *cub, int flag)
 		cub->player->x = px;
 		cub->player->y = py;
 	}
+	mlx_image_to_window(cub->mlx, cub->mode, (WIDTH / 2) - \
+	(cub->mode->width / 2), HEIGHT - cub->mode->height);
 }
 
 void	side_direction(t_cub3d_data *cub, int flag)

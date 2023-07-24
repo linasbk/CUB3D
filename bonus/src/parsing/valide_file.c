@@ -6,11 +6,16 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:37:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/16 15:52:00 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/23 23:28:51 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	sprites_char(char c)
+{
+	return (c == 'Y' || c == 'y' || c == 'L');
+}
 
 int	valid_char(t_cub3d_data *cub, char c, int i, int j)
 {
@@ -22,7 +27,7 @@ int	valid_char(t_cub3d_data *cub, char c, int i, int j)
 		cub->player_dir = c;
 	}
 	if ((c == '1' || c == '0' || c == ' ' || c == 'N' || c == 'S' || c == 'E'\
-		|| c == 'W' || c == 'D' || c == 'Y') && cub->t_index < 8)
+		|| c == 'W' || c == 'D' || sprites_char(c)) && cub->t_index < 8)
 		return (SUCCESS);
 	else
 		return (FAILURE);

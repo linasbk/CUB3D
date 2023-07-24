@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:45:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 18:31:37 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/23 23:20:33 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp)
 				{
 					texelcolor = wall_text[(cub->text[cub->anim_flag]->width * \
 					cub->sp->text_y) + cub->sp->text_x];
-					if (texelcolor != 0x00000000)
+					if (texelcolor != 0)
 						mlx_put_pixel(cub->map_img, x, y, texelcolor);
 				}
 			}
@@ -70,7 +70,6 @@ void	render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 		}
 		i++;
 	}
-	// sprites_animation(cub->anim_flag);
 }
 
 void	render_sprite(t_cub3d_data *cub, int i)

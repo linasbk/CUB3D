@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   MLX42_Keys.h                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/12/28 02:29:06 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2023/03/30 16:23:19 by ntamayo-      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   MLX42.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 02:29:06 by W2Wizard          #+#    #+#             */
+/*   Updated: 2023/07/24 18:48:24 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,21 @@ typedef struct mlx_texture
  * @param texture The texture data of the XPM.
  * @param color_count The amount of colors available.
  * @param cpp The amount of characters per pixel.
- * @param mode The color mode, either (c)olor or (m)onochrome.
+ * @param screen_img The color screen_img, either (c)olor or (m)onochrome.
  */
 typedef struct xpm
 {
 	mlx_texture_t	texture;
 	int32_t			color_count;
 	int32_t			cpp;
-	char			mode;
+	char			screen_img;
 }	xpm_t;
 
 /**
  * An image instance can be summarized as just a simple
  * x, y & z coordinate.
  * 
- * Coordinates start from the top left of the screen at 0,0 and increase
+ * Coordinates start from the top left of the screen_img at 0,0 and increase
  * towards the bottom right.
  * 
  * NOTE: To change the z value, use mlx_set_instance_depth!
@@ -112,7 +112,7 @@ typedef struct mlx_key_data
  * @param pixels The literal pixel data.
  * @param instances An instance carrying the X, Y and Z location data.
  * @param count The element count of the instances array.
- * @param enabled If true the image is drawn onto the screen, else it's not.
+ * @param enabled If true the image is drawn onto the screen_img, else it's not.
  * @param context Abstracted OpenGL data.
  */
 typedef struct mlx_image
@@ -175,10 +175,10 @@ extern mlx_errno_t mlx_errno;
 typedef enum mlx_settings
 {
 	MLX_STRETCH_IMAGE = 0,	// Should images resize with the window as it's being resized or not. Default: false
-	MLX_FULLSCREEN,			// Should the window be in Fullscreen, note it will fullscreen at the given resolution. Default: false
-	MLX_MAXIMIZED,			// Start the window in a maximized state, overwrites the fullscreen state if this is true. Default: false
+	MLX_FULLscreen_img,			// Should the window be in Fullscreen_img, note it will fullscreen_img at the given resolution. Default: false
+	MLX_MAXIMIZED,			// Start the window in a maximized state, overwrites the fullscreen_img state if this is true. Default: false
 	MLX_DECORATED,			// Have the window be decorated with a window bar. Default: true
-	MLX_HEADLESS,			// Run in headless mode, no window is created. (NOTE: Still requires some form of window manager such as xvfb)
+	MLX_HEADLESS,			// Run in headless screen_img, no window is created. (NOTE: Still requires some form of window manager such as xvfb)
 	MLX_SETTINGS_MAX,		// Setting count.
 }	mlx_settings_t;
 
@@ -446,9 +446,9 @@ void mlx_set_mouse_pos(mlx_t* mlx, int32_t x, int32_t y);
  * - Disabled
  * 
  * @param[in] mlx The MLX instance handle. 
- * @param[in] mode A specified mouse mode.
+ * @param[in] screen_img A specified mouse screen_img.
  */
-void mlx_set_cursor_mode(mlx_t* mlx, mouse_mode_t mode);
+void mlx_set_cursor_mode(mlx_t* mlx, mouse_mode_t screen_img);
 
 /**
  * Retrieves the system standard cursor.
@@ -638,7 +638,7 @@ mlx_image_t* mlx_new_image(mlx_t* mlx, uint32_t width, uint32_t height);
  * drawing too many images will cause a loss in peformance!
  * 
  * @param[in] mlx The MLX instance handle.
- * @param[in] img The image to draw on the screen.
+ * @param[in] img The image to draw on the screen_img.
  * @param[in] x The X position.
  * @param[in] y The Y position.
  * @return Index to the instance, or -1 on failure.

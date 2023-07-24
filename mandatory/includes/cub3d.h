@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/21 12:13:45 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/23 12:53:12 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int				map_parsing(t_cub3d_data *cub, int ac, char **av);
 int				resizematrice(t_cub3d_data *cub, int num_lines);
 int				cub_file(char *s);
 int				check_space(char str);
+int				check_retline(t_cub3d_data *cub);
 //ERROR
 int				ft_error(char *s);
 //INIT

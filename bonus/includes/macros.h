@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 17:01:50 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:14:49 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # define CYAN "\033[1;36m"
 # define WIDTH 1800
 # define HEIGHT 1300
-# define MP_WIDTH 150
+# define MP_WIDTH 250
 # define W_DM 64
-# define MP_HEIGHT 150
+# define MP_HEIGHT 250
 # define WIDTH_FULLMAP 1400
 # define HEIGHT_FULLMAP 905
 # define TEXTUR_HEIGHT W_DM
@@ -65,6 +65,7 @@
 # define M_P 9
 # define RET_LINE 10
 
+# define IMG_MODE "images/CJ1.png"
 # define INVALIDE_ARGS "\033[1;31mInvalid arguments!!\n\033[0;34mThe \
 correct format is: ./cub3d map_file.cub"
 # define NON_EXIT_FILE "\033[1;31mNON Existing File!!\n\033[0;34mThe \

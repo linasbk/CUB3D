@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 11:23:53 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:09:36 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,29 @@ void	ft_mlx_init(t_cub3d_data *cub)
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
-	cub->vandal = mlx_load_png("images/forza.png");
-	if (!cub->vandal)
-		puts("here");
-	cub->vandal_img = mlx_texture_to_image(cub->mlx, cub->vandal);
+	cub->walk_flag = 5;
+	cub->anim_flag = 5;
+	load_png(&(cub->cj[0]), "images/gtatime.png");
+	load_png(&(cub->cj[1]), IMG_MODE);
+	load_png(&(cub->cj[2]), IMG_MODE);
+	load_png(&(cub->cj[3]), IMG_MODE);
+	load_png(&(cub->cj[4]), IMG_MODE);
+	load_png(&(cub->cj[5]), "images/CJ1.png");
+	load_png(&(cub->cj[6]), "images/CJ2.png");
+	load_png(&(cub->cj[7]), "images/CJ3.png");
+	load_png(&(cub->cj[8]), "images/CJ4.png");
+	load_png(&(cub->cj[9]), "images/CJ5.png");
+	load_png(&(cub->cj[10]), "images/CJ6.png");
+	load_png(&(cub->cj[11]), "images/CJ7.png");
+	load_png(&(cub->cj[12]), "images/CJ8.png");
+	load_png(&(cub->cj[13]), "images/CJ9.png");
+	load_png(&(cub->cj[14]), "images/CJ10.png");
+	load_png(&(cub->cj[15]), "images/CJ11.png");
+	load_png(&(cub->cj[16]), "images/CJ12.png");
+	load_png(&(cub->cj[17]), "images/CJ13.png");
+	load_png(&(cub->cj[18]), "images/CJ14.png");
+	cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->anim_flag]);
+	cub->screen_img = mlx_texture_to_image(cub->mlx, cub->cj[0]);
 	init_data_player(cub);
 	init_ray_data(cub);
 	cub->openflag = 1;
@@ -58,7 +77,6 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	cub->tm = 1;
 	cub->mouse_x = WIDTH / 2;
 	cub->mouse_y = HEIGHT / 2;
-	cub->anim_flag = 5;
 }
 
 void	init_data_player(t_cub3d_data *cub)

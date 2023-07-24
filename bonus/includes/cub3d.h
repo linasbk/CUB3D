@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 09:37:16 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:32:23 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <time.h>
 # define MINIMAP_SCALE 0.3
 
 typedef struct spinfos
@@ -30,7 +31,7 @@ typedef struct spinfos
 	double	sp_topy;
 	double	sp_bottomy;
 	double	sp_angle;
-	double	sp_screenpos;
+	double	sp_screen_imgpos;
 	double	sp_leftx;
 	double	sp_rightx;
 	double	texelwidth;
@@ -142,6 +143,7 @@ typedef struct cub3d_data
 	int				sx;
 	int				sy;
 	int				anim_flag;
+	int				walk_flag;
 	t_spinfos		*sp;
 	t_sprites		*sprites;
 	mlx_texture_t	*text[25];
@@ -152,9 +154,10 @@ typedef struct cub3d_data
 	mlx_image_t		*map_img;
 	mlx_image_t		*full_map;
 	mlx_image_t		*minimap;
-	mlx_texture_t	*vandal;
-	mlx_image_t	*vandal_img;
-
+	mlx_image_t		*time;
+	mlx_texture_t	*cj[20];
+	mlx_image_t		*screen_img;
+	mlx_image_t		*mode;
 	t_data_player	*player;
 }					t_cub3d_data;
 
@@ -183,6 +186,7 @@ int				map_parsing(t_cub3d_data *cub, int ac, char **av);
 int				resizematrice(t_cub3d_data *cub, int num_lines);
 int				cub_file(char *s);
 int				check_space(char str);
+int				check_retline(t_cub3d_data *cub);
 //ERROR
 int				ft_error(char *s);
 //INIT
@@ -190,6 +194,7 @@ double			normalizeangle(double angle);
 int				init_data(t_cub3d_data *cub);
 void			init_ray_data(t_cub3d_data *cub);
 void			ft_mlx_init(t_cub3d_data *cub);
+void			load_png(mlx_texture_t **text, char *path);
 //VALID_COLOR
 t_map_color		*valide_color(char *str);
 //VALID_MAP
@@ -248,4 +253,5 @@ void			calcs_offset_y(t_cub3d_data *cub, int y);
 void			calcs_offset_x(t_cub3d_data *cub, int x);
 void			sprites_animation(t_cub3d_data *cub);
 void			norm_angle(double *angle);
+void 			display_current_time(t_cub3d_data *cub);
 #endif

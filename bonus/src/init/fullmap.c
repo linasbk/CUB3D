@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fullmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 09:28:39 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/22 21:17:53 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/24 14:56:03 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	background_fullmap(t_cub3d_data *cub)
 	{
 		x = 0;
 		while (x < WIDTH_FULLMAP)
-			mlx_put_pixel(cub->full_map, x++, y, get_color(255, 255, 255, 50));
+			mlx_put_pixel(cub->full_map, x++, y, get_color(191, 191, 191, 150));
 	}
 }
 

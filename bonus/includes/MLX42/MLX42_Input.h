@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   MLX42_Keys.h                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/12/28 02:29:06 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/03/02 16:48:27 by lde-la-h      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   MLX42_Input.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 02:29:06 by W2Wizard          #+#    #+#             */
+/*   Updated: 2023/07/23 16:08:19 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ typedef enum keys
 	MLX_KEY_CAPS_LOCK		= 280,
 	MLX_KEY_SCROLL_LOCK		= 281,
 	MLX_KEY_NUM_LOCK		= 282,
-	MLX_KEY_PRINT_SCREEN	= 283,
+	MLX_KEY_PRINT_screen_img	= 283,
 	MLX_KEY_PAUSE			= 284,
 	MLX_KEY_F1				= 290,
 	MLX_KEY_F2				= 291,

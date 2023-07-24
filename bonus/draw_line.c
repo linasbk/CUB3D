@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:31:03 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 15:44:57 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/24 14:20:03 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	drawline_norm(t_cub3d_data *cub, int x2, int y2)
 	err = cub->dx - cub->dy;
 	while (x1 != x2 || y1 != y2)
 	{
-		mlx_put_pixel(cub->map_img, x1, y1, ORANGE_MP);
+		mlx_put_pixel(cub->minimap, x1, y1, WHITE_MP);
 		err2 = 2 * err;
 		if (err2 > -cub->dy)
 		{
