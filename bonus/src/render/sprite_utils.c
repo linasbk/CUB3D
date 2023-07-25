@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 23:11:33 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:12:45 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,33 @@ void	find_coordinates(t_cub3d_data *cub)
 		i = 0;
 		while (cub->matrice[j][i])
 		{
-			if (cub->matrice[j][i] == 'Y')
+			if (sprites_char(cub->matrice[j][i]))
 			{
+				if (cub->matrice[j][i] == 'Y')
+				{
+					cub->sprites[k].sp_text = cub->text[cub->anim_flag];
+					cub->sprites[k].index = cub->anim_flag;
+				}
+				else if (cub->matrice[j][i] == 'y')
+				{
+					cub->sprites[k].sp_text = cub->text[20];
+					cub->sprites[k].index = 20;
+				}
+				else if (cub->matrice[j][i] == 'T')
+				{
+					cub->sprites[k].sp_text = cub->text[19];
+					cub->sprites[k].index = 19;
+				}
+				else if (cub->matrice[j][i] == 'L')
+				{
+					cub->sprites[k].sp_text = cub->text[22];
+					cub->sprites[k].index = 22;
+				}
+				else if (cub->matrice[j][i] == 'l')
+				{
+					cub->sprites[k].sp_text = cub->text[21];
+					cub->sprites[k].index = 21;
+				}
 				cub->sprites[k].x = i * W_DM;
 				cub->sprites[k].y = j * W_DM;
 				k++;
@@ -45,7 +70,7 @@ void	find_sprites(t_cub3d_data *cub, int i, int j, int n)
 		i = 0;
 		while (cub->matrice[j][i])
 		{
-			if (cub->matrice[j][i] == 'Y')
+			if (cub->matrice[j][i] == 'Y' || cub->matrice[j][i] == 'T')
 				n++;
 			i++;
 		}
@@ -115,7 +140,7 @@ void	draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, int vis_sp)
 	while (++i < cub->sprite_num)
 	{
 		sort_by_distance(vis_sprites, vis_sp);
-		render_vis_sprites(cub, vis_sprites, vis_sp);
+		render_vis_sprites(cub, vis_sprites, vis_sp, i);
 	}
 	free(vis_sprites);
 	free(cub->sprites);

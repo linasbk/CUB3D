@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/24 14:14:49 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 02:28:04 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@
 # define M_E 8
 # define M_P 9
 # define RET_LINE 10
+# define C 1
+# define K 2
+# define G 3
 
 # define IMG_MODE "images/CJ1.png"
 # define INVALIDE_ARGS "\033[1;31mInvalid arguments!!\n\033[0;34mThe \

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/24 19:32:23 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:11:21 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <time.h>
+#include <signal.h>
 # define MINIMAP_SCALE 0.3
 
 typedef struct spinfos
@@ -46,9 +47,11 @@ typedef struct sprites
 	int			text;
 	double		x;
 	double		y;
+	int			index;
 	double		dist;
 	bool		visible;
 	double		angle;
+	mlx_texture_t	*sp_text;
 }				t_sprites;
 
 typedef struct rays
@@ -144,6 +147,7 @@ typedef struct cub3d_data
 	int				sy;
 	int				anim_flag;
 	int				walk_flag;
+	pid_t			pid;
 	t_spinfos		*sp;
 	t_sprites		*sprites;
 	mlx_texture_t	*text[25];
@@ -155,8 +159,9 @@ typedef struct cub3d_data
 	mlx_image_t		*full_map;
 	mlx_image_t		*minimap;
 	mlx_image_t		*time;
-	mlx_texture_t	*cj[20];
+	mlx_texture_t	*cj[25];
 	mlx_image_t		*screen_img;
+	mlx_image_t		*intro;
 	mlx_image_t		*mode;
 	t_data_player	*player;
 }					t_cub3d_data;
@@ -230,7 +235,8 @@ void			put_mini_map(t_cub3d_data *cub);
 void			ft_put_minimap(t_cub3d_data *cub);
 void			drawline(t_cub3d_data *cub, int x2, int y2);
 void			setting_map(t_cub3d_data *cub);
-
+//sound
+void				add_sounds(t_cub3d_data *cub, int sound);
 //SPRITES
 void			render_sprite(t_cub3d_data *cub, int index);
 void			render_mapsprites(t_cub3d_data *cub);
@@ -248,10 +254,11 @@ void			sort_by_distance(t_sprites *vis_sprites, int vis_sp);
 void			draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 				int vis_sp);
 void			render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
-				int vis_sp);
-void			calcs_offset_y(t_cub3d_data *cub, int y);
-void			calcs_offset_x(t_cub3d_data *cub, int x);
+				int vis_sp, int j);
+void			calcs_offset_y(t_cub3d_data *cub, int y, mlx_texture_t *sp_text);
+void			calcs_offset_x(t_cub3d_data *cub, int x, mlx_texture_t *sp_text);
 void			sprites_animation(t_cub3d_data *cub);
 void			norm_angle(double *angle);
 void 			display_current_time(t_cub3d_data *cub);
+int				sprites_char(char c);
 #endif

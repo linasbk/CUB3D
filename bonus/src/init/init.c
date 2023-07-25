@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/24 20:09:36 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:13:42 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	cub->walk_flag = 5;
 	cub->anim_flag = 5;
 	load_png(&(cub->cj[0]), "images/gtatime.png");
-	load_png(&(cub->cj[1]), IMG_MODE);
+	load_png(&(cub->cj[1]), "images/wallpaper.png");
 	load_png(&(cub->cj[2]), IMG_MODE);
 	load_png(&(cub->cj[3]), IMG_MODE);
 	load_png(&(cub->cj[4]), IMG_MODE);
-	load_png(&(cub->cj[5]), "images/CJ1.png");
+	load_png(&(cub->cj[5]), "images/CJ14.png");
 	load_png(&(cub->cj[6]), "images/CJ2.png");
 	load_png(&(cub->cj[7]), "images/CJ3.png");
 	load_png(&(cub->cj[8]), "images/CJ4.png");
@@ -70,6 +70,8 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	load_png(&(cub->cj[18]), "images/CJ14.png");
 	cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->anim_flag]);
 	cub->screen_img = mlx_texture_to_image(cub->mlx, cub->cj[0]);
+	cub->intro = mlx_texture_to_image(cub->mlx, cub->cj[1]);
+	add_sounds(cub, C);
 	init_data_player(cub);
 	init_ray_data(cub);
 	cub->openflag = 1;
@@ -84,8 +86,8 @@ void	init_data_player(t_cub3d_data *cub)
 	cub->player = ft_calloc(1, sizeof(t_data_player));
 	if (cub->matrice[cub->player_y][cub->player_x])
 	{
-		cub->player->x = cub->player_x * W_DM + 32;
-		cub->player->y = cub->player_y * W_DM + 32;
+		cub->player->x = cub->player_x * W_DM + 2;
+		cub->player->y = cub->player_y * W_DM + 2;
 		if (cub->player_dir == 'E')
 			cub->player->rot_angle = M_PI;
 		if (cub->player_dir == 'N')

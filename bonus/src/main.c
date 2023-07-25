@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/24 19:14:32 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 02:38:56 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_all(t_cub3d_data *cub)
 	}
 }
 
-const char* get_current_time() {
+char*	get_current_time() {
     time_t t;
     struct tm *tm_info;
     static char buffer[6];
@@ -49,12 +49,12 @@ const char* get_current_time() {
     time(&t);
     tm_info = localtime(&t);
     strftime(buffer, sizeof(buffer), "%H:%M", tm_info);
-    return buffer;
+    return (buffer);
 }
 
 void display_current_time(t_cub3d_data *cub)
 {
-	const char* current_time;
+	char*	current_time;
 
     current_time = get_current_time();
 	cub->time = mlx_put_string(cub->mlx, current_time, WIDTH - 220, 0);
@@ -70,6 +70,7 @@ void put_images_to_window(t_cub3d_data *cub)
 	mlx_image_to_window(cub->mlx, cub->mode, (WIDTH / 2) - \
 		(cub->mode->width / 2), HEIGHT - cub->mode->height);
 	mlx_image_to_window(cub->mlx, cub->minimap, 0, HEIGHT - MP_HEIGHT);
+	mlx_image_to_window(cub->mlx, cub->intro, 0, 0);
 }
 
 int	main(int ac, char **av)
@@ -80,10 +81,10 @@ int	main(int ac, char **av)
 	if (map_parsing(cub, ac, av) == FAILURE)
 		return (FAILURE);
 	ft_mlx_init(cub);
-	display_current_time(cub);
 	sky_floor(cub, 0, 0);
 	read_color(cub);
 	cub_img(cub);
+	display_current_time(cub);
 	put_images_to_window(cub);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 	mlx_cursor_hook(cub->mlx, (void *)ft_mouse, cub);

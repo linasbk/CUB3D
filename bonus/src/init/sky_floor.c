@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/24 20:10:58 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 02:20:45 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ void	read_color(t_cub3d_data *cub)
 	load_png(&(cub->text[16]), "images/lights.png");
 	load_png(&(cub->text[17]), "images/lights.png");
 	load_png(&(cub->text[18]), "images/lights.png");
+	load_png(&(cub->text[19]), "images/tree.png");
+	load_png(&(cub->text[20]), "images/ferrari.png");
+	load_png(&(cub->text[21]), "images/lights.png");
+	load_png(&(cub->text[22]), "images/gta.png");
 	i = -1;
-	while (++i < 19)
+	while (++i < 23)
 		png_info(cub, i, cub->text[i]);
 }

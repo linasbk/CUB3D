@@ -6,22 +6,22 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:45:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 23:20:33 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 01:52:13 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	check_texture_bounds(t_cub3d_data *cub, t_spinfos *sp)
+int	check_texture_bounds(t_spinfos *sp, mlx_texture_t *sp_text)
 {
 	unsigned int	texel_index;
 
-	texel_index = (cub->text[cub->anim_flag]->width * sp->text_y) + sp->text_x;
-	return (texel_index > 0 && texel_index < (cub->text[cub->anim_flag]->width \
-		* cub->text[cub->anim_flag]->height));
+	texel_index = (sp_text->width * sp->text_y) + sp->text_x;
+	return (texel_index > 0 && texel_index < (sp_text->width \
+		* sp_text->height));
 }
 
-void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp)
+void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, mlx_texture_t *sp_text, int k)
 {
 	int				y;
 	unsigned int	texelcolor;
@@ -32,13 +32,13 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp)
 	{
 		if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 		{
-			calcs_offset_y(cub, y);
+			calcs_offset_y(cub, y, sp_text);
 			if (sp.dist < cub->ray_dist[x])
 			{
-				wall_text = cub->walltexture[cub->anim_flag];
-				if (check_texture_bounds(cub, cub->sp))
+				wall_text = cub->walltexture[k];
+				if (check_texture_bounds(cub->sp, sp_text))
 				{
-					texelcolor = wall_text[(cub->text[cub->anim_flag]->width * \
+					texelcolor = wall_text[(sp_text->width * \
 					cub->sp->text_y) + cub->sp->text_x];
 					if (texelcolor != 0)
 						mlx_put_pixel(cub->map_img, x, y, texelcolor);
@@ -50,22 +50,26 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp)
 }
 
 void	render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
-		int vis_sp)
+		int vis_sp, int j)
 {
 	int				i;
 	int				x;
 	t_sprites		sprite;
+	mlx_texture_t	*sp_text;
 
 	i = 0;
+	int k = 0;
 	while (i < vis_sp)
 	{
+		sp_text = vis_sprites[i].sp_text;
+		k = vis_sprites[i].index;
 		sprite = vis_sprites[i];
 		calc_sprite_dims(cub, sprite);
 		x = cub->sp->sp_leftx;
 		while (x < cub->sp->sp_rightx)
 		{
-			calcs_offset_x(cub, x);
-			render_vert_stripe(cub, x, sprite);
+			calcs_offset_x(cub, x, sp_text);
+			render_vert_stripe(cub, x, sprite, sp_text, k);
 			x++;
 		}
 		i++;
