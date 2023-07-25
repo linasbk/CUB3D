@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 03:13:42 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 15:24:28 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	cub->anim_flag = 5;
 	load_png(&(cub->cj[0]), "images/gtatime.png");
 	load_png(&(cub->cj[1]), "images/wallpaper.png");
-	load_png(&(cub->cj[2]), IMG_MODE);
+	load_png(&(cub->cj[2]), "images/lotoo.png");
 	load_png(&(cub->cj[3]), IMG_MODE);
 	load_png(&(cub->cj[4]), IMG_MODE);
 	load_png(&(cub->cj[5]), "images/CJ14.png");
@@ -69,6 +69,7 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	load_png(&(cub->cj[17]), "images/CJ13.png");
 	load_png(&(cub->cj[18]), "images/CJ14.png");
 	cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->anim_flag]);
+	cub->mode_fg = 0;
 	cub->screen_img = mlx_texture_to_image(cub->mlx, cub->cj[0]);
 	cub->intro = mlx_texture_to_image(cub->mlx, cub->cj[1]);
 	add_sounds(cub, C);

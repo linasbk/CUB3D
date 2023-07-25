@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sky_floor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 02:20:45 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 14:55:25 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	read_color(t_cub3d_data *cub)
 	load_png(&(cub->text[16]), "images/lights.png");
 	load_png(&(cub->text[17]), "images/lights.png");
 	load_png(&(cub->text[18]), "images/lights.png");
-	load_png(&(cub->text[19]), "images/tree.png");
-	load_png(&(cub->text[20]), "images/ferrari.png");
+	load_png(&(cub->text[19]), "images/ferrari.png");
+	load_png(&(cub->text[20]), "images/tree.png");
 	load_png(&(cub->text[21]), "images/lights.png");
 	load_png(&(cub->text[22]), "images/gta.png");
 	i = -1;

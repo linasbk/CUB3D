@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 18:33:02 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:27:07 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ char	*ft_strtrim(char *s1, char *set)
 
 	first = 0;
 	if (!s1 || !set)
+	{
 		return (NULL);
+	}
 	last = ft_strlen(s1) - 1;
 	while (s1 && check_set(s1[first], set))
 		first++;

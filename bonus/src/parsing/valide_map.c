@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 15:36:09 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:15:48 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,17 @@ int	check_retline(t_cub3d_data *cub)
 	char	*line;
 
 	i = 0;
-	j = ft_strlen(cub->line);
 	if (!cub->line)
 		return (FAILURE);
+	j = ft_strlen(cub->line);
+	if (ft_isspace(cub->line[i]))
+	{
+		while (ft_isspace(cub->line[i]))
+			i++;
+		if (!cub->line)
+			return (FAILURE);
+	}
+	i = 0;
 	line = ft_strtrim(cub->line, "\n");
 	free(cub->line);
 	while (line[i])

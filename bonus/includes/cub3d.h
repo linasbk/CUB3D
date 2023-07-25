@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 03:11:21 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 15:23:16 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ typedef struct cub3d_data
 	int				sy;
 	int				anim_flag;
 	int				walk_flag;
+	int				mode_fg;
 	pid_t			pid;
 	t_spinfos		*sp;
 	t_sprites		*sprites;
