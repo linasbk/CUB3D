@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 02:28:04 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 10:52:14 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@
 
 # define ORANGE_MP 0xFF7000FF
 # define BLACK_MP 0x000000FF
+# define DARKGREY_MP 0x5C5C5CFF
 # define WHITE_MP 0xFFFFFFFF
 # define RED_MP 0xFF0000FF
-# define GREEN_MP 0x00FF00FF
+# define GREEN_MP 0x006400FF
 # define BLUE_MP 0x0000FFFF
 # define YELLOW_MP 0xFFFF00FF
 # define CYAN_MP 0x00FFFFFF

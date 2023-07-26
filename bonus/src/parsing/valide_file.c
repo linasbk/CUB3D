@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:37:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 14:52:11 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:43:50 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	sprites_char(char c)
 {
-	return (c == 'Y' || c == 'y' || c == 'T');
+	return (c == 'Y' || c == 'y' || c == 'T' || c == 'l' || c == 'L');
 }
 
 int	valid_char(t_cub3d_data *cub, char c, int i, int j)

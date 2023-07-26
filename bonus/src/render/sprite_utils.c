@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 14:57:32 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:42:37 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ void	find_coordinates(t_cub3d_data *cub)
 					cub->sprites[k].sp_text = cub->text[19];
 					cub->sprites[k].index = 19;
 				}
-				// else if (cub->matrice[j][i] == 'L')
-				// {
-				// 	cub->sprites[k].sp_text = cub->text[22];
-				// 	cub->sprites[k].index = 22;
-				// }
-				// else if (cub->matrice[j][i] == 'l')
-				// {
-				// 	cub->sprites[k].sp_text = cub->text[21];
-				// 	cub->sprites[k].index = 21;
-				// }
+				else if (cub->matrice[j][i] == 'L')
+				{
+					cub->sprites[k].sp_text = cub->text[22];
+					cub->sprites[k].index = 22;
+				}
+				else if (cub->matrice[j][i] == 'l')
+				{
+					cub->sprites[k].sp_text = cub->text[21];
+					cub->sprites[k].index = 21;
+				}
 				k++;
 			}
 			i++;
@@ -70,7 +70,7 @@ void	find_sprites(t_cub3d_data *cub, int i, int j, int n)
 		i = 0;
 		while (cub->matrice[j][i])
 		{
-			if (cub->matrice[j][i] == 'Y' || cub->matrice[j][i] == 'T' || cub->matrice[j][i] == 'y')
+			if (cub->matrice[j][i] == 'Y' || cub->matrice[j][i] == 'T' || cub->matrice[j][i] == 'y' || cub->matrice[j][i] == 'l' || cub->matrice[j][i] == 'L')
 				n++;
 			i++;
 		}

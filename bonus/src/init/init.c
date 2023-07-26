@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 15:24:28 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:00:16 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_mlx_init(t_cub3d_data *cub)
 	cub->mode_fg = 0;
 	cub->screen_img = mlx_texture_to_image(cub->mlx, cub->cj[0]);
 	cub->intro = mlx_texture_to_image(cub->mlx, cub->cj[1]);
-	add_sounds(cub, C);
 	init_data_player(cub);
 	init_ray_data(cub);
 	cub->openflag = 1;
