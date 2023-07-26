@@ -6,16 +6,11 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 10:42:58 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 00:51:04 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	get_color(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
 
 void	sky_floor(t_cub3d_data *cub, int x, int y)
 {
@@ -72,10 +67,8 @@ void	load_png(mlx_texture_t **text, char *path)
 	}
 }
 
-void	read_color(t_cub3d_data *cub)
+void	read_color_cont(t_cub3d_data *cub)
 {
-	int	i;
-
 	load_png(&(cub->text[0]), cub->t_no);
 	load_png(&(cub->text[1]), cub->t_so);
 	load_png(&(cub->text[2]), cub->t_we);
@@ -99,6 +92,13 @@ void	read_color(t_cub3d_data *cub)
 	load_png(&(cub->text[20]), "images/tree.png");
 	load_png(&(cub->text[21]), "images/light.png");
 	load_png(&(cub->text[22]), "images/lights.png");
+}
+
+void	read_color(t_cub3d_data *cub)
+{
+	int	i;
+
+	read_color_cont(cub);
 	i = -1;
 	while (++i < 23)
 		png_info(cub, i, cub->text[i]);

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   keyhook.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/26 23:22:56 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/27 00:55:21 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-pid_t		play_music(t_cub3d_data *cub, char *path)
+
+pid_t	play_music(t_cub3d_data *cub, char *path)
 {
 	char	**args;
 	pid_t	pid;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valide_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 14:38:22 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/27 00:53:37 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ int	parsetopbottom_line(t_cub3d_data *cub)
 	i = 0;
 	while (cub->matrice[cub->m_index - 1][i])
 	{
-		if (cub->matrice[cub->m_index - 1][i] == '1' || cub->matrice[cub->m_index - 1][i] == ' ')
+		if (cub->matrice[cub->m_index - 1][i] == '1' || \
+		cub->matrice[cub->m_index - 1][i] == ' ')
 			i++;
 		else
 			return (FAILURE);
 	}
 	return (SUCCESS);
 }
+
 int	check_sides(t_cub3d_data *cub, int i, int j)
 {
 	if (check_space(cub->matrice[i - 1][j]) == 1)
@@ -65,8 +67,8 @@ int	parse_mid(t_cub3d_data *cub, int i, int ret, int j)
 		if (valid_char(cub, cub->matrice[i][j], i, j) == FAILURE)
 			return (FAILURE);
 		else if (cub->matrice[i][j] == '0' || cub->matrice[i][j] == 'N' || \
-			cub->matrice[i][j] == 'S' || cub->matrice[i][j] == 'E' || \
-			cub->matrice[i][j] == 'W'|| sprites_char(cub->matrice[i][j]))
+		cub->matrice[i][j] == 'S' || cub->matrice[i][j] == 'E' || \
+		cub->matrice[i][j] == 'W' || sprites_char(cub->matrice[i][j]))
 			ret = check_sides(cub, i, j);
 		if (ret == FAILURE)
 			return (FAILURE);
@@ -92,6 +94,7 @@ int	empty_line(t_cub3d_data *cub)
 	}
 	return (SUCCESS);
 }
+
 int	check_retline(t_cub3d_data *cub)
 {
 	int		i;
@@ -128,8 +131,8 @@ int	check_map(t_cub3d_data *cub, int i)
 		i++;
 	}
 	cub->len_j = resizematrice(cub, cub->m_index);
-	i = 0;
-	while (i < cub->m_index)
+	i = -1;
+	while (++i < cub->m_index)
 	{
 		if (i == 0 || i == cub->m_index - 1)
 			ret = parsetopbottom_line(cub);
@@ -137,7 +140,6 @@ int	check_map(t_cub3d_data *cub, int i)
 			ret = parse_mid(cub, i, 1, 1);
 		if (ret == FAILURE)
 			return (FAILURE);
-		i++;
 	}
 	if (i == cub->m_index && cub->player_dir == '\0')
 		return (FAILURE);

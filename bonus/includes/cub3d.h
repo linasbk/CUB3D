@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 23:18:32 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/27 00:50:13 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <time.h>
-#include <signal.h>
+# include <signal.h>
 # define MINIMAP_SCALE 0.3
 
 typedef struct spinfos
@@ -44,15 +44,15 @@ typedef struct spinfos
 
 typedef struct sprites
 {
-	int			text;
-	double		x;
-	double		y;
-	int			index;
-	double		dist;
-	bool		visible;
-	double		angle;
+	int				text;
+	double			x;
+	double			y;
+	int				index;
+	double			dist;
+	bool			visible;
+	double			angle;
 	mlx_texture_t	*sp_text;
-}				t_sprites;
+}					t_sprites;
 
 typedef struct rays
 {
@@ -141,6 +141,7 @@ typedef struct cub3d_data
 	int				wallbottom;
 	int				text_offsety;
 	int				tmpi;
+	int				tmp_vl;
 	int				dx;
 	int				dy;
 	int				sx;
@@ -237,7 +238,7 @@ void			ft_put_minimap(t_cub3d_data *cub);
 void			drawline(t_cub3d_data *cub, int x2, int y2);
 void			setting_map(t_cub3d_data *cub);
 //sound
-void				add_sounds(t_cub3d_data *cub, int sound);
+void			add_sounds(t_cub3d_data *cub, int sound);
 //SPRITES
 void			render_sprite(t_cub3d_data *cub, int index);
 void			render_mapsprites(t_cub3d_data *cub);
@@ -256,10 +257,15 @@ void			draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 				int vis_sp);
 void			render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 				int vis_sp, int j);
-void			calcs_offset_y(t_cub3d_data *cub, int y, mlx_texture_t *sp_text);
-void			calcs_offset_x(t_cub3d_data *cub, int x, mlx_texture_t *sp_text);
+void			calcs_offset_y(t_cub3d_data *cub, \
+int y, mlx_texture_t *sp_text);
+void			calcs_offset_x(t_cub3d_data *cub, \
+int x, mlx_texture_t *sp_text);
 void			sprites_animation(t_cub3d_data *cub);
 void			norm_angle(double *angle);
-void 			display_current_time(t_cub3d_data *cub);
+void			display_current_time(t_cub3d_data *cub);
 int				sprites_char(char c);
+void			init_img(t_cub3d_data *cub);
+void			ft_load_png(t_cub3d_data *cub);
+void			free_all(t_cub3d_data *cub);
 #endif

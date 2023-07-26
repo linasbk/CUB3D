@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:59:00 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 16:05:29 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 00:54:41 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	vert_intersec(t_cub3d_data *cub)
 		cub->rays->xstep *= -1;
 		cub->rays->ystep *= -1;
 		cub->rays->vert_wallhitx -= 0.01;
-	}	
+	}
 	while (1)
 	{
 		if (protect_matrice(cub->rays->vert_wallhitx, \

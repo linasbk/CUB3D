@@ -3,105 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 15:22:13 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/27 00:51:14 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_puts_pixel(t_cub3d_data *cub, int by, int tmpx, int j)
+int	get_color(int r, int g, int b, int a)
 {
-	int		i;
-	int		bx;
-
-	i = cub->tmpi - 1;
-	bx = tmpx;
-	while (i < MP_WIDTH)
-	{
-		if ((by / (W_DM / 2)) < cub->len_j && (bx / (W_DM / 2)) < cub->len_i)
-		{
-			if (check_ch(cub, bx, by, '1') && distance(MP_WIDTH / 2, \
-				MP_HEIGHT / 2, i, j) < 120)
-				mlx_put_pixel(cub->minimap, i, j, WHITE_MP);
-			else if (check_ch(cub, bx, by, 'D') && distance(MP_WIDTH / 2, \
-				MP_HEIGHT / 2, i, j) < 120)
-				mlx_put_pixel(cub->minimap, i, j, BLACK_MP);
-			else if (check_ch(cub, bx, by, 'Y') && distance(MP_WIDTH / 2, \
-				MP_HEIGHT / 2, i, j) < 120)
-				mlx_put_pixel(cub->minimap, i, j, PURPLE_MP);
-			else if (check_ch(cub, bx, by, 'd') && distance(MP_WIDTH / 2, \
-				MP_HEIGHT / 2, i, j) < 120)
-				mlx_put_pixel(cub->minimap, i, j, 0x5C5C5CFF);
-			else if (check_ch(cub, bx, by, 'T') && distance(MP_WIDTH / 2, \
-				MP_HEIGHT / 2, i, j) < 120)
-				mlx_put_pixel(cub->minimap, i, j, GREEN_MP);
-			else if (check_ch(cub, bx, by, 'y') && distance(MP_WIDTH / 2, \
-				MP_HEIGHT / 2, i, j) < 120)
-				mlx_put_pixel(cub->minimap, i, j, RED_MP);
-			else if (distance(MP_WIDTH / 2, MP_HEIGHT / 2, i, j) < 120)
-				mlx_put_pixel(cub->minimap, i, j, 0xD3D3D3FF);
-		}
-		bx++;
-		i++;
-	}
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	ft_put_minimap(t_cub3d_data *cub)
+void	free_all(t_cub3d_data *cub)
 {
-	int		j;
-	int		bx;
-	int		by;
-
-	j = 0;
-	bx = (cub->player->x / 2) - 125;
-	by = (cub->player->y / 2) - 125;
-	if (bx < 0)
+	free(cub->t_no);
+	free(cub->t_so);
+	free(cub->t_ea);
+	free(cub->t_we);
+	free(cub->player);
+	free(cub->rays);
+	while (*cub->matrice)
 	{
-		cub->tmpi = (bx * -1);
-		bx = 0;
+		free(*cub->matrice);
+		cub->matrice++;
 	}
-	if (by < 0)
-	{
-		j = (by * -1);
-		by = 0;
-	}
-	while (j < MP_HEIGHT)
-	{
-		ft_puts_pixel(cub, by, bx, j);
-		by++;
-		j++;
-	}
-}
-
-void	put_mini_map(t_cub3d_data *cub)
-{
-	int	x;
-	int	y;
-
-	ft_put_minimap(cub);
-	y = 0;
-	while (y < MP_HEIGHT)
-	{
-		x = 0;
-		while (x < MP_WIDTH)
-		{
-			if (distance(x, y, MP_WIDTH / 2, MP_HEIGHT / 2) >= 115 \
-			&& distance(x, y, MP_WIDTH / 2, MP_HEIGHT / 2) <= 125)
-				mlx_put_pixel(cub->minimap, x, y, BLACK_MP);
-			if (distance(x, y, MP_WIDTH / 2, MP_HEIGHT / 2) <= 5)
-				mlx_put_pixel(cub->minimap, x, y, WHITE_MP);
-			if (distance(x, y, MP_WIDTH / 2, MP_HEIGHT / 2) >= 6 && distance(x, y, MP_WIDTH / 2, MP_HEIGHT / 2) <= 8)
-				mlx_put_pixel(cub->minimap, x, y, BLACK_MP);
-			x++;
-		}
-		y++;
-	}
-	drawline(cub, cos(cub->player->rot_angle + M_PI) * 30 + \
-	(MP_WIDTH / 2), sin(cub->player->rot_angle + M_PI) * 30 \
-	+ (MP_HEIGHT / 2));
 }
 
 void	cast_allrays(t_cub3d_data *cub)

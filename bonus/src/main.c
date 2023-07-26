@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 11:00:30 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 00:48:50 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,28 @@ void	ft_mouse(void *param)
 	mlx_set_mouse_pos(cub->mlx, 500, 500);
 }
 
-void	free_all(t_cub3d_data *cub)
+char	*get_current_time(void)
 {
-	free(cub->t_no);
-	free(cub->t_so);
-	free(cub->t_ea);
-	free(cub->t_we);
-	free(cub->player);
-	free(cub->rays);
-	while (*cub->matrice)
-	{
-		free(*cub->matrice);
-		cub->matrice++;
-	}
+	time_t		t;
+	struct tm	*tm_info;
+	static char	buffer[6];
+
+	time(&t);
+	tm_info = localtime(&t);
+	strftime(buffer, sizeof(buffer), "%H:%M", tm_info);
+	return (buffer);
 }
 
-char*	get_current_time() {
-    time_t t;
-    struct tm *tm_info;
-    static char buffer[6];
-
-    time(&t);
-    tm_info = localtime(&t);
-    strftime(buffer, sizeof(buffer), "%H:%M", tm_info);
-    return (buffer);
-}
-
-void display_current_time(t_cub3d_data *cub)
+void	display_current_time(t_cub3d_data *cub)
 {
-	char*	current_time;
+	char	*current_time;
 
-    current_time = get_current_time();
+	current_time = get_current_time();
 	cub->time = mlx_put_string(cub->mlx, current_time, WIDTH - 220, 0);
-	mlx_resize_image(cub->time , 190, 100);
+	mlx_resize_image(cub->time, 190, 100);
 }
 
-void put_images_to_window(t_cub3d_data *cub)
+void	put_images_to_window(t_cub3d_data *cub)
 {
 	mlx_image_to_window(cub->mlx, cub->sky_floor, 0, 0);
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);
