@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   raycastingutils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 12:08:26 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/25 19:57:15 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:48:30 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+double	fix_fishbowl(t_cub3d_data *cub)
+{
+	if (cub->rays->distance == 0)
+		cub->rays->distance = 0.1;
+	return (cub->rays->distance * cos(cub->rays->ray_ang - cub->player_data->rot_angle));
+}
 
 void	renderwall(t_cub3d_data *cub, int i)
 {
@@ -36,13 +43,10 @@ void	renderwall(t_cub3d_data *cub, int i)
 
 void	renderwallproject(t_cub3d_data *cub, int i)
 {
-	double			corr_dis;
-	double			d_pr_plane;
+	double	corr_dis;
+	double	d_pr_plane;
 
-	if (cub->rays->distance == 0)
-		cub->rays->distance = 0.1;
-	corr_dis = cub->rays->distance * \
-	cos(cub->rays->ray_ang - cub->player_data->rot_angle);
+	corr_dis = fix_fishbowl(cub);
 	d_pr_plane = (WIDTH / 2) / tan(FOV_ANGLE / 2);
 	cub->rays->pr_wallheight = (WALL_DIMENSION / corr_dis) * d_pr_plane;
 	cub->rays->wl_strip_h = (int) cub->rays->pr_wallheight;

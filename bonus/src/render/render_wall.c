@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 17:08:54 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/24 12:43:43 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 22:48:06 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	caluc_offest_x(t_cub3d_data *cub, int f)
 
 double	fix_fishbowl(t_cub3d_data *cub)
 {
-	if (cub->rays->distance == 0)
-		cub->rays->distance = 0.2;
 	return (cub->rays->distance *= cos(cub->rays->ray_ang - \
 		cub->player->rot_angle));
 }

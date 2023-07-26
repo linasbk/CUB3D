@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/15 12:33:33 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 20:30:41 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_ray_data(t_cub3d_data *cub)
 
 void	ft_mlx_init(t_cub3d_data *cub)
 {
-	cub->mlx = mlx_init(WIDTH, HEIGHT, "MyCub3D", true);
+	cub->mlx = mlx_init(WIDTH, HEIGHT, "MyCub3D", false);
 	if (!cub->mlx)
 	{
 		puts(mlx_strerror(mlx_errno));
@@ -47,8 +47,8 @@ void	init_data_player(t_cub3d_data *cub)
 	cub->player_data = ft_calloc(1, sizeof(t_data_player));
 	if (cub->matrice[cub->player_y][cub->player_x])
 	{
-		cub->player_data->x = cub->player_x * WALL_DIMENSION + 10;
-		cub->player_data->y = cub->player_y * WALL_DIMENSION + 10;
+		cub->player_data->x = cub->player_x * WALL_DIMENSION + 16;
+		cub->player_data->y = cub->player_y * WALL_DIMENSION + 16;
 		if (cub->player_dir == 'E')
 			cub->player_data->rot_angle = M_PI;
 		if (cub->player_dir == 'N')
@@ -58,6 +58,8 @@ void	init_data_player(t_cub3d_data *cub)
 		if (cub->player_dir == 'W')
 			cub->player_data->rot_angle = 0;
 	}
+	cub->player_movex = cub->player_data->x;
+	cub->player_movey = cub->player_data->y;
 }
 
 int	init_data(t_cub3d_data *cub)

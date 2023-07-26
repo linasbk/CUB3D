@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 11:00:16 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 23:15:38 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,29 @@ void	ft_mlx_init(t_cub3d_data *cub)
 		puts(mlx_strerror(mlx_errno));
 		exit(EXIT_FAILURE);
 	}
-	cub->walk_flag = 5;
+	cub->walk_flag = 0;
 	cub->anim_flag = 5;
-	load_png(&(cub->cj[0]), "images/gtatime.png");
-	load_png(&(cub->cj[1]), "images/wallpaper.png");
-	load_png(&(cub->cj[2]), "images/lotoo.png");
-	load_png(&(cub->cj[3]), IMG_MODE);
-	load_png(&(cub->cj[4]), IMG_MODE);
-	load_png(&(cub->cj[5]), "images/CJ14.png");
-	load_png(&(cub->cj[6]), "images/CJ2.png");
-	load_png(&(cub->cj[7]), "images/CJ3.png");
-	load_png(&(cub->cj[8]), "images/CJ4.png");
-	load_png(&(cub->cj[9]), "images/CJ5.png");
-	load_png(&(cub->cj[10]), "images/CJ6.png");
-	load_png(&(cub->cj[11]), "images/CJ7.png");
-	load_png(&(cub->cj[12]), "images/CJ8.png");
-	load_png(&(cub->cj[13]), "images/CJ9.png");
-	load_png(&(cub->cj[14]), "images/CJ10.png");
-	load_png(&(cub->cj[15]), "images/CJ11.png");
-	load_png(&(cub->cj[16]), "images/CJ12.png");
-	load_png(&(cub->cj[17]), "images/CJ13.png");
-	load_png(&(cub->cj[18]), "images/CJ14.png");
-	cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->anim_flag]);
+	load_png(&(cub->cj[0]), "images/CJ1.png");
+	load_png(&(cub->cj[1]), "images/CJ2.png");
+	load_png(&(cub->cj[2]), "images/CJ3.png");
+	load_png(&(cub->cj[3]), "images/CJ4.png");
+	load_png(&(cub->cj[4]), "images/CJ5.png");
+	load_png(&(cub->cj[5]), "images/CJ6.png");
+	load_png(&(cub->cj[6]), "images/CJ7.png");
+	load_png(&(cub->cj[7]), "images/CJ8.png");
+	load_png(&(cub->cj[8]), "images/CJ9.png");
+	load_png(&(cub->cj[9]), "images/CJ10.png");
+	load_png(&(cub->cj[10]), "images/CJ11.png");
+	load_png(&(cub->cj[11]), "images/CJ12.png");
+	load_png(&(cub->cj[12]), "images/CJ13.png");
+	load_png(&(cub->cj[13]), "images/CJ14.png");
+	load_png(&(cub->cj[14]), "images/gtatime.png");
+	load_png(&(cub->cj[15]), "images/wallpaper.png");
+	load_png(&(cub->cj[16]), "images/lotoo.png");
+	cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->walk_flag]);
 	cub->mode_fg = 0;
-	cub->screen_img = mlx_texture_to_image(cub->mlx, cub->cj[0]);
-	cub->intro = mlx_texture_to_image(cub->mlx, cub->cj[1]);
+	cub->screen_img = mlx_texture_to_image(cub->mlx, cub->cj[14]);
+	cub->intro = mlx_texture_to_image(cub->mlx, cub->cj[15]);
 	init_data_player(cub);
 	init_ray_data(cub);
 	cub->openflag = 1;

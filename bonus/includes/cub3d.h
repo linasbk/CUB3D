@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 15:23:16 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 23:18:32 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ typedef struct cub3d_data
 	mlx_image_t		*full_map;
 	mlx_image_t		*minimap;
 	mlx_image_t		*time;
-	mlx_texture_t	*cj[25];
+	mlx_texture_t	*cj[17];
 	mlx_image_t		*screen_img;
 	mlx_image_t		*intro;
 	mlx_image_t		*mode;
@@ -204,7 +204,7 @@ void			load_png(mlx_texture_t **text, char *path);
 //VALID_COLOR
 t_map_color		*valide_color(char *str);
 //VALID_MAP
-int				check_map(t_cub3d_data *cub);
+int				check_map(t_cub3d_data *cub, int i);
 int				valid_char(t_cub3d_data *cub, char c, int i, int j);
 void			put_player(t_cub3d_data *cub);
 void			ft_update(t_cub3d_data *cub);

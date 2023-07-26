@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 14:32:36 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 20:56:13 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef struct cub3d_data
 	int				len_j;
 	unsigned int	*texture;
 	unsigned int	*walltexture[4];
+	double			player_movex;
+	double			player_movey;
 	mlx_texture_t	*text[4];
 	t_ray_data		*rays;
 	t_map_color		*c_f;
@@ -162,7 +164,7 @@ void			calcs_horintercept(t_cub3d_data *cub);
 void			renderwallproject(t_cub3d_data *cub, int i);
 void			read_image_colors(t_cub3d_data *cub);
 int				get_color(int r, int g, int b, int a);
-void			read_color(t_cub3d_data *cub);
+void			init_texture(t_cub3d_data *cub);
 void			sky_floor(t_cub3d_data *cub, int x, int y);
 int				distance(int i, int j, int x, int y);
 void			walk_direction(t_cub3d_data *cub, int flag);

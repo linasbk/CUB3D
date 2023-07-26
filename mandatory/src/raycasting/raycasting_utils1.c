@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 12:05:37 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/25 14:03:05 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:49:51 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	protect_matrice(double touchX, double touchY, t_cub3d_data *cub)
 
 void	raycasting_init(t_cub3d_data *cub)
 {
-	cub->rays->hor_wallhitx = cub->len_i * WALL_DIMENSION * 20;
-	cub->rays->hor_wallhity = cub->len_j * WALL_DIMENSION * 20;
-	cub->rays->vert_wallhitx = cub->len_i * WALL_DIMENSION * 20;
-	cub->rays->vert_wallhity = cub->len_j * WALL_DIMENSION * 20;
+	cub->rays->hor_wallhitx = INT_MAX;
+	cub->rays->hor_wallhity = INT_MAX;
+	cub->rays->vert_wallhitx = INT_MAX;
+	cub->rays->vert_wallhity = INT_MAX;
 	if (cub->rays->ray_ang > 0 && cub->rays->ray_ang < M_PI)
 		cub->rays->is_rayfacingup = 1;
 	else

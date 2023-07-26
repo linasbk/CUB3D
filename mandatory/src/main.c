@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 09:32:27 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:41:56 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 		return (FAILURE);
 	ft_mlx_init(cub);
 	sky_floor(cub, 0, 0);
-	read_color(cub);
+	init_texture(cub);
 	cub_img(cub);
 	mlx_image_to_window(cub->mlx, cub->sky_floor, 0, 0);
 	mlx_image_to_window(cub->mlx, cub->map_img, 0, 0);

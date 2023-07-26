@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sky_floor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/22 21:30:38 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:12:58 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	png_info(t_cub3d_data *cub, int num, mlx_texture_t *text)
 	while (j < (text->height * text->width))
 	{
 		cub->walltexture[num][j++] = get_color(text->pixels[i], \
-			text->pixels[i + 1], text->pixels[i + 2], 255);
+			text->pixels[i + 1], text->pixels[i + 2], text->pixels[i + 3]);
 		if (i < (text->height * text->width * 4) - 4)
 			i += 4;
 	}
 }
 
-void	read_color(t_cub3d_data *cub)
+void	init_texture(t_cub3d_data *cub)
 {
 	int	i;
 

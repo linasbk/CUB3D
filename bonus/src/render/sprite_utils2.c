@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:55 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 01:28:56 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 23:22:59 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	sprites_animation(t_cub3d_data *cub)
 
 	if (cub->anim_flag == 18)
 		cub->anim_flag = 5;
+	if (cub->walk_flag == 13)
+		cub->walk_flag = 0;
 	else
 	{
 		i++;
@@ -48,6 +50,7 @@ void	sprites_animation(t_cub3d_data *cub)
 		{
 			i = 0;
 			cub->anim_flag++;
+			cub->walk_flag++;
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhookutil.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:01:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/25 15:56:03 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 23:22:53 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	walk_direction(t_cub3d_data *cub, int flag)
 	if (!cub->mode_fg)
 	{
 		mlx_delete_image(cub->mlx, cub->mode);
-		cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->anim_flag]);
+		cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->walk_flag]);
 		cub->mode_fg = 0;
 	}
 	mv_step = walk_dir * MV_SPEED;
@@ -55,7 +55,7 @@ void	walk_direction(t_cub3d_data *cub, int flag)
 	[(int)(px / W_DM)] == '1' && cub->matrice[(int) \
 	(py / W_DM)][(int)(cub->player->x / W_DM)] \
 	== '1') || cub->matrice[(int)(cub->player->y / W_DM)] \
-	[(int)(cub->player->x / W_DM)] == 'D')
+	[(int)(cub->player->x / W_DM)] == 'D' || cub->ray_dist[WIDTH / 2] == 0)
 	{
 		cub->player->x = px;
 		cub->player->y = py;
@@ -86,7 +86,7 @@ void	side_direction(t_cub3d_data *cub, int flag)
 	[(int)(px / W_DM)] == '1' && cub->matrice[(int) \
 	(py / W_DM)][(int)(cub->player->x / W_DM)] \
 	== '1') || cub->matrice[(int)(cub->player->y / W_DM)] \
-	[(int)(cub->player->x / W_DM)] == 'D')
+	[(int)(cub->player->x / W_DM)] == 'D' || cub->ray_dist[WIDTH / 2] == 0)
 	{
 		cub->player->x = px;
 		cub->player->y = py;

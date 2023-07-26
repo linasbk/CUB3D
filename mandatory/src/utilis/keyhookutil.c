@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhookutil.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:31:10 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/21 10:37:08 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:55:18 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ void	ft_tur_direction(t_cub3d_data *cub)
 	}	
 }
 
+int	wall_collision(t_cub3d_data *cub, double new_x, double new_y)
+{
+	int	px;
+	int	py;
+
+	px = (int)cub->player_data->x / WALL_DIMENSION;
+	py = (int)cub->player_data->y / WALL_DIMENSION;
+	if (cub->matrice[py][px] == '1')
+		return (1);
+	if (cub->matrice[py][(int)new_x] == '1' && cub->matrice[(int)new_y][px] \
+	== '1')
+		return (1);
+	return (0);
+}
+
 void	walk_direction(t_cub3d_data *cub, int flag)
 {
 	double			walk_dir;
@@ -41,13 +56,7 @@ void	walk_direction(t_cub3d_data *cub, int flag)
 	mv_step = walk_dir * MV_SPEED;
 	cub->player_data->x += cos(cub->player_data->rot_angle) * mv_step;
 	cub->player_data->y += sin(cub->player_data->rot_angle) * mv_step;
-	if (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)] \
-	[(int)(cub->player_data->x / WALL_DIMENSION)] == '1' || \
-	(cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)] \
-	[(int)(px / WALL_DIMENSION)] == '1' && cub->matrice[(int) \
-	(py / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] \
-	== '1') || cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)] \
-	[(int)(cub->player_data->x / WALL_DIMENSION)] == 'D')
+	if (wall_collision(cub, (px / WALL_DIMENSION), (py / WALL_DIMENSION)))
 	{
 		cub->player_data->x = px;
 		cub->player_data->y = py;
@@ -69,13 +78,7 @@ void	side_direction(t_cub3d_data *cub, int flag)
 	(M_PI / 2)) * mv_step;
 	cub->player_data->y += sin(cub->player_data->rot_angle + \
 	(M_PI / 2)) * mv_step;
-	if (cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)] \
-	[(int)(cub->player_data->x / WALL_DIMENSION)] == '1' || \
-	(cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)] \
-	[(int)(px / WALL_DIMENSION)] == '1' && cub->matrice[(int) \
-	(py / WALL_DIMENSION)][(int)(cub->player_data->x / WALL_DIMENSION)] \
-	== '1') || cub->matrice[(int)(cub->player_data->y / WALL_DIMENSION)] \
-	[(int)(cub->player_data->x / WALL_DIMENSION)] == 'D')
+	if (wall_collision(cub, (px / WALL_DIMENSION), (py / WALL_DIMENSION)))
 	{
 		cub->player_data->x = px;
 		cub->player_data->y = py;
