@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 16:29:10 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/23 11:43:57 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int	check_lines(t_cub3d_data *cub, char *line)
 	int		i;
 
 	tmp = ft_strtrim(line, " ");
-	if (tmp[0] == '\0')
-		return (FAILURE);
 	key = get_key(ft_strtrim(tmp, "\t"));
 	free(tmp);
 	if (key >= T_NO && key <= C_C)

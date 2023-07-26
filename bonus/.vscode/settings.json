@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "cub3d.h": "c",
-        "macros.h": "c",
-        "unistd.h": "c",
-        "fcntl.h": "c",
-        "mlx42.h": "c"
-    }
-}
