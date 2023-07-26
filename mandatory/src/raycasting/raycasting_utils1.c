@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 12:05:37 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/21 12:05:47 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:03:05 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	calcs_vertintercept(t_cub3d_data *cub)
 	cub->rays->ystep = WALL_DIMENSION * tan(cub->rays->ray_ang);
 }
 
-void	calcs_horintercept(t_cub3d_data *cub)
+void	 calcs_horintercept(t_cub3d_data *cub)
 {
 	cub->rays->foundverzwallhit = 0;
 	cub->rays->yintercept = floor(cub->player_data->y / WALL_DIMENSION) \

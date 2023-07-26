@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 12:08:26 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/21 12:14:25 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:57:15 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	renderwall(t_cub3d_data *cub, int i)
 		cub->rays->dis_fromtop = y + (cub->rays->wl_strip_h / 2) - (HEIGHT / 2);
 		cub->rays->textureoffsety = cub->rays->dis_fromtop * \
 		((float)TEXTUR_HEIGHT / cub->rays->wl_strip_h);
-		texelcolor = cub->rays->text_wall[(TEXTUR_WIDTH * \
-		cub->rays->textureoffsety) + cub->rays->textoffsetx];
+		texelcolor = cub->rays->text_wall[(TEXTUR_WIDTH * cub->rays->textureoffsety) + cub->rays->textoffsetx];
 		mlx_put_pixel(cub->map_img, i, y, texelcolor);
 		y++;
 	}

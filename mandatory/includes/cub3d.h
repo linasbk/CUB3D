@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 12:53:12 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 14:32:36 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct player_movement
 typedef struct cub3d_data
 {
 	mlx_t			*mlx;
-	char			**map;
 	char			*t_no;
 	char			*t_so;
 	char			*t_we;
@@ -140,7 +139,7 @@ void			ft_mlx_init(t_cub3d_data *cub);
 //VALID_COLOR
 t_map_color		*valide_color(char *str);
 //VALID_MAP
-int				check_map(t_cub3d_data *cub);
+int				check_map(t_cub3d_data *cub, int i);
 int				valid_char(t_cub3d_data *cub, char c, int i, int j);
 void			put_player(t_cub3d_data *cub);
 void			ft_update(t_cub3d_data *cub);

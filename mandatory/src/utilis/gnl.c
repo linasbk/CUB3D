@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:44 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 09:37:04 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:23:38 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ char	*ft_strdup(char *s1)
 	char	*str;
 	char	*res;
 
+	if (!s1)
+		return (NULL);
 	str = ft_calloc(1, sizeof(char) * (ft_strlen(s1) + 1));
 	if (!(str))
-		return (0);
+		return (NULL);
 	res = str;
 	while (*s1)
 	{

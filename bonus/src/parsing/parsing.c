@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 11:43:57 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:32:20 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	check_lines(t_cub3d_data *cub, char *line)
 	int		i;
 
 	tmp = ft_strtrim(line, " ");
+	if (tmp[0] == '\0')
+		return (FAILURE);
 	key = get_key(ft_strtrim(tmp, "\t"));
 	free(tmp);
 	if (key >= T_NO && key <= C_C)
@@ -77,6 +79,7 @@ int	check_lines(t_cub3d_data *cub, char *line)
 	else if (key == M_W && cub->t_index == 6)
 		return (cub->m_index++, cub->line = ft_strjoin(cub->line, line), \
 			SUCCESS);
+			
 	return (ft_error(CONFIG_ERROR));
 }
 
@@ -102,7 +105,7 @@ int	read_map(t_cub3d_data *cub, char *av, int fd)
 	}
 	free(line);
 	close(fd);
-	if (check_map(cub) == FAILURE)
+	if (check_map(cub, 0) == FAILURE)
 		return (ft_error("MAP ERROR"));
 	return (SUCCESS);
 }
