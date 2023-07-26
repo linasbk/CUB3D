@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/23 12:53:12 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/25 19:02:27 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct player_movement
 typedef struct cub3d_data
 {
 	mlx_t			*mlx;
-	char			**map;
 	char			*t_no;
 	char			*t_so;
 	char			*t_we;
