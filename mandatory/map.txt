@@ -1,11 +1,3 @@
-NO /Users/lsabik/Desktop/akhir_cuba/mandatory/images/a.png
-SO /Users/lsabik/Desktop/akhir_cuba/mandatory/images/a.png
-WE /Users/lsabik/Desktop/akhir_cuba/mandatory/images/a.png
-EA /Users/lsabik/Desktop/akhir_cuba/mandatory/images/a.png
-
-F 72, 72, 79
-C 34, 36, 35
-
 111111111111111
 100000100000001
 10000111111111111111111111
@@ -110,3 +102,5 @@ C 34, 36, 35
                                                 100000001
                                                 100000001
                                                 111111111
+                                                
+                                                11111

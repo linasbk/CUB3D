@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valide_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 23:47:12 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 22:02:17 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,20 @@ int	empty_line(t_cub3d_data *cub)
 	return (SUCCESS);
 }
 
+static int all_spaces(char *line)
+{
+	int i;
+	
+	i = 0;
+	while (line[i] && line[i] != '\n') 
+	{
+		if (line[i] != ' ' && line[i] != '\t')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	check_retline(t_cub3d_data *cub)
 {
 	int		i;
@@ -89,12 +103,16 @@ int	check_retline(t_cub3d_data *cub)
 	i = 0;
 	if (empty_line(cub) == FAILURE)
 		return (FAILURE);
-	line = ft_strtrim(cub->line, "\n");
+	line = ft_strtrim(cub->line, "\n ");
 	free(cub->line);
 	while (line[i])
 	{
 		if (line[i] == '\n' && line[i + 1] == '\n')
 			return (FAILURE);
+		else if (line[i] == '\n' && all_spaces(&line[i + 1]))
+		{
+			return (FAILURE);
+		}
 		else
 			i++;
 	}
