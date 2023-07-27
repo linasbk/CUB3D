@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:55 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 10:23:14 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:57:21 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ void	sprites_animation(t_cub3d_data *cub)
 {
 	static int	i;
 
-	if (cub->anim_flag == 18)
+	if (cub->anim_flag == 24)
 		cub->anim_flag = 5;
 	if (cub->walk_flag == 13)
 		cub->walk_flag = 0;
 	else
 	{
 		i++;
-		if (i == 2)
+		if (i == 3)
 		{
 			i = 0;
 			cub->anim_flag++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 10:26:27 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:57:44 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,26 @@ void	find_coordinates(t_cub3d_data *cub, int k)
 					cub->sprites[k].sp_text = cub->text[cub->anim_flag];
 					cub->sprites[k].index = cub->anim_flag;
 				}
-				else
-					fixed_sprites(cub, i, j, k);
+				else if (cub->matrice[j][i] == 'T')
+				{
+					cub->sprites[k].sp_text = cub->text[26];
+					cub->sprites[k].index = 26;
+				}
+				else if (cub->matrice[j][i] == 'y')
+				{
+					cub->sprites[k].sp_text = cub->text[25];
+					cub->sprites[k].index = 25;
+				}
+				else if (cub->matrice[j][i] == 'L')
+				{
+					cub->sprites[k].sp_text = cub->text[28];
+					cub->sprites[k].index = 28;
+				}
+				else if (cub->matrice[j][i] == 'l')
+				{
+					cub->sprites[k].sp_text = cub->text[27];
+					cub->sprites[k].index = 27;
+				}
 				k++;
 			}
 		}

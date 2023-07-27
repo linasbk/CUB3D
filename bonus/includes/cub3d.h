@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 12:02:54 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:00:11 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct cub3d_data
 	int				len_i;
 	int				len_j;
 	unsigned int	*texture;
-	unsigned int	*walltexture[25];
+	unsigned int	*walltexture[30];
 	double			ray_dist[NUM_RAYS];
 	int				sprite_num;
 	int				beginx;
@@ -153,7 +153,7 @@ typedef struct cub3d_data
 	pid_t			pid;
 	t_spinfos		*sp;
 	t_sprites		*sprites;
-	mlx_texture_t	*text[25];
+	mlx_texture_t	*text[30];
 	t_ray_data		*rays;
 	t_map_color		*c_f;
 	t_map_color		*c_c;
