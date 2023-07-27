@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhookutil.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:31:10 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/26 20:55:18 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 23:50:08 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_tur_direction(t_cub3d_data *cub)
 	{
 		turn_dir = 1;
 		cub->player_data->rot_angle += (turn_dir * ROT_SPEED);
-	}	
+	}
 }
 
 int	wall_collision(t_cub3d_data *cub, double new_x, double new_y)

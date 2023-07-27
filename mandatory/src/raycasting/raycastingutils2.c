@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycastingutils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 12:08:26 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/26 21:48:30 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 23:48:47 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ double	fix_fishbowl(t_cub3d_data *cub)
 {
 	if (cub->rays->distance == 0)
 		cub->rays->distance = 0.1;
-	return (cub->rays->distance * cos(cub->rays->ray_ang - cub->player_data->rot_angle));
+	return (cub->rays->distance * \
+	cos(cub->rays->ray_ang - cub->player_data->rot_angle));
 }
 
 void	renderwall(t_cub3d_data *cub, int i)
@@ -35,7 +36,8 @@ void	renderwall(t_cub3d_data *cub, int i)
 		cub->rays->dis_fromtop = y + (cub->rays->wl_strip_h / 2) - (HEIGHT / 2);
 		cub->rays->textureoffsety = cub->rays->dis_fromtop * \
 		((float)TEXTUR_HEIGHT / cub->rays->wl_strip_h);
-		texelcolor = cub->rays->text_wall[(TEXTUR_WIDTH * cub->rays->textureoffsety) + cub->rays->textoffsetx];
+		texelcolor = cub->rays->text_wall[(TEXTUR_WIDTH * \
+		cub->rays->textureoffsety) + cub->rays->textoffsetx];
 		mlx_put_pixel(cub->map_img, i, y, texelcolor);
 		y++;
 	}

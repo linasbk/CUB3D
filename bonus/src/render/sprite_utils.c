@@ -6,25 +6,22 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 10:42:37 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 10:26:27 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	find_coordinates(t_cub3d_data *cub)
+void	find_coordinates(t_cub3d_data *cub, int k)
 {
 	int	i;
 	int	j;
-	int	k;
 
-	k = 0;
-	i = 0;
-	j = 0;
-	while (cub->matrice[j])
+	j = -1;
+	while (cub->matrice[++j])
 	{
-		i = 0;
-		while (cub->matrice[j][i])
+		i = -1;
+		while (cub->matrice[j][++i])
 		{
 			if (sprites_char(cub->matrice[j][i]))
 			{
@@ -35,31 +32,11 @@ void	find_coordinates(t_cub3d_data *cub)
 					cub->sprites[k].sp_text = cub->text[cub->anim_flag];
 					cub->sprites[k].index = cub->anim_flag;
 				}
-				else if (cub->matrice[j][i] == 'T')
-				{
-					cub->sprites[k].sp_text = cub->text[20];
-					cub->sprites[k].index = 20;
-				}
-				else if (cub->matrice[j][i] == 'y')
-				{
-					cub->sprites[k].sp_text = cub->text[19];
-					cub->sprites[k].index = 19;
-				}
-				else if (cub->matrice[j][i] == 'L')
-				{
-					cub->sprites[k].sp_text = cub->text[22];
-					cub->sprites[k].index = 22;
-				}
-				else if (cub->matrice[j][i] == 'l')
-				{
-					cub->sprites[k].sp_text = cub->text[21];
-					cub->sprites[k].index = 21;
-				}
+				else
+					fixed_sprites(cub, i, j, k);
 				k++;
 			}
-			i++;
 		}
-		j++;
 	}
 }
 
@@ -70,7 +47,9 @@ void	find_sprites(t_cub3d_data *cub, int i, int j, int n)
 		i = 0;
 		while (cub->matrice[j][i])
 		{
-			if (cub->matrice[j][i] == 'Y' || cub->matrice[j][i] == 'T' || cub->matrice[j][i] == 'y' || cub->matrice[j][i] == 'l' || cub->matrice[j][i] == 'L')
+			if (cub->matrice[j][i] == 'Y' || cub->matrice[j][i] == 'T' || \
+			cub->matrice[j][i] == 'y' || cub->matrice[j][i] == 'l' || \
+			cub->matrice[j][i] == 'L')
 				n++;
 			i++;
 		}
@@ -84,7 +63,7 @@ void	find_sprites(t_cub3d_data *cub, int i, int j, int n)
 		exit(FAILURE);
 	}
 	cub->sprite_num = n;
-	find_coordinates(cub);
+	find_coordinates(cub, 0);
 }
 
 void	sort_by_distance(t_sprites *vis_sprites, int vis_sp)

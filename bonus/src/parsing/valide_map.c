@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:58:30 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 00:53:37 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 10:18:02 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,6 @@ int	parse_mid(t_cub3d_data *cub, int i, int ret, int j)
 		j++;
 	}
 	return (ret);
-}
-
-int	empty_line(t_cub3d_data *cub)
-{
-	int	i;
-
-	i = 0;
-
-	if (!cub->line)
-		return (FAILURE);
-	if (ft_isspace(cub->line[i]))
-	{
-		while (ft_isspace(cub->line[i]))
-			i++;
-		if (!cub->line)
-			return (FAILURE);
-	}
-	return (SUCCESS);
 }
 
 int	check_retline(t_cub3d_data *cub)

@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:55 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 23:22:59 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/27 10:23:14 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	fixed_sprites(t_cub3d_data *cub, int i, int j, int k)
+{
+	if (cub->matrice[j][i] == 'T')
+	{
+		cub->sprites[k].sp_text = cub->text[20];
+		cub->sprites[k].index = 20;
+	}
+	else if (cub->matrice[j][i] == 'y')
+	{
+		cub->sprites[k].sp_text = cub->text[19];
+		cub->sprites[k].index = 19;
+	}
+	else if (cub->matrice[j][i] == 'L')
+	{
+		cub->sprites[k].sp_text = cub->text[22];
+		cub->sprites[k].index = 22;
+	}
+	else if (cub->matrice[j][i] == 'l')
+	{
+		cub->sprites[k].sp_text = cub->text[21];
+		cub->sprites[k].index = 21;
+	}
+}
 
 void	calcs_offset_x(t_cub3d_data *cub, int x, mlx_texture_t *sp_text)
 {

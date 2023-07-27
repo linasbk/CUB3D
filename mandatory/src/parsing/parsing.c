@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 14:32:20 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 23:36:15 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,12 @@ int	check_lines(t_cub3d_data *cub, char *line)
 		return (free(tmp), i);
 	}
 	else if (key == RET_LINE && cub->m_index != 0)
-	{
-		cub->line = ft_strjoin(cub->line, line);
-		return (SUCCESS);
-	}
+		return (cub->line = ft_strjoin(cub->line, line), SUCCESS);
 	else if (key == RET_LINE && cub->m_index == 0)
 		return (SUCCESS);
 	else if (key == M_W && cub->t_index == 6)
 		return (cub->m_index++, cub->line = ft_strjoin(cub->line, line), \
 			SUCCESS);
-			
 	return (ft_error(CONFIG_ERROR));
 }
 

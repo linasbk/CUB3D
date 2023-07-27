@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 20:56:13 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 23:43:57 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,4 +171,5 @@ void			walk_direction(t_cub3d_data *cub, int flag);
 void			side_direction(t_cub3d_data *cub, int flag);
 void			ft_tur_direction(t_cub3d_data *cub);
 unsigned int	*get_dir(t_cub3d_data *cub);
+int				check_sides(t_cub3d_data *cub, int i, int j);
 #endif

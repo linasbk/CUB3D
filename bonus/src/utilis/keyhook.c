@@ -6,45 +6,11 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/27 00:55:21 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:07:47 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-pid_t	play_music(t_cub3d_data *cub, char *path)
-{
-	char	**args;
-	pid_t	pid;
-
-	pid = fork(); 
-	if (pid < 0)
-	{
-		printf("Music process couldn't be forked :(");
-		exit(EXIT_FAILURE);
-	}
-	else if (pid == 0)
-	{
-		args = ft_split(path, ' ');
-		execv("/usr/bin/afplay", args);
-	}
-	return (pid);
-}
-
-void	add_sounds(t_cub3d_data *cub, int sound)
-{
-	pid_t	pid;
-
-	pid = 0;
-	if (sound == G)
-		pid = play_music(cub, "afplay sounds/gta.mp3");
-	else if (sound == K)
-		pid = play_music(cub, "afplay sounds/Klaxon.wav");
-	else if (sound == C)
-		cub->pid = play_music(cub, "afplay sounds/intro.mp3");
-	if (pid < 0 || cub->pid < 0)
-		exit(EXIT_FAILURE);
-}
 
 void	ft_clear_window(t_cub3d_data *cub)
 {
@@ -87,7 +53,7 @@ int	ft_change_mode(t_cub3d_data *cub, char c1, char c2)
 
 void	ft_drive(t_cub3d_data *cub)
 {
-	if (!cub->mode_fg)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_F) && !cub->mode_fg)
 	{
 		if (ft_change_mode(cub, 'y', '0'))
 		{
@@ -98,7 +64,7 @@ void	ft_drive(t_cub3d_data *cub)
 			mlx_image_to_window(cub->mlx, cub->minimap, 0, HEIGHT - MP_HEIGHT);
 		}
 	}
-	else if (cub->mode_fg)
+	else if (mlx_is_key_down(cub->mlx, MLX_KEY_V) && cub->mode_fg)
 	{
 		if (ft_change_mode(cub, '0', 'y'))
 		{
@@ -111,27 +77,10 @@ void	ft_drive(t_cub3d_data *cub)
 	}
 }
 
-void	ft_hook(void *param)
+void	ft_hook_cont(t_cub3d_data *cub)
 {
-	t_cub3d_data	*cub;
 	static int		time;
 
-	cub = param;
-	ft_clear_window(cub);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_F))
-		ft_drive(cub);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
-		walk_direction(cub, 1);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-		walk_direction(cub, -1);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-		side_direction(cub, -1);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-		side_direction(cub, 1);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_G))
-		add_sounds(cub, G);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_K) && cub->mode_fg)
-		add_sounds(cub, K);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_SPACE))
 	{
 		kill(cub->pid, SIGKILL);
@@ -150,4 +99,28 @@ void	ft_hook(void *param)
 	cub_img(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_M))
 		setting_map(cub);
+}
+
+void	ft_hook(void *param)
+{
+	t_cub3d_data	*cub;
+
+	cub = param;
+	ft_clear_window(cub);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_F) || \
+	mlx_is_key_down(cub->mlx, MLX_KEY_V))
+		ft_drive(cub);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
+		walk_direction(cub, 1);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+		walk_direction(cub, -1);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+		side_direction(cub, -1);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+		side_direction(cub, 1);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_G))
+		add_sounds(cub, G);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_K) && cub->mode_fg)
+		add_sounds(cub, K);
+	ft_hook_cont(cub);
 }

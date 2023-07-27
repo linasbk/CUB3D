@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 12:05:37 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/26 16:49:51 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 23:47:45 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	calcs_vertintercept(t_cub3d_data *cub)
 	cub->rays->ystep = WALL_DIMENSION * tan(cub->rays->ray_ang);
 }
 
-void	 calcs_horintercept(t_cub3d_data *cub)
+void	calcs_horintercept(t_cub3d_data *cub)
 {
 	cub->rays->foundverzwallhit = 0;
 	cub->rays->yintercept = floor(cub->player_data->y / WALL_DIMENSION) \

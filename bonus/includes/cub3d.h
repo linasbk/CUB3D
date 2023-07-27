@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 00:50:13 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:02:54 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct cub3d_data
 	int				text_offsetx;
 	double			d_pr_plane;
 	double			pr_wallheight;
+	double			tmp_px;
 	int				wallstripheight;
 	int				walltop;
 	int				wallbottom;
@@ -194,6 +195,7 @@ int				resizematrice(t_cub3d_data *cub, int num_lines);
 int				cub_file(char *s);
 int				check_space(char str);
 int				check_retline(t_cub3d_data *cub);
+int				empty_line(t_cub3d_data *cub);
 //ERROR
 int				ft_error(char *s);
 //INIT
@@ -255,6 +257,7 @@ void			calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite);
 void			sort_by_distance(t_sprites *vis_sprites, int vis_sp);
 void			draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 				int vis_sp);
+void			fixed_sprites(t_cub3d_data *cub, int i, int j, int k);
 void			render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 				int vis_sp, int j);
 void			calcs_offset_y(t_cub3d_data *cub, \

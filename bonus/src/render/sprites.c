@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:45:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/25 01:52:13 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/27 10:57:27 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	check_texture_bounds(t_spinfos *sp, mlx_texture_t *sp_text)
 		* sp_text->height));
 }
 
-void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, mlx_texture_t *sp_text, int k)
+void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, \
+		mlx_texture_t *sp_text)
 {
 	int				y;
 	unsigned int	texelcolor;
@@ -35,7 +36,7 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, mlx_texture_t *s
 			calcs_offset_y(cub, y, sp_text);
 			if (sp.dist < cub->ray_dist[x])
 			{
-				wall_text = cub->walltexture[k];
+				wall_text = cub->walltexture[cub->tmp_vl];
 				if (check_texture_bounds(cub->sp, sp_text))
 				{
 					texelcolor = wall_text[(sp_text->width * \
@@ -58,18 +59,17 @@ void	render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 	mlx_texture_t	*sp_text;
 
 	i = 0;
-	int k = 0;
 	while (i < vis_sp)
 	{
 		sp_text = vis_sprites[i].sp_text;
-		k = vis_sprites[i].index;
 		sprite = vis_sprites[i];
 		calc_sprite_dims(cub, sprite);
 		x = cub->sp->sp_leftx;
+		cub->tmp_vl = vis_sprites[i].index;
 		while (x < cub->sp->sp_rightx)
 		{
 			calcs_offset_x(cub, x, sp_text);
-			render_vert_stripe(cub, x, sprite, sp_text, k);
+			render_vert_stripe(cub, x, sprite, sp_text);
 			x++;
 		}
 		i++;
@@ -90,7 +90,7 @@ void	render_sprite(t_cub3d_data *cub, int i)
 		angel_sp_pl = cub->player->rot_angle - atan2(cub->player->y - \
 			cub->sprites[i].y, cub->player->x - cub->sprites[i].x);
 		norm_angle(&angel_sp_pl);
-		if (angel_sp_pl < (FOV_ANGLE / 2) + EPSILON)
+		if (angel_sp_pl < (FOV_ANGLE / 2))
 		{
 			cub->sprites[i].visible = true;
 			cub->sprites[i].angle = angel_sp_pl;

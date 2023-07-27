@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:44 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 14:23:38 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/26 23:49:57 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {
