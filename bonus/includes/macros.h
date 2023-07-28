@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/28 13:49:12 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:42:59 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define NUM_RAYS WIDTH
 # define FOV_ANGLE 1.0471975512
 # define P_RADIUS  5.0
-# define MV_SPEED 10.0
+# define MV_SPEED 15.0
 # define ROT_SPEED 0.14
 # define SENSE 1.0
 # define EPSILON 0.2

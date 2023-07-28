@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 17:08:54 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/28 14:46:58 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:40:49 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	renderwallproject(t_cub3d_data *cub, int x, int text_index)
 	y = cub->walltop;
 	while (y < cub->wallbottom)
 	{
-		if (x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
+		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 		{
 			cub->text_offsety = (y - cub->walltop) * \
 				((double)cub->text[text_index]->height / cub->wallstripheight);

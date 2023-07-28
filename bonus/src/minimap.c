@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 22:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/28 14:30:24 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:07:57 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ void	cast_allrays(t_cub3d_data *cub)
 	int		i;
 
 	i = 0;
+	cub->rays->ray_ang = cub->player->rot_angle - (FOV_ANGLE / 2);
 	while (i < NUM_RAYS)
 	{
-		cub->rays->ray_ang = cub->player->rot_angle + \
-		atan((i - NUM_RAYS / 2) / cub->d_pr_plane);
 		ray_cast(cub, INT_MAX, INT_MAX);
 		renderwallproject(cub, i, index_dir(cub));
 		cub->rays->ray_ang += FOV_ANGLE / NUM_RAYS;

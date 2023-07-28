@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:55 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/28 12:26:15 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:43:44 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	sprites_animation(t_cub3d_data *cub)
 	else
 	{
 		i++;
-		if (i == 3)
+		if (i == 2)
 		{
 			i = 0;
 			cub->anim_flag++;

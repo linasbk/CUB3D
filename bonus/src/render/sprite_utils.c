@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/28 12:27:05 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:56:16 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ void	calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite)
 	cub->sp->sp_rightx = cub->sp->sp_leftx + cub->sp->sp_width;
 }
 
-void	draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, int vis_sp)
+void	draw_sprites(t_cub3d_data *cub, t_sprites
+ *vis_sprites, int vis_sp)
 {
 	sort_by_distance(vis_sprites, vis_sp);
 	render_vis_sprites(cub, vis_sprites, vis_sp);

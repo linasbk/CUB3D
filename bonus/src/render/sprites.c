@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:45:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/28 14:46:35 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:57:35 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, \
 	y = cub->sp->sp_topy;
 	while (y < cub->sp->sp_bottomy)
 	{
-		if (x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
+		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 		{
 			calcs_offset_y(cub, y, sp_text);
 			if (sp.dist < cub->ray_dist[x])
