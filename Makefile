@@ -3,7 +3,7 @@ NAME := cub3D
 INC := mandatory/includes/cub3d.h mandatory/includes/macros.h
 INC_B := bonus/includes/cub3d.h bonus/includes/macros.h
 B_NAME := cub3DBONUS
-CFLAGS := -Wall -Wextra -Werror -Ofast
+CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address -Ofast
 SRCS =	mandatory/src/main.c mandatory/src/utilis/gnl.c mandatory/src/utilis/utils.c mandatory/src/utilis/ft_split.c mandatory/src/utilis/ft_atoi.c mandatory/src/raycasting/raycasting_utils1.c mandatory/src/raycasting/raycastingutils2.c mandatory/src/utilis/utils_2.c\
 			mandatory/src/parsing/parsing.c mandatory/src/parsing/errors.c mandatory/src/parsing/valide_color.c mandatory/src/parsing/valide_file.c mandatory/src/parsing/valide_map.c mandatory/src/raycasting/raycasting.c \
 			mandatory/src/init/init.c  mandatory/src/minimap.c mandatory/src/utilis/keyhook.c mandatory/src/utilis/keyhookutil.c mandatory/src/init/sky_floor.c mandatory/src/utilis/texture_utils.c \

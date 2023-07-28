@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 17:08:54 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 16:48:51 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 14:46:58 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	caluc_offest_x(t_cub3d_data *cub, int f)
 
 double	fix_fishbowl(t_cub3d_data *cub)
 {
+	if (cub->rays->distance == 0)
+		cub->rays->distance = 0.1;
 	return (cub->rays->distance *= cos(cub->rays->ray_ang - \
 		cub->player->rot_angle));
 }
@@ -73,7 +75,7 @@ void	renderwallproject(t_cub3d_data *cub, int x, int text_index)
 	y = cub->walltop;
 	while (y < cub->wallbottom)
 	{
-		if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
+		if (x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
 		{
 			cub->text_offsety = (y - cub->walltop) * \
 				((double)cub->text[text_index]->height / cub->wallstripheight);
