@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:47 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 13:59:38 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:03:41 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int ac, char **av)
 	read_color(cub);
 	cub_img(cub);
 	display_current_time(cub);
-	add_sounds(cub, C);
+	add_sounds(cub, W);
 	put_images_to_window(cub);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 	mlx_cursor_hook(cub->mlx, (void *)ft_mouse, cub);

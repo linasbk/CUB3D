@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 20:48:16 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/28 12:43:33 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define TEXTUR_WIDTH WALL_DIMENSION
 # define NUM_RAYS WIDTH
 # define FOV_ANGLE 1.0471975512
-# define P_RADIUS  5.0
-# define MV_SPEED 1.0
+# define P_RADIUS  8.0
+# define MV_SPEED 5.0
 # define ROT_SPEED 0.05235987756
 # define MINIMAP_SCALE_FACTOR 0.3
 # define WALL_STRIP_WIDTH 1

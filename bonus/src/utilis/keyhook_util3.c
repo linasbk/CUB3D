@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   keyhook_util3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 13:55:18 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/28 12:43:54 by nouahidi         ###   ########.fr       */
+/*   Created: 2023/07/28 13:22:34 by nouahidi          #+#    #+#             */
+/*   Updated: 2023/07/28 13:24:43 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	empty_line(t_cub3d_data *cub)
+void	cj_walk(t_cub3d_data *cub)
 {
-	int	i;
-
-	i = 0;
-	if (!cub->line)
-		return (FAILURE);
-	if (ft_isspace(cub->line[i]))
-	{
-		while (ft_isspace(cub->line[i]))
-			i++;
-		if (!cub->line)
-			return (FAILURE);
-	}
-	return (SUCCESS);
+	mlx_delete_image(cub->mlx, cub->mode);
+	cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->walk_flag]);
+	cub->mode_fg = 0;
 }
 
-int	ft_error(char *s)
+int	hit_sprite(t_cub3d_data *cub)
 {
-	ft_putstr("\033[1;31mError!!\n");
-	ft_putstr(s);
-	ft_putstr("\n");
-	return (FAILURE);
+	int	px;
+	int	py;
+
+	px = (int)cub->player->x / W_DM;
+	py = (int)cub->player->y / W_DM;
+	if (cub->matrice[py][px] == 'Y')
+		return (1);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sky_floor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 18:34:42 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 14:07:40 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/28 12:06:04 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,37 +69,37 @@ void	load_png(mlx_texture_t **text, char *path)
 
 void	load_sprites(t_cub3d_data *cub)
 {
-	load_png(&(cub->text[4]), "images/black_door.png");
-	load_png(&(cub->text[5]), "images/gta_femal1.png");
-	load_png(&(cub->text[6]), "images/gta_femal2.png");
-	load_png(&(cub->text[7]), "images/gta_femal3.png");
-	load_png(&(cub->text[8]), "images/gta_femal4.png");
-	load_png(&(cub->text[9]), "images/gta_femal5.png");
-	load_png(&(cub->text[10]), "images/gta_femal6.png");
-	load_png(&(cub->text[11]), "images/gta_femal7.png");
-	load_png(&(cub->text[12]), "images/gta_femal8.png");
-	load_png(&(cub->text[13]), "images/gta_femal9.png");
-	load_png(&(cub->text[14]), "images/gta_femal10.png");
-	load_png(&(cub->text[15]), "images/gta_femal11.png");
-	load_png(&(cub->text[16]), "images/gta_femal12.png");
-	load_png(&(cub->text[17]), "images/gta_femal13.png");
-	load_png(&(cub->text[18]), "images/gta_femal14.png");
-	load_png(&(cub->text[19]), "images/gta_femal15.png");
-	load_png(&(cub->text[20]), "images/gta_femal16.png");
-	load_png(&(cub->text[21]), "images/gta_femal17.png");
-	load_png(&(cub->text[22]), "images/gta_femal18.png");
-	load_png(&(cub->text[23]), "images/gta_femal19.png");
-	load_png(&(cub->text[24]), "images/gta_femal20.png");
-	load_png(&(cub->text[25]), "images/ferrari.png");
-	load_png(&(cub->text[26]), "images/tree.png");
-	load_png(&(cub->text[27]), "images/light.png");
-	load_png(&(cub->text[28]), "images/lights.png");
+	load_png(&(cub->text[4]), "bonus/images/black_door.png");
+	load_png(&(cub->text[5]), "bonus/images/gta_femal1.png");
+	load_png(&(cub->text[6]), "bonus/images/gta_femal2.png");
+	load_png(&(cub->text[7]), "bonus/images/gta_femal3.png");
+	load_png(&(cub->text[8]), "bonus/images/gta_femal4.png");
+	load_png(&(cub->text[9]), "bonus/images/gta_femal5.png");
+	load_png(&(cub->text[10]), "bonus/images/gta_femal6.png");
+	load_png(&(cub->text[11]), "bonus/images/gta_femal7.png");
+	load_png(&(cub->text[12]), "bonus/images/gta_femal8.png");
+	load_png(&(cub->text[13]), "bonus/images/gta_femal9.png");
+	load_png(&(cub->text[14]), "bonus/images/gta_femal10.png");
+	load_png(&(cub->text[15]), "bonus/images/gta_femal11.png");
+	load_png(&(cub->text[16]), "bonus/images/gta_femal12.png");
+	load_png(&(cub->text[17]), "bonus/images/gta_femal13.png");
+	load_png(&(cub->text[18]), "bonus/images/gta_femal14.png");
+	load_png(&(cub->text[19]), "bonus/images/gta_femal15.png");
+	load_png(&(cub->text[20]), "bonus/images/gta_femal16.png");
+	load_png(&(cub->text[21]), "bonus/images/gta_femal17.png");
+	load_png(&(cub->text[22]), "bonus/images/gta_femal18.png");
+	load_png(&(cub->text[23]), "bonus/images/gta_femal19.png");
+	load_png(&(cub->text[24]), "bonus/images/gta_femal20.png");
+	load_png(&(cub->text[25]), "bonus/images/ferrari.png");
+	load_png(&(cub->text[26]), "bonus/images/tree.png");
+	load_png(&(cub->text[27]), "bonus/images/light.png");
+	load_png(&(cub->text[28]), "bonus/images/lights.png");
 }
 
 void	read_color(t_cub3d_data *cub)
 {
 	int	i;
-	
+
 	load_png(&(cub->text[0]), cub->t_no);
 	load_png(&(cub->text[1]), cub->t_so);
 	load_png(&(cub->text[2]), cub->t_we);

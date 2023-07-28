@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:47:32 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 00:41:40 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 09:44:25 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ void	init_img(t_cub3d_data *cub)
 
 void	ft_load_png(t_cub3d_data *cub)
 {
-	load_png(&(cub->cj[0]), "images/CJ1.png");
-	load_png(&(cub->cj[1]), "images/CJ2.png");
-	load_png(&(cub->cj[2]), "images/CJ3.png");
-	load_png(&(cub->cj[3]), "images/CJ4.png");
-	load_png(&(cub->cj[4]), "images/CJ5.png");
-	load_png(&(cub->cj[5]), "images/CJ6.png");
-	load_png(&(cub->cj[6]), "images/CJ7.png");
-	load_png(&(cub->cj[7]), "images/CJ8.png");
-	load_png(&(cub->cj[8]), "images/CJ9.png");
-	load_png(&(cub->cj[9]), "images/CJ10.png");
-	load_png(&(cub->cj[10]), "images/CJ11.png");
-	load_png(&(cub->cj[11]), "images/CJ12.png");
-	load_png(&(cub->cj[12]), "images/CJ13.png");
-	load_png(&(cub->cj[13]), "images/CJ14.png");
-	load_png(&(cub->cj[14]), "images/gtatime.png");
-	load_png(&(cub->cj[15]), "images/wallpaper.png");
-	load_png(&(cub->cj[16]), "images/lotoo.png");
+	load_png(&(cub->cj[0]), "bonus/images/CJ1.png");
+	load_png(&(cub->cj[1]), "bonus/images/CJ2.png");
+	load_png(&(cub->cj[2]), "bonus/images/CJ3.png");
+	load_png(&(cub->cj[3]), "bonus/images/CJ4.png");
+	load_png(&(cub->cj[4]), "bonus/images/CJ5.png");
+	load_png(&(cub->cj[5]), "bonus/images/CJ6.png");
+	load_png(&(cub->cj[6]), "bonus/images/CJ7.png");
+	load_png(&(cub->cj[7]), "bonus/images/CJ8.png");
+	load_png(&(cub->cj[8]), "bonus/images/CJ9.png");
+	load_png(&(cub->cj[9]), "bonus/images/CJ10.png");
+	load_png(&(cub->cj[10]), "bonus/images/CJ11.png");
+	load_png(&(cub->cj[11]), "bonus/images/CJ12.png");
+	load_png(&(cub->cj[12]), "bonus/images/CJ13.png");
+	load_png(&(cub->cj[13]), "bonus/images/CJ14.png");
+	load_png(&(cub->cj[14]), "bonus/images/gtatime.png");
+	load_png(&(cub->cj[15]), "bonus/images/wallpaper.png");
+	load_png(&(cub->cj[16]), "bonus/images/lotoo.png");
 }

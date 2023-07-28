@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 10:13:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/27 12:07:47 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 13:53:11 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_drive(t_cub3d_data *cub)
 			mlx_delete_image(cub->mlx, cub->mode);
 			cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[16]);
 			cub->mode_fg = 1;
+			add_sounds(cub, R);
 			mlx_image_to_window(cub->mlx, cub->mode, 0, 0);
 			mlx_image_to_window(cub->mlx, cub->minimap, 0, HEIGHT - MP_HEIGHT);
 		}
@@ -71,6 +72,7 @@ void	ft_drive(t_cub3d_data *cub)
 			mlx_delete_image(cub->mlx, cub->mode);
 			cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->walk_flag]);
 			cub->mode_fg = 0;
+			kill(cub->pid, SIGKILL);
 			mlx_image_to_window(cub->mlx, cub->mode, (WIDTH / 2) - \
 		(cub->mode->width / 2), HEIGHT - cub->mode->height);
 		}

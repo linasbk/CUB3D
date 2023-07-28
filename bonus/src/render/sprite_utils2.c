@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:00:55 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 13:57:21 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/28 12:26:15 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	fixed_sprites(t_cub3d_data *cub, int i, int j, int k)
 {
 	if (cub->matrice[j][i] == 'T')
 	{
-		cub->sprites[k].sp_text = cub->text[20];
-		cub->sprites[k].index = 20;
+		cub->sprites[k].sp_text = cub->text[26];
+		cub->sprites[k].index = 26;
 	}
 	else if (cub->matrice[j][i] == 'y')
 	{
-		cub->sprites[k].sp_text = cub->text[19];
-		cub->sprites[k].index = 19;
+		cub->sprites[k].sp_text = cub->text[25];
+		cub->sprites[k].index = 25;
 	}
 	else if (cub->matrice[j][i] == 'L')
 	{
-		cub->sprites[k].sp_text = cub->text[22];
-		cub->sprites[k].index = 22;
+		cub->sprites[k].sp_text = cub->text[28];
+		cub->sprites[k].index = 28;
 	}
 	else if (cub->matrice[j][i] == 'l')
 	{
-		cub->sprites[k].sp_text = cub->text[21];
-		cub->sprites[k].index = 21;
+		cub->sprites[k].sp_text = cub->text[27];
+		cub->sprites[k].index = 27;
 	}
 }
 

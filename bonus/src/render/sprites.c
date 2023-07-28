@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:45:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 14:32:28 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/28 11:18:38 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	render_vert_stripe(t_cub3d_data *cub, int x, t_sprites sp, \
 }
 
 void	render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
-		int vis_sp, int j)
+		int vis_sp)
 {
 	int				i;
 	int				x;
@@ -90,7 +90,7 @@ void	render_sprite(t_cub3d_data *cub, int i)
 		angel_sp_pl = cub->player->rot_angle - atan2(cub->player->y - \
 			cub->sprites[i].y, cub->player->x - cub->sprites[i].x);
 		norm_angle(&angel_sp_pl);
-		if (angel_sp_pl < (FOV_ANGLE / 2))
+		if (angel_sp_pl < (FOV_ANGLE / 2) + EPSILON)
 		{
 			cub->sprites[i].visible = true;
 			cub->sprites[i].angle = angel_sp_pl;

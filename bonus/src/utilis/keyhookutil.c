@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:01:01 by nouahidi          #+#    #+#             */
-/*   Updated: 2023/07/27 12:04:20 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 13:58:28 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ void	walk_direction(t_cub3d_data *cub, int walk_dir)
 	cub->tmp_px = cub->player->x;
 	py = cub->player->y;
 	if (!cub->mode_fg)
-	{
-		mlx_delete_image(cub->mlx, cub->mode);
-		cub->mode = mlx_texture_to_image(cub->mlx, cub->cj[cub->walk_flag]);
-		cub->mode_fg = 0;
-	}
+		cj_walk(cub);
 	mv_step = walk_dir * MV_SPEED;
 	if (cub->mode_fg)
 		mv_step = walk_dir * MV_SPEED * 2;
@@ -67,26 +63,26 @@ void	walk_direction(t_cub3d_data *cub, int walk_dir)
 		cub->player->x = cub->tmp_px;
 		cub->player->y = py;
 	}
+	if (hit_sprite(cub) && cub->mode_fg)
+		add_sounds(cub, H);
+	else if (hit_sprite(cub) && !cub->mode_fg)
+		add_sounds(cub, S);
 	if (!cub->mode_fg)
 		mlx_image_to_window(cub->mlx, cub->mode, (WIDTH / 2) - \
 		(cub->mode->width / 2), HEIGHT - cub->mode->height);
 }
 
-void	side_direction(t_cub3d_data *cub, int flag)
+void	side_direction(t_cub3d_data *cub, int side_dir)
 {
-	double			side_dir;
 	double			px;
 	double			py;
-	double			mv_step;
 
 	px = cub->player->x;
 	py = cub->player->y;
-	side_dir = flag;
-	mv_step = side_dir * MV_SPEED;
 	cub->player->x += cos(cub->player->rot_angle + \
-	(M_PI / 2)) * mv_step;
+	(M_PI / 2)) * side_dir * MV_SPEED;
 	cub->player->y += sin(cub->player->rot_angle + \
-	(M_PI / 2)) * mv_step;
+	(M_PI / 2)) * side_dir * MV_SPEED;
 	if (wall_collision(cub, (px / W_DM), (py / W_DM)) || \
 		cub->ray_dist[WIDTH / 2] == 0)
 	{

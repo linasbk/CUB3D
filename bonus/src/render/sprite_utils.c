@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:04:59 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 13:57:44 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/28 12:27:05 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,8 @@ void	find_coordinates(t_cub3d_data *cub, int k)
 					cub->sprites[k].sp_text = cub->text[cub->anim_flag];
 					cub->sprites[k].index = cub->anim_flag;
 				}
-				else if (cub->matrice[j][i] == 'T')
-				{
-					cub->sprites[k].sp_text = cub->text[26];
-					cub->sprites[k].index = 26;
-				}
-				else if (cub->matrice[j][i] == 'y')
-				{
-					cub->sprites[k].sp_text = cub->text[25];
-					cub->sprites[k].index = 25;
-				}
-				else if (cub->matrice[j][i] == 'L')
-				{
-					cub->sprites[k].sp_text = cub->text[28];
-					cub->sprites[k].index = 28;
-				}
-				else if (cub->matrice[j][i] == 'l')
-				{
-					cub->sprites[k].sp_text = cub->text[27];
-					cub->sprites[k].index = 27;
-				}
+				else
+					fixed_sprites(cub, i, j, k);
 				k++;
 			}
 		}
@@ -131,14 +113,8 @@ void	calc_sprite_dims(t_cub3d_data *cub, t_sprites sprite)
 
 void	draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, int vis_sp)
 {
-	int	i;
-
-	i = -1;
-	while (++i < cub->sprite_num)
-	{
-		sort_by_distance(vis_sprites, vis_sp);
-		render_vis_sprites(cub, vis_sprites, vis_sp, i);
-	}
+	sort_by_distance(vis_sprites, vis_sp);
+	render_vis_sprites(cub, vis_sprites, vis_sp);
 	free(vis_sprites);
 	free(cub->sprites);
 	free(cub->sp);

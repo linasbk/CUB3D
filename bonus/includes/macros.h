@@ -6,7 +6,7 @@
 /*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:25 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 10:52:14 by nouahidi         ###   ########.fr       */
+/*   Updated: 2023/07/28 13:49:12 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,14 @@
 # define M_E 8
 # define M_P 9
 # define RET_LINE 10
-# define C 1
+# define H 1
 # define K 2
 # define G 3
+# define W 4
+# define R 5
+# define S 6
 
-# define IMG_MODE "images/CJ1.png"
+# define IMG_MODE "bonus/images/CJ1.png"
 # define INVALIDE_ARGS "\033[1;31mInvalid arguments!!\n\033[0;34mThe \
 correct format is: ./cub3d map_file.cub"
 # define NON_EXIT_FILE "\033[1;31mNON Existing File!!\n\033[0;34mThe \

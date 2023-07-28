@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:54:53 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 14:00:11 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:56:15 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,8 @@ void			ray_cast(t_cub3d_data *cub, double horz_dist, double ver_dist);
 int				check_ch(t_cub3d_data *cub, int bx, int by, char c);
 //HOOK
 void			ft_hook(void *param);
+int				hit_sprite(t_cub3d_data *cub);
+void			cj_walk(t_cub3d_data *cub);
 //RAYCASTING
 int				protect_matrice(double touchX, double touchY, \
 				t_cub3d_data *cub);
@@ -259,7 +261,7 @@ void			draw_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
 				int vis_sp);
 void			fixed_sprites(t_cub3d_data *cub, int i, int j, int k);
 void			render_vis_sprites(t_cub3d_data *cub, t_sprites *vis_sprites, \
-				int vis_sp, int j);
+				int vis_sp);
 void			calcs_offset_y(t_cub3d_data *cub, \
 int y, mlx_texture_t *sp_text);
 void			calcs_offset_x(t_cub3d_data *cub, \
@@ -271,4 +273,6 @@ int				sprites_char(char c);
 void			init_img(t_cub3d_data *cub);
 void			ft_load_png(t_cub3d_data *cub);
 void			free_all(t_cub3d_data *cub);
+int				empty_line(t_cub3d_data *cub);
+int				check_sides(t_cub3d_data *cub, int i, int j);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:21:33 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/27 13:58:11 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/27 21:38:49 by lsabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	check_lines(t_cub3d_data *cub, char *line)
 	int		i;
 
 	tmp = ft_strtrim(line, " ");
-	if (tmp[0] == '\0')
+	if (tmp[0] == '\0' && cub->m_index == 0)
 		return (FAILURE);
 	key = get_key(ft_strtrim(tmp, "\t"));
 	free(tmp);
@@ -76,6 +76,8 @@ int	check_lines(t_cub3d_data *cub, char *line)
 	else if (key == M_W && cub->t_index == 6)
 		return (cub->m_index++, cub->line = ft_strjoin(cub->line, line), \
 			SUCCESS);
+	if (line[ft_strlen(line)] == '\0' && line[ft_strlen(line) - 1] != '\n')
+		return (SUCCESS);
 	return (ft_error(CONFIG_ERROR));
 }
 

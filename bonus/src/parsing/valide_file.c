@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   valide_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsabik <lsabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nouahidi <nouahidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 22:37:31 by lsabik            #+#    #+#             */
-/*   Updated: 2023/07/26 14:37:56 by lsabik           ###   ########.fr       */
+/*   Updated: 2023/07/28 11:05:44 by nouahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	check_sides(t_cub3d_data *cub, int i, int j)
+{
+	if (check_space(cub->matrice[i - 1][j]) == 1)
+		return (FAILURE);
+	if (check_space(cub->matrice[i + 1][j]) == 1)
+		return (FAILURE);
+	if (check_space(cub->matrice[i][j - 1]) == 1)
+		return (FAILURE);
+	if (check_space(cub->matrice[i][j + 1]) == 1)
+		return (FAILURE);
+	return (SUCCESS);
+}
 
 int	sprites_char(char c)
 {
@@ -49,4 +62,21 @@ int	cub_file(char *s)
 		i++;
 	}
 	return (FAILURE);
+}
+
+int	empty_line(t_cub3d_data *cub)
+{
+	int	i;
+
+	i = 0;
+	if (!cub->line)
+		return (FAILURE);
+	if (ft_isspace(cub->line[i]))
+	{
+		while (ft_isspace(cub->line[i]))
+			i++;
+		if (!cub->line)
+			return (FAILURE);
+	}
+	return (SUCCESS);
 }
