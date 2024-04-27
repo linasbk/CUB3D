@@ -1,6 +1,6 @@
 # cub3D
 
-Cub3D is a 1337 school team project to create a dynamic view inside a 3D maze. Using the [MiniLibX library](https://github.com/42Paris/minilibx-linux), and we must implement raycasting .
+Cub3D is a 1337 school team project to create a dynamic view inside a 3D maze. Using the [MiniLibX library](https://github.com/42Paris/minilibx-linux), and we must implement raycasting.
 
 ## Clone
 
